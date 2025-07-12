@@ -36,16 +36,37 @@ export default function Report() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+      const res = await fetch("/api/incidents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: selectedType,
+          description,
+          location: { lat: 0, lng: 0 },
+        }),
+      })
 
-    toast({
-      title: "Report submitted successfully",
-      description: "Your report has been received. You will be contacted within 24 hours if you provided contact information.",
-    })
+      if (!res.ok) {
+        throw new Error("Request failed")
+      }
 
-    setIsSubmitting(false)
-    navigate("/dashboard")
+      toast({
+        title: "Report submitted successfully",
+        description:
+          "Your report has been received and routed to the nearest NGO.",
+      })
+
+      navigate("/dashboard")
+    } catch (err) {
+      toast({
+        title: "Submission failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

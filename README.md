@@ -60,6 +60,21 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Backend API
+
+The `server` directory contains a minimal Express API used to accept incident
+reports and forward them to an external AI service. If the external service is
+unavailable, the API falls back to a local routing strategy that assigns the
+nearest NGO based on location and track record.
+
+To run the backend locally:
+
+```sh
+cd server
+npm install
+npm run dev
+```
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/f1dc96e3-d91a-4b3f-8770-5386918d6826) and click on Share -> Publish.
