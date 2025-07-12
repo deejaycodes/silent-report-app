@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { IncidentCard } from "@/components/IncidentCard"
@@ -18,15 +18,26 @@ import type { IncidentType } from "@/components/IncidentCard"
 export default function Dashboard() {
   const navigate = useNavigate()
   const { toast } = useToast()
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [showForm, setShowForm] = useState(false)
   const [selectedIncident, setSelectedIncident] = useState<IncidentType | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [includeContact, setIncludeContact] = useState(false)
   const [description, setDescription] = useState("")
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
 
   const handleIncidentSelect = (incident: IncidentType) => {
     setSelectedIncident(incident)
     setShowForm(true)
+  }
+
+  const handleFileUpload = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    setSelectedFiles(files)
   }
 
   const incidentTypes = [
@@ -54,6 +65,7 @@ export default function Dashboard() {
     setDescription("")
     setIncludeContact(false)
     setSelectedIncident(null)
+    setSelectedFiles([])
   }
 
   const quickActions = [
@@ -152,7 +164,18 @@ export default function Dashboard() {
             {/* File Upload */}
             <div className="space-y-2">
               <Label>Evidence (Optional)</Label>
-              <Card className="border-dashed border-2 border-muted hover:bg-muted/10 transition-colors cursor-pointer">
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept=".jpg,.jpeg,.png,.pdf,.mp4,.mov"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              <Card 
+                className="border-dashed border-2 border-muted hover:bg-muted/10 transition-colors cursor-pointer"
+                onClick={handleFileUpload}
+              >
                 <CardContent className="p-6 text-center">
                   <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
                   <p className="text-sm text-muted-foreground mb-1">
@@ -161,11 +184,30 @@ export default function Dashboard() {
                   <p className="text-xs text-muted-foreground">
                     Max 10MB per file. Supported: JPG, PNG, PDF, MP4
                   </p>
-                  <Button variant="outline" size="sm" className="mt-3" type="button">
+                  <Button variant="outline" size="sm" className="mt-3" type="button" onClick={handleFileUpload}>
                     Choose Files
                   </Button>
                 </CardContent>
               </Card>
+              
+              {selectedFiles.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-sm font-medium">Selected files:</p>
+                  {selectedFiles.map((file, index) => (
+                    <div key={index} className="flex items-center justify-between p-2 bg-muted rounded-lg">
+                      <span className="text-sm">{file.name}</span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedFiles(files => files.filter((_, i) => i !== index))}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Contact Information */}
