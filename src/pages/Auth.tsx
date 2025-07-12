@@ -51,16 +51,23 @@ export default function Auth() {
     e.preventDefault()
     setIsLoading(true)
     
+    const formData = new FormData(e.target as HTMLFormElement)
+    const email = formData.get('email') as string
+    
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
     
+    // Simple logic to detect admin login (in real app, this would be determined by backend)
+    const isAdminLogin = email?.includes('admin') || email?.includes('@organization') || email?.includes('ngo')
+    
     toast({
       title: "Welcome back!",
-      description: "You have successfully logged in.",
+      description: `You have successfully logged in${isAdminLogin ? ' as an admin' : ''}.`,
     })
     
     setIsLoading(false)
-    navigate("/dashboard")
+    // Redirect based on user type
+    navigate(isAdminLogin ? "/admin" : "/dashboard")
   }
 
   return (
@@ -105,6 +112,7 @@ export default function Auth() {
                       <Label htmlFor="email">Email or Phone</Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="Enter your email or phone"
                         required
