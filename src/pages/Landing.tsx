@@ -73,7 +73,7 @@ export default function Landing() {
                     variant="outline" 
                     size="sm" 
                     className="flex-1"
-                    onClick={() => navigate("/auth")}
+                    onClick={() => navigate("/auth?mode=login")}
                   >
                     Login
                   </Button>
@@ -81,7 +81,7 @@ export default function Landing() {
                     variant="default" 
                     size="sm" 
                     className="flex-1"
-                    onClick={() => navigate("/auth")}
+                    onClick={() => navigate("/auth?mode=register")}
                   >
                     Register NGO
                   </Button>
