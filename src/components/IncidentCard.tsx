@@ -44,6 +44,14 @@ const incidentTypes: IncidentType[] = [
     icon: <Phone className="h-6 w-6" />,
     severity: "medium",
     color: "warning"
+  },
+  {
+    id: "other",
+    title: "Others",
+    description: "Other incidents or situations needing support",
+    icon: <AlertTriangle className="h-6 w-6" />,
+    severity: "medium",
+    color: "secondary"
   }
 ]
 
