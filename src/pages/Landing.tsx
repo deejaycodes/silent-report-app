@@ -51,7 +51,7 @@ export default function Landing() {
 
             <div className="flex flex-col gap-4 max-w-sm mx-auto mb-12">
               <Button 
-                variant="calm" 
+                variant="default" 
                 size="lg"
                 onClick={() => navigate("/report")}
                 className="w-full"
