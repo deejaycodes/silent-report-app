@@ -53,7 +53,7 @@ export default function Landing() {
               <Button 
                 variant="default" 
                 size="lg"
-                onClick={() => navigate("/report")}
+                onClick={() => navigate("/dashboard")}
                 className="w-full"
               >
                 Report Anonymously
