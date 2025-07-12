@@ -56,7 +56,7 @@ export default function Landing() {
                 onClick={() => navigate("/auth")}
                 className="w-full"
               >
-                Get Started
+                NGO Login/Signup
               </Button>
               
               <Button 
