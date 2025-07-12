@@ -554,68 +554,58 @@ export default function AdminDashboard() {
 
                 <div className="space-y-3">
                   <div>
-                    <h4 className="font-medium text-sm">Incident Description</h4>
                     <p className="text-sm text-muted-foreground">{selectedIncident.description}</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
-                      <p className="font-medium">Reported</p>
                       <p className="text-muted-foreground">
                         {new Date(selectedIncident.reportedAt).toLocaleDateString()}
                       </p>
                     </div>
                     <div>
-                      <p className="font-medium">Reporter</p>
                       <p className="text-muted-foreground">{selectedIncident.reportedBy}</p>
                     </div>
                   </div>
 
                   {selectedIncident.location && (
                     <div>
-                      <p className="font-medium text-sm flex items-center gap-1">
+                      <p className="text-sm text-muted-foreground flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
-                        Location
+                        {selectedIncident.location}
                       </p>
-                      <p className="text-sm text-muted-foreground">{selectedIncident.location}</p>
                     </div>
                   )}
 
                   {selectedIncident.contactInfo && (
                     <div>
-                      <p className="font-medium text-sm flex items-center gap-1">
+                      <p className="text-sm text-muted-foreground flex items-center gap-1">
                         <Phone className="h-3 w-3" />
-                        Contact Information
+                        {selectedIncident.contactInfo}
                       </p>
-                      <p className="text-sm text-muted-foreground">{selectedIncident.contactInfo}</p>
                     </div>
                   )}
 
                   <div className="border-t pt-3">
-                    <h4 className="font-medium text-sm mb-2">Victim Details</h4>
                     <div className="space-y-2 text-sm">
                       {selectedIncident.details.age && (
-                        <div className="flex justify-between">
-                          <span>Age:</span>
+                        <div>
                           <span className="text-muted-foreground">{selectedIncident.details.age}</span>
                         </div>
                       )}
                       {selectedIncident.details.gender && (
-                        <div className="flex justify-between">
-                          <span>Gender:</span>
+                        <div>
                           <span className="text-muted-foreground">{selectedIncident.details.gender}</span>
                         </div>
                       )}
                       {selectedIncident.details.relationship && (
-                        <div className="flex justify-between">
-                          <span>Relationship to Perpetrator:</span>
+                        <div>
                           <span className="text-muted-foreground">{selectedIncident.details.relationship}</span>
                         </div>
                       )}
                       {selectedIncident.details.evidenceAttached && (
-                        <div className="flex justify-between">
-                          <span>Evidence Attached:</span>
-                          <Badge variant="outline" className="text-xs">Yes</Badge>
+                        <div>
+                          <Badge variant="outline" className="text-xs">Evidence Attached</Badge>
                         </div>
                       )}
                     </div>
@@ -623,7 +613,6 @@ export default function AdminDashboard() {
 
                   {selectedIncident.details.additionalInfo && (
                     <div>
-                      <p className="font-medium text-sm">Additional Information</p>
                       <p className="text-sm text-muted-foreground">{selectedIncident.details.additionalInfo}</p>
                     </div>
                   )}
