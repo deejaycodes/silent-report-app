@@ -35,21 +35,21 @@ export default function Landing() {
     <Layout>
       <div className="flex flex-col min-h-screen">
         {/* Hero Section */}
-        <div className="flex-1 flex flex-col justify-center px-6 py-12 text-center">
+        <div className="flex-1 flex flex-col justify-center px-4 py-8 text-center max-w-screen-sm mx-auto">
           <div className="animate-fade-in">
-            <div className="mx-auto mb-8 p-4 bg-primary-soft rounded-full w-fit">
-              <Shield className="h-12 w-12 text-primary" />
+            <div className="mx-auto mb-6 p-3 bg-primary-soft rounded-full w-fit">
+              <Shield className="h-10 w-10 text-primary" />
             </div>
             
-            <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight">
+            <h1 className="text-3xl font-bold text-foreground mb-3 leading-tight">
               Safe Haven
             </h1>
             
-            <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
+            <p className="text-base text-muted-foreground mb-6 max-w-xs mx-auto leading-relaxed">
               A secure platform for anonymous reporting and getting the support you need
             </p>
 
-            <div className="flex flex-col gap-4 max-w-sm mx-auto mb-12">
+            <div className="flex flex-col gap-3 max-w-xs mx-auto mb-8">
               <Button 
                 variant="default" 
                 size="lg"
@@ -70,16 +70,15 @@ export default function Landing() {
             </div>
           </div>
 
-
           {/* Features Grid */}
-          <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+          <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
             {features.map((feature, index) => (
               <Card key={index} className="border-0 shadow-soft bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-4 text-center">
-                  <div className="mb-3 p-2 bg-primary-soft rounded-lg w-fit mx-auto">
+                <CardContent className="p-3 text-center">
+                  <div className="mb-2 p-2 bg-primary-soft rounded-lg w-fit mx-auto">
                     {feature.icon}
                   </div>
-                  <h3 className="font-semibold text-sm mb-2">{feature.title}</h3>
+                  <h3 className="font-semibold text-xs mb-1">{feature.title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
@@ -89,7 +88,7 @@ export default function Landing() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-12 flex items-center justify-center gap-4 text-xs text-muted-foreground">
+          <div className="mt-8 flex items-center justify-center gap-4 text-xs text-muted-foreground flex-wrap">
             <div className="flex items-center gap-1">
               <Shield className="h-3 w-3" />
               <span>Secure</span>

@@ -61,28 +61,29 @@ interface IncidentCardProps {
 
 export function IncidentCard({ onSelect }: IncidentCardProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 p-4">
+    <div className="grid grid-cols-1 gap-3 px-3">
       {incidentTypes.map((incident) => (
         <Card 
           key={incident.id} 
-          className="cursor-pointer transition-all duration-200 hover:shadow-comfort hover:scale-102 border-0 shadow-soft"
+          className="cursor-pointer transition-all duration-200 hover:shadow-comfort hover:scale-[1.02] border-0 shadow-soft active:scale-95"
         >
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-primary-soft">
+              <div className="p-2 rounded-full bg-primary-soft flex-shrink-0">
                 {incident.icon}
               </div>
-              <div>
-                <CardTitle className="text-lg">{incident.title}</CardTitle>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-base leading-tight">{incident.title}</CardTitle>
               </div>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
-            <CardDescription className="text-sm mb-4">
+            <CardDescription className="text-sm mb-3 leading-relaxed">
               {incident.description}
             </CardDescription>
             <Button 
               variant="trust" 
+              size="lg"
               className="w-full"
               onClick={() => onSelect(incident)}
             >

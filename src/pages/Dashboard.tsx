@@ -394,35 +394,34 @@ export default function Dashboard() {
 
   return (
     <Layout className="pb-20">
-      <div className="px-4 py-6 space-y-6">
+      <div className="px-3 py-4 space-y-4 max-w-screen-sm mx-auto">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Welcome to Safe Haven</h1>
-          <p className="text-muted-foreground">How can we help you today?</p>
+        <div className="text-center px-2">
+          <h1 className="text-xl font-bold mb-2">Welcome to Safe Haven</h1>
+          <p className="text-sm text-muted-foreground">How can we help you today?</p>
         </div>
-
 
         {/* Report New Incident */}
         <div className="space-y-3">
-          <h2 className="text-lg font-semibold">Report an Incident</h2>
+          <h2 className="text-lg font-semibold px-3">Report an Incident</h2>
           <IncidentCard onSelect={handleIncidentSelect} />
         </div>
 
         {/* Quick Actions */}
-        <div className="space-y-3">
+        <div className="space-y-3 px-3">
           <h2 className="text-lg font-semibold">Quick Actions</h2>
           <div className="grid grid-cols-1 gap-3">
             {quickActions.map((action, index) => (
-              <Card key={index} className="cursor-pointer border-0 shadow-soft hover:shadow-comfort transition-all duration-200" onClick={action.action}>
+              <Card key={index} className="cursor-pointer border-0 shadow-soft hover:shadow-comfort transition-all duration-200 active:scale-95" onClick={action.action}>
                 <CardContent className="flex items-center p-4">
-                  <div className="p-2 rounded-lg bg-primary-soft mr-3">
+                  <div className="p-2 rounded-lg bg-primary-soft mr-3 flex-shrink-0">
                     {action.icon}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-medium">{action.title}</h3>
-                    <p className="text-sm text-muted-foreground">{action.description}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-sm">{action.title}</h3>
+                    <p className="text-sm text-muted-foreground truncate">{action.description}</p>
                   </div>
-                  <Button variant={action.variant} size="sm">
+                  <Button variant={action.variant} size="sm" className="ml-2">
                     Open
                   </Button>
                 </CardContent>
@@ -433,13 +432,13 @@ export default function Dashboard() {
 
 
         {/* Support Resources */}
-        <Card className="border-0 shadow-soft bg-gradient-calm">
-          <CardHeader>
+        <Card className="border-0 shadow-soft bg-gradient-calm mx-3">
+          <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-lg">
               <Heart className="h-5 w-5" />
               24/7 Support Available
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm">
               Remember: You are not alone. Help is always available.
             </CardDescription>
           </CardHeader>

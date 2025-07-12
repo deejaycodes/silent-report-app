@@ -174,78 +174,66 @@ export default function AdminDashboard() {
 
   return (
     <Layout>
-      <div className="px-4 py-6 space-y-6">
+      <div className="px-3 py-4 space-y-4 max-w-screen-sm mx-auto">
         {/* Header with Welcome Message */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">Welcome back, Hope Foundation</h1>
-              <p className="text-muted-foreground">NGO Admin Dashboard</p>
+        <div className="space-y-3">
+          <div className="flex items-start justify-between">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl font-bold truncate">Hope Foundation</h1>
+              <p className="text-sm text-muted-foreground">NGO Admin Dashboard</p>
             </div>
-            <Button variant="outline" size="sm">
-              <Building2 className="h-4 w-4 mr-2" />
-              NGO Settings
+            <Button variant="outline" size="sm" className="ml-2">
+              <Building2 className="h-4 w-4 mr-1" />
+              <span className="hidden sm:inline">Settings</span>
             </Button>
           </div>
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 gap-2">
           <Card className="border-0 shadow-soft">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-primary" />
-                <div>
-                  <p className="text-2xl font-bold">{totalIncidents}</p>
-                  <p className="text-xs text-muted-foreground">Total Reports</p>
+                <FileText className="h-4 w-4 text-primary flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-lg font-bold">{totalIncidents}</p>
+                  <p className="text-xs text-muted-foreground truncate">Total Reports</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           
           <Card className="border-0 shadow-soft">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-amber-500" />
-                <div>
-                  <p className="text-2xl font-bold">{pendingIncidents.length}</p>
-                  <p className="text-xs text-muted-foreground">Pending</p>
+                <Clock className="h-4 w-4 text-amber-500 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-lg font-bold">{pendingIncidents.length}</p>
+                  <p className="text-xs text-muted-foreground truncate">Pending</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-soft">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-blue-500" />
-                <div>
-                  <p className="text-2xl font-bold">{inProgressIncidents.length}</p>
-                  <p className="text-xs text-muted-foreground">In Progress</p>
+                <TrendingUp className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-lg font-bold">{inProgressIncidents.length}</p>
+                  <p className="text-xs text-muted-foreground truncate">In Progress</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-soft">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-500" />
-                <div>
-                  <p className="text-2xl font-bold">{completedIncidents.length}</p>
-                  <p className="text-xs text-muted-foreground">Completed</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-soft">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2">
-                <XCircle className="h-4 w-4 text-red-500" />
-                <div>
-                  <p className="text-2xl font-bold">{rejectedIncidents.length}</p>
-                  <p className="text-xs text-muted-foreground">Rejected</p>
+                <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-lg font-bold">{completedIncidents.length}</p>
+                  <p className="text-xs text-muted-foreground truncate">Completed</p>
                 </div>
               </div>
             </CardContent>
@@ -254,34 +242,32 @@ export default function AdminDashboard() {
 
         {/* Latest Pending Incident */}
         {latestPending && (
-          <Card className="border-0 shadow-comfort bg-gradient-subtle">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-amber-500" />
-                Latest Pending Assignment
+          <Card className="border-0 shadow-comfort bg-gradient-calm">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <AlertTriangle className="h-4 w-4 text-amber-500" />
+                Latest Pending
               </CardTitle>
-              <CardDescription>Requires immediate attention</CardDescription>
+              <CardDescription className="text-sm">Requires immediate attention</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-start justify-between">
-                <div className="space-y-2 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold">{latestPending.title}</h3>
-                    <Badge variant={getSeverityColor(latestPending.severity)}>
-                      {latestPending.severity}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{latestPending.description}</p>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {new Date(latestPending.reportedAt).toLocaleDateString()}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3" />
-                      {latestPending.location}
-                    </span>
-                  </div>
+            <CardContent className="space-y-3">
+              <div className="space-y-2">
+                <div className="flex items-start gap-2 flex-wrap">
+                  <h3 className="font-semibold text-base flex-1 min-w-0">{latestPending.title}</h3>
+                  <Badge variant={getSeverityColor(latestPending.severity)} className="text-xs">
+                    {latestPending.severity}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-2">{latestPending.description}</p>
+                <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {new Date(latestPending.reportedAt).toLocaleDateString()}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <MapPin className="h-3 w-3" />
+                    <span className="truncate">{latestPending.location}</span>
+                  </span>
                 </div>
               </div>
               <div className="flex gap-2">
@@ -289,6 +275,7 @@ export default function AdminDashboard() {
                   variant="trust" 
                   size="sm"
                   onClick={() => setSelectedIncident(latestPending)}
+                  className="flex-1"
                 >
                   View Details
                 </Button>
@@ -296,6 +283,7 @@ export default function AdminDashboard() {
                   variant="outline" 
                   size="sm"
                   onClick={() => updateIncidentStatus(latestPending.id, "in-progress")}
+                  className="flex-1"
                 >
                   Start Working
                 </Button>
@@ -305,48 +293,53 @@ export default function AdminDashboard() {
         )}
 
         {/* Incidents Management */}
-        <Tabs defaultValue="all" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="all">All Reports</TabsTrigger>
-            <TabsTrigger value="pending">Pending</TabsTrigger>
-            <TabsTrigger value="in-progress">In Progress</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
-            <TabsTrigger value="rejected">Rejected</TabsTrigger>
+        <Tabs defaultValue="all" className="space-y-3">
+          <TabsList className="grid w-full grid-cols-5 h-auto">
+            <TabsTrigger value="all" className="text-xs py-2">All</TabsTrigger>
+            <TabsTrigger value="pending" className="text-xs py-2">Pending</TabsTrigger>
+            <TabsTrigger value="in-progress" className="text-xs py-2">Progress</TabsTrigger>
+            <TabsTrigger value="completed" className="text-xs py-2">Done</TabsTrigger>
+            <TabsTrigger value="rejected" className="text-xs py-2">Rejected</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="all" className="space-y-3">
+          <TabsContent value="all" className="space-y-2">
             {incidents.map((incident) => (
               <Card key={incident.id} className="border-0 shadow-soft">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-medium">{incident.title}</h3>
-                        <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
-                          {incident.severity}
-                        </Badge>
-                        <Badge variant={getStatusColor(incident.status)} className="text-xs">
-                          {incident.status}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{incident.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span>ID: {incident.id}</span>
-                        <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
-                        <span>{incident.category}</span>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="space-y-2 flex-1 min-w-0">
+                        <div className="flex items-start gap-2 flex-wrap">
+                          <h3 className="font-medium text-sm flex-1 min-w-0 truncate">{incident.title}</h3>
+                          <div className="flex gap-1">
+                            <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
+                              {incident.severity}
+                            </Badge>
+                            <Badge variant={getStatusColor(incident.status)} className="text-xs">
+                              {incident.status}
+                            </Badge>
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground line-clamp-2">{incident.description}</p>
+                        <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                          <span>ID: {incident.id}</span>
+                          <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
+                          <span className="truncate">{incident.category}</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex gap-2">
                       <Button 
                         variant="outline" 
                         size="sm"
                         onClick={() => setSelectedIncident(incident)}
+                        className="flex-1"
                       >
                         View
                       </Button>
                       {incident.status === "pending" && (
                         <Select onValueChange={(value) => updateIncidentStatus(incident.id, value as IncidentStatus)}>
-                          <SelectTrigger className="w-32 h-8 text-xs">
+                          <SelectTrigger className="flex-1 h-8 text-xs">
                             <SelectValue placeholder="Update" />
                           </SelectTrigger>
                           <SelectContent>
@@ -358,7 +351,7 @@ export default function AdminDashboard() {
                       )}
                       {incident.status === "in-progress" && (
                         <Select onValueChange={(value) => updateIncidentStatus(incident.id, value as IncidentStatus)}>
-                          <SelectTrigger className="w-32 h-8 text-xs">
+                          <SelectTrigger className="flex-1 h-8 text-xs">
                             <SelectValue placeholder="Update" />
                           </SelectTrigger>
                           <SelectContent>
@@ -374,34 +367,35 @@ export default function AdminDashboard() {
             ))}
           </TabsContent>
 
-          <TabsContent value="pending" className="space-y-3">
+          <TabsContent value="pending" className="space-y-2">
             {pendingIncidents.map((incident) => (
               <Card key={incident.id} className="border-0 shadow-soft">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-medium">{incident.title}</h3>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <h3 className="font-medium text-sm flex-1 min-w-0">{incident.title}</h3>
                         <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
                           {incident.severity}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">{incident.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground line-clamp-2">{incident.description}</p>
+                      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                         <span>ID: {incident.id}</span>
                         <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex gap-2">
                       <Button 
                         variant="outline" 
                         size="sm"
                         onClick={() => setSelectedIncident(incident)}
+                        className="flex-1"
                       >
                         View Details
                       </Button>
                       <Select onValueChange={(value) => updateIncidentStatus(incident.id, value as IncidentStatus)}>
-                        <SelectTrigger className="w-32 h-8 text-xs">
+                        <SelectTrigger className="flex-1 h-8 text-xs">
                           <SelectValue placeholder="Action" />
                         </SelectTrigger>
                         <SelectContent>
@@ -417,34 +411,35 @@ export default function AdminDashboard() {
             ))}
           </TabsContent>
 
-          <TabsContent value="in-progress" className="space-y-3">
+          <TabsContent value="in-progress" className="space-y-2">
             {incidents.filter(i => i.status === "in-progress").map((incident) => (
               <Card key={incident.id} className="border-0 shadow-soft">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-medium">{incident.title}</h3>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <h3 className="font-medium text-sm flex-1 min-w-0">{incident.title}</h3>
                         <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
                           {incident.severity}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">{incident.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground line-clamp-2">{incident.description}</p>
+                      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                         <span>ID: {incident.id}</span>
                         <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex gap-2">
                       <Button 
                         variant="outline" 
                         size="sm"
                         onClick={() => setSelectedIncident(incident)}
+                        className="flex-1"
                       >
                         View Details
                       </Button>
                       <Select onValueChange={(value) => updateIncidentStatus(incident.id, value as IncidentStatus)}>
-                        <SelectTrigger className="w-32 h-8 text-xs">
+                        <SelectTrigger className="flex-1 h-8 text-xs">
                           <SelectValue placeholder="Update" />
                         </SelectTrigger>
                         <SelectContent>
@@ -459,23 +454,25 @@ export default function AdminDashboard() {
             ))}
           </TabsContent>
 
-          <TabsContent value="completed" className="space-y-3">
+          <TabsContent value="completed" className="space-y-2">
             {incidents.filter(i => i.status === "completed").map((incident) => (
               <Card key={incident.id} className="border-0 shadow-soft">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-medium">{incident.title}</h3>
-                        <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
-                          {incident.severity}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          Completed
-                        </Badge>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <h3 className="font-medium text-sm flex-1 min-w-0">{incident.title}</h3>
+                        <div className="flex gap-1">
+                          <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
+                            {incident.severity}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs">
+                            Completed
+                          </Badge>
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground">{incident.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground line-clamp-2">{incident.description}</p>
+                      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                         <span>ID: {incident.id}</span>
                         <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
                       </div>
@@ -484,6 +481,7 @@ export default function AdminDashboard() {
                       variant="outline" 
                       size="sm"
                       onClick={() => setSelectedIncident(incident)}
+                      className="w-full"
                     >
                       View Details
                     </Button>
@@ -493,23 +491,25 @@ export default function AdminDashboard() {
             ))}
           </TabsContent>
 
-          <TabsContent value="rejected" className="space-y-3">
+          <TabsContent value="rejected" className="space-y-2">
             {rejectedIncidents.map((incident) => (
               <Card key={incident.id} className="border-0 shadow-soft">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-medium">{incident.title}</h3>
-                        <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
-                          {incident.severity}
-                        </Badge>
-                        <Badge variant="destructive" className="text-xs">
-                          Rejected
-                        </Badge>
+                <CardContent className="p-3">
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <h3 className="font-medium text-sm flex-1 min-w-0">{incident.title}</h3>
+                        <div className="flex gap-1">
+                          <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
+                            {incident.severity}
+                          </Badge>
+                          <Badge variant="destructive" className="text-xs">
+                            Rejected
+                          </Badge>
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground">{incident.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground line-clamp-2">{incident.description}</p>
+                      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                         <span>ID: {incident.id}</span>
                         <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
                       </div>
@@ -518,6 +518,7 @@ export default function AdminDashboard() {
                       variant="outline" 
                       size="sm"
                       onClick={() => setSelectedIncident(incident)}
+                      className="w-full"
                     >
                       View Details
                     </Button>
@@ -530,7 +531,7 @@ export default function AdminDashboard() {
 
         {/* Incident Details Modal */}
         <Dialog open={!!selectedIncident} onOpenChange={() => setSelectedIncident(null)}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
