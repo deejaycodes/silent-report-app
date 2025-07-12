@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
 import { 
   AlertTriangle, 
   Clock, 
@@ -18,9 +21,13 @@ import {
   MapPin,
   Phone,
   User,
-  Building2
+  Building2,
+  LogOut,
+  Settings,
+  Edit
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { useNavigate } from "react-router-dom"
 
 type IncidentStatus = "pending" | "in-progress" | "completed" | "rejected"
 type IncidentSeverity = "low" | "medium" | "high" | "critical"
@@ -48,7 +55,9 @@ interface Incident {
 
 export default function AdminDashboard() {
   const { toast } = useToast()
+  const navigate = useNavigate()
   const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null)
+  const [showSettings, setShowSettings] = useState(false)
   const [incidents, setIncidents] = useState<Incident[]>([
     {
       id: "INC-001",
@@ -129,6 +138,15 @@ export default function AdminDashboard() {
     }
   ])
 
+  // Admin settings state
+  const [adminSettings, setAdminSettings] = useState({
+    ngoName: "Hope Foundation",
+    adminName: "Sarah Johnson",
+    email: "admin@hopefoundation.org",
+    phone: "+234 801 234 5678",
+    registrationNumber: "NGO/REG/2020/001"
+  })
+
   const updateIncidentStatus = (incidentId: string, newStatus: IncidentStatus) => {
     setIncidents(prev => 
       prev.map(incident => 
@@ -142,6 +160,23 @@ export default function AdminDashboard() {
       title: "Status Updated",
       description: `Incident ${incidentId} status changed to ${newStatus}`,
     })
+  }
+
+  const handleLogout = () => {
+    toast({
+      title: "Logged out successfully",
+      description: "You have been safely logged out of your admin account.",
+    })
+    navigate("/")
+  }
+
+  const handleSaveSettings = (e: React.FormEvent) => {
+    e.preventDefault()
+    toast({
+      title: "Settings saved",
+      description: "Your organization details have been updated successfully.",
+    })
+    setShowSettings(false)
   }
 
   const getSeverityColor = (severity: IncidentSeverity) => {
@@ -179,13 +214,28 @@ export default function AdminDashboard() {
         <div className="space-y-3">
           <div className="flex items-start justify-between">
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-bold truncate">Hope Foundation</h1>
+              <h1 className="text-xl font-bold truncate">{adminSettings.ngoName}</h1>
               <p className="text-sm text-muted-foreground">NGO Admin Dashboard</p>
             </div>
-            <Button variant="outline" size="sm" className="ml-2">
-              <Building2 className="h-4 w-4 mr-1" />
-              <span className="hidden sm:inline">Settings</span>
-            </Button>
+            <div className="flex gap-2 ml-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowSettings(true)}
+              >
+                <Settings className="h-4 w-4 mr-1" />
+                <span className="hidden sm:inline">Settings</span>
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={handleLogout}
+                className="text-muted-foreground hover:text-destructive"
+              >
+                <LogOut className="h-4 w-4 mr-1" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -640,6 +690,94 @@ export default function AdminDashboard() {
                 )}
               </div>
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Settings Modal */}
+        <Dialog open={showSettings} onOpenChange={setShowSettings}>
+          <DialogContent className="max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <Settings className="h-5 w-5" />
+                Organization Settings
+              </DialogTitle>
+              <DialogDescription>
+                Update your organization details and preferences
+              </DialogDescription>
+            </DialogHeader>
+            
+            <form onSubmit={handleSaveSettings} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="settings-ngo-name">Organization Name</Label>
+                <Input
+                  id="settings-ngo-name"
+                  value={adminSettings.ngoName}
+                  onChange={(e) => setAdminSettings({...adminSettings, ngoName: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="settings-admin-name">Admin Name</Label>
+                <Input
+                  id="settings-admin-name"
+                  value={adminSettings.adminName}
+                  onChange={(e) => setAdminSettings({...adminSettings, adminName: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="settings-email">Organization Email</Label>
+                <Input
+                  id="settings-email"
+                  type="email"
+                  value={adminSettings.email}
+                  onChange={(e) => setAdminSettings({...adminSettings, email: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="settings-phone">Contact Phone</Label>
+                <Input
+                  id="settings-phone"
+                  type="tel"
+                  value={adminSettings.phone}
+                  onChange={(e) => setAdminSettings({...adminSettings, phone: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="settings-reg-number">Registration Number</Label>
+                <Input
+                  id="settings-reg-number"
+                  value={adminSettings.registrationNumber}
+                  onChange={(e) => setAdminSettings({...adminSettings, registrationNumber: e.target.value})}
+                  required
+                />
+              </div>
+
+              <Separator />
+
+              <div className="flex flex-col gap-2 pt-2">
+                <Button type="submit" variant="trust" className="w-full">
+                  <Edit className="h-4 w-4 mr-2" />
+                  Save Changes
+                </Button>
+                
+                <Button 
+                  type="button" 
+                  variant="destructive" 
+                  onClick={handleLogout}
+                  className="w-full"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            </form>
           </DialogContent>
         </Dialog>
       </div>
