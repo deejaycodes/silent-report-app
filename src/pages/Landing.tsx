@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Layout } from "@/components/Layout"
 import { SOSButton } from "@/components/SOSButton"
-import { Shield, Phone, Heart, MapPin, MessageCircle, FileText } from "lucide-react"
+import { Shield, Phone, Heart, MapPin, MessageCircle, FileText, Building2 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 const features = [
@@ -59,14 +59,34 @@ export default function Landing() {
                 Report Anonymously
               </Button>
               
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={() => navigate("/auth")}
-                className="w-full"
-              >
-                NGO Login/Signup
-              </Button>
+              {/* NGO Organization Section */}
+              <div className="border rounded-lg p-4 bg-card/50 backdrop-blur-sm mt-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <Building2 className="h-5 w-5 text-primary" />
+                  <h3 className="font-semibold text-sm">For NGO Organizations</h3>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                  Manage incidents, support victims, coordinate responses
+                </p>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => navigate("/auth")}
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => navigate("/auth")}
+                  >
+                    Register NGO
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
 
