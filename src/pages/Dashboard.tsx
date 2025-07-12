@@ -24,7 +24,7 @@ export default function Dashboard() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [includeContact, setIncludeContact] = useState(false)
   const [description, setDescription] = useState("")
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   const handleIncidentSelect = (incident: IncidentType) => {
     setSelectedIncident(incident)
@@ -38,6 +38,16 @@ export default function Dashboard() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
     setSelectedFiles(files)
+  }
+  
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+
+  const resetForm = () => {
+    setDescription("")
+    setIncludeContact(false)
+    setSelectedIncident(null)
+    setSelectedFiles([])
+    setShowConfirmation(false)
   }
 
   const incidentTypes = [
@@ -55,17 +65,9 @@ export default function Dashboard() {
     // Simulate API submission
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    toast({
-      title: "Report submitted successfully",
-      description: "Your report has been received. You will be contacted within 24 hours if you provided contact information.",
-    })
-
     setIsSubmitting(false)
     setShowForm(false)
-    setDescription("")
-    setIncludeContact(false)
-    setSelectedIncident(null)
-    setSelectedFiles([])
+    setShowConfirmation(true)
   }
 
   const quickActions = [
@@ -91,6 +93,97 @@ export default function Dashboard() {
       variant: "info" as const
     }
   ]
+
+  // Confirmation page after successful submission
+  if (showConfirmation) {
+    return (
+      <Layout className="pb-20">
+        <div className="px-4 py-6 flex flex-col min-h-screen">
+          <div className="flex-1 flex flex-col justify-center text-center space-y-6">
+            <div className="animate-fade-in">
+              <div className="mx-auto mb-6 p-4 bg-green-100 dark:bg-green-900/20 rounded-full w-fit">
+                <Shield className="h-16 w-16 text-green-600 dark:text-green-400" />
+              </div>
+              
+              <h1 className="text-3xl font-bold text-foreground mb-4">
+                Thank You for Your Courage
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-2 max-w-md mx-auto">
+                Your report has been received safely and securely. Taking this step shows incredible strength.
+              </p>
+              
+              <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                Our trained professionals will review your report within 24 hours. If you provided contact information, we'll reach out to you.
+              </p>
+            </div>
+
+            <div className="space-y-4 max-w-sm mx-auto">
+              <h2 className="text-xl font-semibold mb-4">What would you like to do next?</h2>
+              
+              <Button 
+                variant="default" 
+                size="lg" 
+                onClick={() => {
+                  resetForm()
+                  setShowForm(true)
+                }}
+                className="w-full"
+              >
+                <FileText className="h-5 w-5 mr-2" />
+                Report Another Incident
+              </Button>
+              
+              <Button 
+                variant="trust" 
+                size="lg"
+                onClick={() => navigate("/chat")}
+                className="w-full"
+              >
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Live Chat with Counselor
+              </Button>
+              
+              <Button 
+                variant="calm" 
+                size="lg"
+                onClick={() => navigate("/resources")}
+                className="w-full"
+              >
+                <MapPin className="h-5 w-5 mr-2" />
+                Find Help Nearby
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => {
+                  resetForm()
+                  setShowForm(false)
+                }}
+                className="w-full"
+              >
+                <Heart className="h-5 w-5 mr-2" />
+                Return to Dashboard
+              </Button>
+            </div>
+
+            {/* Support reminder */}
+            <Card className="border-0 shadow-soft bg-gradient-calm max-w-md mx-auto mt-8">
+              <CardContent className="p-4 text-center">
+                <p className="text-sm font-medium mb-2">Remember: You are not alone</p>
+                <p className="text-xs text-muted-foreground">
+                  Help is available 24/7. Your safety and wellbeing matter.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+        
+        <Navigation />
+      </Layout>
+    )
+  }
 
   if (showForm && selectedIncident) {
     return (
