@@ -154,16 +154,18 @@ export default function AdminDashboard() {
   return (
     <Layout>
       <div className="px-4 py-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Safe Haven NGO Management</p>
+        {/* Header with Welcome Message */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">Welcome back, Hope Foundation</h1>
+              <p className="text-muted-foreground">NGO Admin Dashboard</p>
+            </div>
+            <Button variant="outline" size="sm">
+              <Building2 className="h-4 w-4 mr-2" />
+              NGO Settings
+            </Button>
           </div>
-          <Button variant="outline" size="sm">
-            <Building2 className="h-4 w-4 mr-2" />
-            NGO Settings
-          </Button>
         </div>
 
         {/* Stats Overview */}
