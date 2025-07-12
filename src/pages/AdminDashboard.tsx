@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { 
   AlertTriangle, 
   Clock, 
@@ -24,7 +25,8 @@ import {
   Building2,
   LogOut,
   Settings,
-  Edit
+  Edit,
+  ChevronDown
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useNavigate } from "react-router-dom"
@@ -217,25 +219,31 @@ export default function AdminDashboard() {
               <h1 className="text-xl font-bold truncate">{adminSettings.ngoName}</h1>
               <p className="text-sm text-muted-foreground">NGO Admin Dashboard</p>
             </div>
-            <div className="flex gap-2 ml-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setShowSettings(true)}
-              >
-                <Settings className="h-4 w-4 mr-1" />
-                <span className="hidden sm:inline">Settings</span>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleLogout}
-                className="text-muted-foreground hover:text-destructive"
-              >
-                <LogOut className="h-4 w-4 mr-1" />
-                <span className="hidden sm:inline">Logout</span>
-              </Button>
-            </div>
+            
+            {/* User Menu Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="ml-2">
+                  <User className="h-4 w-4 mr-1" />
+                  <span className="hidden sm:inline">{adminSettings.adminName}</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={() => setShowSettings(true)}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  Edit Profile
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                  onClick={handleLogout}
+                  className="text-destructive focus:text-destructive"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
@@ -698,11 +706,11 @@ export default function AdminDashboard() {
           <DialogContent className="max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <Settings className="h-5 w-5" />
-                Organization Settings
+                <User className="h-5 w-5" />
+                Edit Profile
               </DialogTitle>
               <DialogDescription>
-                Update your organization details and preferences
+                Update your personal and organization details
               </DialogDescription>
             </DialogHeader>
             
@@ -769,12 +777,11 @@ export default function AdminDashboard() {
                 
                 <Button 
                   type="button" 
-                  variant="destructive" 
-                  onClick={handleLogout}
+                  variant="outline" 
+                  onClick={() => setShowSettings(false)}
                   className="w-full"
                 >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
+                  Cancel
                 </Button>
               </div>
             </form>
