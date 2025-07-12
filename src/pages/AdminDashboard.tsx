@@ -107,6 +107,25 @@ export default function AdminDashboard() {
         additionalInfo: "Child appears malnourished and often unsupervised for long periods.",
         evidenceAttached: true
       }
+    },
+    {
+      id: "INC-004",
+      title: "False Complaint",
+      description: "Unsubstantiated domestic violence claim",
+      category: "Domestic Violence",
+      severity: "low",
+      status: "rejected",
+      reportedAt: "2024-01-10T16:45:00Z",
+      reportedBy: "Anonymous User",
+      location: "Suburban Area, Oak Drive",
+      assignedTo: "current-admin",
+      details: {
+        age: "35",
+        gender: "Male",
+        relationship: "Ex-Partner",
+        additionalInfo: "Investigation revealed this was a false accusation made during custody dispute.",
+        evidenceAttached: false
+      }
     }
   ])
 
@@ -146,10 +165,12 @@ export default function AdminDashboard() {
   }
 
   const pendingIncidents = incidents.filter(i => i.status === "pending")
+  const inProgressIncidents = incidents.filter(i => i.status === "in-progress")
+  const completedIncidents = incidents.filter(i => i.status === "completed")
+  const rejectedIncidents = incidents.filter(i => i.status === "rejected")
+  
   const latestPending = pendingIncidents[0]
   const totalIncidents = incidents.length
-  const completedIncidents = incidents.filter(i => i.status === "completed").length
-  const inProgressIncidents = incidents.filter(i => i.status === "in-progress").length
 
   return (
     <Layout>
@@ -169,7 +190,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <Card className="border-0 shadow-soft">
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
@@ -199,7 +220,7 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-blue-500" />
                 <div>
-                  <p className="text-2xl font-bold">{inProgressIncidents}</p>
+                  <p className="text-2xl font-bold">{inProgressIncidents.length}</p>
                   <p className="text-xs text-muted-foreground">In Progress</p>
                 </div>
               </div>
@@ -211,8 +232,20 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 <div>
-                  <p className="text-2xl font-bold">{completedIncidents}</p>
+                  <p className="text-2xl font-bold">{completedIncidents.length}</p>
                   <p className="text-xs text-muted-foreground">Completed</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-soft">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2">
+                <XCircle className="h-4 w-4 text-red-500" />
+                <div>
+                  <p className="text-2xl font-bold">{rejectedIncidents.length}</p>
+                  <p className="text-xs text-muted-foreground">Rejected</p>
                 </div>
               </div>
             </CardContent>
@@ -273,11 +306,12 @@ export default function AdminDashboard() {
 
         {/* Incidents Management */}
         <Tabs defaultValue="all" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="all">All Reports</TabsTrigger>
             <TabsTrigger value="pending">Pending</TabsTrigger>
             <TabsTrigger value="in-progress">In Progress</TabsTrigger>
             <TabsTrigger value="completed">Completed</TabsTrigger>
+            <TabsTrigger value="rejected">Rejected</TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="space-y-3">
@@ -438,6 +472,40 @@ export default function AdminDashboard() {
                         </Badge>
                         <Badge variant="outline" className="text-xs">
                           Completed
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{incident.description}</p>
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <span>ID: {incident.id}</span>
+                        <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setSelectedIncident(incident)}
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </TabsContent>
+
+          <TabsContent value="rejected" className="space-y-3">
+            {rejectedIncidents.map((incident) => (
+              <Card key={incident.id} className="border-0 shadow-soft">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-medium">{incident.title}</h3>
+                        <Badge variant={getSeverityColor(incident.severity)} className="text-xs">
+                          {incident.severity}
+                        </Badge>
+                        <Badge variant="destructive" className="text-xs">
+                          Rejected
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">{incident.description}</p>
