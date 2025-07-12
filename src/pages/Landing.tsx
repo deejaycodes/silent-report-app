@@ -60,7 +60,7 @@ export default function Landing() {
               </Button>
               
               <Button 
-                variant="trust" 
+                variant="default" 
                 size="lg" 
                 onClick={() => navigate("/auth")}
                 className="w-full"
