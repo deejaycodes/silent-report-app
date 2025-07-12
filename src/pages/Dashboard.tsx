@@ -153,19 +153,6 @@ export default function Dashboard() {
                 <MapPin className="h-5 w-5 mr-2" />
                 Find Help Nearby
               </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => {
-                  resetForm()
-                  setShowForm(false)
-                }}
-                className="w-full"
-              >
-                <Heart className="h-5 w-5 mr-2" />
-                Return to Dashboard
-              </Button>
             </div>
 
             {/* Support reminder */}
