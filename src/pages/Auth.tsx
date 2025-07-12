@@ -51,23 +51,16 @@ export default function Auth() {
     e.preventDefault()
     setIsLoading(true)
     
-    const formData = new FormData(e.target as HTMLFormElement)
-    const email = formData.get('email') as string
-    
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
     
-    // Simple logic to detect admin login (in real app, this would be determined by backend)
-    const isAdminLogin = email?.includes('admin') || email?.includes('@organization') || email?.includes('ngo')
-    
     toast({
       title: "Welcome back!",
-      description: `You have successfully logged in${isAdminLogin ? ' as an admin' : ''}.`,
+      description: "You have successfully logged in to your admin dashboard.",
     })
     
     setIsLoading(false)
-    // Redirect based on user type
-    navigate(isAdminLogin ? "/admin" : "/dashboard")
+    navigate("/admin")
   }
 
   return (
