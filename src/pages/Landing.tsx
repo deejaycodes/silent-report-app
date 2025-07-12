@@ -51,21 +51,21 @@ export default function Landing() {
 
             <div className="flex flex-col gap-4 max-w-sm mx-auto mb-12">
               <Button 
-                variant="trust" 
-                size="lg" 
-                onClick={() => navigate("/auth")}
-                className="w-full"
-              >
-                NGO Login/Signup
-              </Button>
-              
-              <Button 
                 variant="calm" 
                 size="lg"
                 onClick={() => navigate("/report")}
                 className="w-full"
               >
                 Report Anonymously
+              </Button>
+              
+              <Button 
+                variant="trust" 
+                size="lg" 
+                onClick={() => navigate("/auth")}
+                className="w-full"
+              >
+                NGO Login/Signup
               </Button>
             </div>
           </div>
