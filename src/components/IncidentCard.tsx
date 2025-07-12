@@ -60,21 +60,13 @@ export function IncidentCard({ onSelect }: IncidentCardProps) {
           className="cursor-pointer transition-all duration-200 hover:shadow-comfort hover:scale-102 border-0 shadow-soft"
         >
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-primary-soft">
-                  {incident.icon}
-                </div>
-                <div>
-                  <CardTitle className="text-lg">{incident.title}</CardTitle>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-full bg-primary-soft">
+                {incident.icon}
               </div>
-              <Badge 
-                variant={incident.severity === "high" ? "destructive" : "secondary"}
-                className="text-xs"
-              >
-                {incident.severity}
-              </Badge>
+              <div>
+                <CardTitle className="text-lg">{incident.title}</CardTitle>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="pt-0">
