@@ -175,8 +175,8 @@ export default function AdminDashboard() {
   const handleSaveSettings = (e: React.FormEvent) => {
     e.preventDefault()
     toast({
-      title: "Settings saved",
-      description: "Your organization details have been updated successfully.",
+      title: "Changes submitted",
+      description: "Please check your email to confirm the changes made to your profile.",
     })
     setShowSettings(false)
   }
