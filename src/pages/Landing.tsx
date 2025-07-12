@@ -70,10 +70,6 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Emergency SOS */}
-          <div className="mb-12">
-            <SOSButton className="animate-slide-up" />
-          </div>
 
           {/* Features Grid */}
           <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">

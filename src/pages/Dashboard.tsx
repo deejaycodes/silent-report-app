@@ -1,6 +1,5 @@
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
-import { SOSButton } from "@/components/SOSButton"
 import { IncidentCard } from "@/components/IncidentCard"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -54,10 +53,6 @@ export default function Dashboard() {
           <p className="text-muted-foreground">How can we help you today?</p>
         </div>
 
-        {/* Emergency SOS */}
-        <div className="flex justify-center">
-          <SOSButton />
-        </div>
 
         {/* Quick Actions */}
         <div className="space-y-3">

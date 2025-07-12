@@ -39,12 +39,12 @@ export default function Auth() {
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     toast({
-      title: "Admin account pending verification",
-      description: "Your NGO admin account will be verified within 24 hours.",
+      title: "Admin account created successfully!",
+      description: "Welcome to Safe Haven Admin Dashboard.",
     })
     
     setIsLoading(false)
-    navigate("/")
+    navigate("/admin")
   }
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -143,149 +143,74 @@ export default function Auth() {
             </TabsContent>
 
             <TabsContent value="signup">
-              <Tabs defaultValue="user" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-4">
-                  <TabsTrigger value="user" className="text-xs">
-                    <Shield className="h-3 w-3 mr-1" />
-                    User
-                  </TabsTrigger>
-                  <TabsTrigger value="admin" className="text-xs">
-                    <Building2 className="h-3 w-3 mr-1" />
-                    NGO Admin
-                  </TabsTrigger>
-                </TabsList>
+              <Card className="border-0 shadow-comfort">
+                <CardHeader>
+                  <CardTitle>NGO Admin Signup</CardTitle>
+                  <CardDescription>
+                    Register your organization to manage reports
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleAdminSignup} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="ngo-name">NGO Name</Label>
+                      <Input
+                        id="ngo-name"
+                        placeholder="Enter organization name"
+                        required
+                      />
+                    </div>
 
-                <TabsContent value="user">
-                  <Card className="border-0 shadow-comfort">
-                    <CardHeader>
-                      <CardTitle>Create User Account</CardTitle>
-                      <CardDescription>
-                        Sign up to report incidents and access support
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handleUserSignup} className="space-y-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="user-email">Email or Phone</Label>
-                          <Input
-                            id="user-email"
-                            type="email"
-                            placeholder="Enter your email or phone"
-                            required
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="user-password">Password</Label>
-                          <Input
-                            id="user-password"
-                            type="password"
-                            placeholder="Create a password"
-                            required
-                          />
-                        </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="admin-name">Admin Name</Label>
+                      <Input
+                        id="admin-name"
+                        placeholder="Enter your full name"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="admin-email">Organization Email</Label>
+                      <Input
+                        id="admin-email"
+                        type="email"
+                        placeholder="admin@organization.org"
+                        required
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="confirm-password">Confirm Password</Label>
-                          <Input
-                            id="confirm-password"
-                            type="password"
-                            placeholder="Confirm your password"
-                            required
-                          />
-                        </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="admin-phone">Phone Number</Label>
+                      <Input
+                        id="admin-phone"
+                        type="tel"
+                        placeholder="Enter phone number"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="admin-password">Password</Label>
+                      <Input
+                        id="admin-password"
+                        type="password"
+                        placeholder="Create a secure password"
+                        required
+                      />
+                    </div>
 
-                        <div className="flex items-center space-x-2">
-                          <Checkbox id="anonymous" />
-                          <Label htmlFor="anonymous" className="text-sm">
-                            I want to report anonymously (no personal data collected)
-                          </Label>
-                        </div>
-
-                        <Button 
-                          type="submit" 
-                          variant="trust" 
-                          className="w-full"
-                          disabled={isLoading}
-                        >
-                          {isLoading ? "Creating account..." : "Create Account"}
-                        </Button>
-                      </form>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value="admin">
-                  <Card className="border-0 shadow-comfort">
-                    <CardHeader>
-                      <CardTitle>NGO Admin Signup</CardTitle>
-                      <CardDescription>
-                        Register your organization to manage reports
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handleAdminSignup} className="space-y-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="ngo-name">NGO Name</Label>
-                          <Input
-                            id="ngo-name"
-                            placeholder="Enter organization name"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="admin-name">Admin Name</Label>
-                          <Input
-                            id="admin-name"
-                            placeholder="Enter your full name"
-                            required
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="admin-email">Organization Email</Label>
-                          <Input
-                            id="admin-email"
-                            type="email"
-                            placeholder="admin@organization.org"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="admin-phone">Phone Number</Label>
-                          <Input
-                            id="admin-phone"
-                            type="tel"
-                            placeholder="Enter phone number"
-                            required
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="admin-password">Password</Label>
-                          <Input
-                            id="admin-password"
-                            type="password"
-                            placeholder="Create a secure password"
-                            required
-                          />
-                        </div>
-
-                        <Button 
-                          type="submit" 
-                          variant="trust" 
-                          className="w-full"
-                          disabled={isLoading}
-                        >
-                          {isLoading ? "Registering..." : "Register NGO"}
-                        </Button>
-                      </form>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
+                    <Button 
+                      type="submit" 
+                      variant="trust" 
+                      className="w-full"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Registering..." : "Register NGO"}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
