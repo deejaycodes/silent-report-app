@@ -25,11 +25,10 @@ export default function Report() {
   )
 
   const incidentTypes = [
-    { id: "domestic-violence", title: "Domestic Violence" },
-    { id: "fgm", title: "FGM/Cutting" },
-    { id: "child-abuse", title: "Child Abuse" },
-    { id: "harassment", title: "Harassment" },
-    { id: "other", title: "Other" }
+    { id: "violence-at-home", title: "Violence at home" },
+    { id: "harm-to-child", title: "Harm to a child" },
+    { id: "unwanted-touching", title: "Unwanted touching or harassment" },
+    { id: "other-safety", title: "Other safety concern" }
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,7 +102,7 @@ export default function Report() {
             </Label>
             <Textarea
               id="description"
-              placeholder="Please describe the incident in as much detail as you feel comfortable sharing..."
+              placeholder="Tell us what happened in your own words. You can write as much or as little as you want..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={1000}
@@ -112,7 +111,7 @@ export default function Report() {
               required
             />
             <p className="text-xs text-muted-foreground">
-              Include when, where, and what happened. Only share what you're comfortable with.
+              Share what happened, when it happened, and where it happened. Use simple words and write however feels natural to you.
             </p>
           </div>
 
