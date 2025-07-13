@@ -50,7 +50,7 @@ export default function Report() {
 
   return (
     <Layout className="pb-20">
-      <div className="px-4 py-6">
+      <div className="px-4 py-6 safe-top">
         <div className="flex items-center gap-3 mb-6">
           <Button
             variant="ghost"

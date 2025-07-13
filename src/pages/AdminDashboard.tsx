@@ -211,7 +211,7 @@ export default function AdminDashboard() {
 
   return (
     <Layout>
-      <div className="px-3 py-4 space-y-4 max-w-screen-sm mx-auto">
+      <div className="px-3 py-4 space-y-4 max-w-screen-sm mx-auto safe-top">
         {/* Header with Welcome Message */}
         <div className="space-y-3">
           <div className="flex items-start justify-between">
