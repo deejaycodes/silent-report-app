@@ -12,7 +12,7 @@ export function Layout({ children, className, showThemeToggle = true }: LayoutPr
   return (
     <div className={cn("min-h-screen bg-gradient-calm", className)}>
       {showThemeToggle && (
-        <div className="absolute top-4 right-4 z-50 safe-top">
+        <div className="absolute top-4 right-4 z-50">
           <ThemeToggle />
         </div>
       )}
