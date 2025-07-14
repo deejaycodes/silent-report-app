@@ -11,8 +11,8 @@ export default function Dashboard() {
   const navigate = useNavigate()
 
   const handleIncidentSelect = (incident: IncidentType) => {
-    // Navigate to report page with selected incident
-    navigate("/report", { state: { selectedIncident: incident } })
+    // Navigate to report page with only the incident ID to avoid serialization issues
+    navigate("/report", { state: { selectedIncidentId: incident.id } })
   }
 
   return (

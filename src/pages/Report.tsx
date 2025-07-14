@@ -21,7 +21,7 @@ export default function Report() {
   const [includeContact, setIncludeContact] = useState(false)
   const [description, setDescription] = useState("")
   const [selectedType, setSelectedType] = useState(
-    location.state?.selectedIncident?.id || ""
+    location.state?.selectedIncidentId || ""
   )
 
   const incidentTypes = [
