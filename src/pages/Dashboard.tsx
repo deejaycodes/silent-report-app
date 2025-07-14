@@ -398,7 +398,7 @@ export default function Dashboard() {
         {/* Simplified Header */}
         <div className="text-center space-y-3">
           <h1 className="text-3xl font-bold">Safe Haven</h1>
-          <p className="text-lg text-muted-foreground">What happened to you?</p>
+          <p className="text-lg text-muted-foreground">Report what happened</p>
         </div>
 
         {/* Main Reporting Section */}
