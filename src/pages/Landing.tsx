@@ -63,7 +63,7 @@ export default function Landing() {
             </h1>
             
             <p className="text-base text-muted-foreground mb-6 max-w-xs mx-auto leading-relaxed">
-              A secure platform for anonymous reporting and getting the support you need
+              {t('landing.hero_description')}
             </p>
 
             <div className="flex flex-col gap-3 max-w-xs mx-auto mb-8">
@@ -73,7 +73,7 @@ export default function Landing() {
                 onClick={() => navigate("/dashboard")}
                 className="w-full"
               >
-                Report Anonymously
+                {t('landing.report_anonymously')}
               </Button>
               
               {/* NGO Organization Section */}
