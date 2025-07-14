@@ -1,57 +1,48 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { AlertTriangle, Shield, Heart, Phone } from "lucide-react"
+import { Home, Baby, Hand, UserX, HelpCircle } from "lucide-react"
 
 interface IncidentType {
   id: string
   title: string
-  description: string
+  simpleTitle: string
   icon: React.ReactNode
-  severity: "high" | "medium" | "low"
   color: string
+  bgColor: string
 }
 
 const incidentTypes: IncidentType[] = [
   {
-    id: "domestic-violence",
-    title: "Domestic Violence",
-    description: "Report domestic abuse or violence in the home",
-    icon: <Shield className="h-6 w-6" />,
-    severity: "high",
-    color: "destructive"
+    id: "violence-at-home",
+    title: "Violence at home",
+    simpleTitle: "Home Violence",
+    icon: <Home className="h-12 w-12" />,
+    color: "text-red-600",
+    bgColor: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
   },
   {
-    id: "fgm",
-    title: "FGM/Cutting",
-    description: "Female genital mutilation or cutting incidents",
-    icon: <AlertTriangle className="h-6 w-6" />,
-    severity: "high", 
-    color: "destructive"
+    id: "harm-to-child",
+    title: "Harm to a child",
+    simpleTitle: "Child Hurt",
+    icon: <Baby className="h-12 w-12" />,
+    color: "text-orange-600",
+    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
   },
   {
-    id: "child-abuse",
-    title: "Child Abuse",
-    description: "Report child abuse or neglect",
-    icon: <Heart className="h-6 w-6" />,
-    severity: "high",
-    color: "destructive"
+    id: "unwanted-touching",
+    title: "Unwanted touching or harassment",
+    simpleTitle: "Unwanted Touch",
+    icon: <Hand className="h-12 w-12" />,
+    color: "text-purple-600",
+    bgColor: "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800"
   },
   {
-    id: "harassment",
-    title: "Harassment",
-    description: "Sexual or psychological harassment",
-    icon: <Phone className="h-6 w-6" />,
-    severity: "medium",
-    color: "warning"
-  },
-  {
-    id: "other",
-    title: "Others",
-    description: "Other incidents or situations needing support",
-    icon: <AlertTriangle className="h-6 w-6" />,
-    severity: "medium",
-    color: "secondary"
+    id: "other-safety",
+    title: "Other safety concern",
+    simpleTitle: "Other Problem",
+    icon: <HelpCircle className="h-12 w-12" />,
+    color: "text-blue-600",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
   }
 ]
 
@@ -61,33 +52,26 @@ interface IncidentCardProps {
 
 export function IncidentCard({ onSelect }: IncidentCardProps) {
   return (
-    <div className="grid grid-cols-1 gap-3 px-3">
+    <div className="grid grid-cols-1 gap-6 px-3">
       {incidentTypes.map((incident) => (
         <Card 
           key={incident.id} 
-          className="cursor-pointer transition-all duration-200 hover:shadow-comfort hover:scale-[1.02] border-0 shadow-soft active:scale-95"
+          className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-95 border-2 ${incident.bgColor}`}
+          onClick={() => onSelect(incident)}
         >
-          <CardHeader className="pb-2">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-primary-soft flex-shrink-0">
-                {incident.icon}
-              </div>
-              <div className="min-w-0 flex-1">
-                <CardTitle className="text-base leading-tight">{incident.title}</CardTitle>
-              </div>
+          <CardContent className="p-8 text-center">
+            <div className={`mx-auto mb-4 ${incident.color}`}>
+              {incident.icon}
             </div>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <CardDescription className="text-sm mb-3 leading-relaxed">
-              {incident.description}
-            </CardDescription>
+            <h3 className="text-2xl font-bold mb-2 leading-tight">
+              {incident.title}
+            </h3>
             <Button 
-              variant="trust" 
+              variant="default" 
               size="lg"
-              className="w-full"
-              onClick={() => onSelect(incident)}
+              className="w-full mt-4 text-lg py-6"
             >
-              Report This Incident
+              Report This
             </Button>
           </CardContent>
         </Card>
