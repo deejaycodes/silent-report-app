@@ -27,6 +27,19 @@ const resources = {
           "other_safety": "Other safety concern"
         },
         "report_this": "Report This"
+      },
+      "report": {
+        "title": "Submit Report",
+        "anonymous_secure": "Anonymous & Secure",
+        "anonymous_notice": "Your report is completely anonymous unless you choose to provide contact information below.",
+        "tell_what_happened": "Tell us what happened *",
+        "description_placeholder": "Tell us what happened in your own words. You can write as much or as little as you want...",
+        "description_help": "Share what happened, when it happened, and where it happened. Use simple words and write however feels natural to you.",
+        "categorize_optional": "Help us categorize this (Optional)",
+        "category_placeholder": "Choose category if you want",
+        "category_help": "This helps us connect you with the right people, but you can skip this if you want.",
+        "submit_report": "Submit Report",
+        "submitting": "Submitting Report..."
       }
     }
   },
@@ -54,6 +67,19 @@ const resources = {
           "other_safety": "Iṣoro aabo miiran"
         },
         "report_this": "Sọ Eyi"
+      },
+      "report": {
+        "title": "Fi Ijabọ Silẹ",
+        "anonymous_secure": "Laimi Orukọ ati Aabo",
+        "anonymous_notice": "Ijabọ rẹ jẹ laimi orukọ patapata ayafi ti o ba yan lati fun ni alaye olubasọrọ.",
+        "tell_what_happened": "Sọ fun wa ohun ti o ṣẹlẹ *",
+        "description_placeholder": "Sọ fun wa ohun ti o ṣẹlẹ ni ọrọ tirẹ. O le kọ pupọ tabi diẹ bi o ti fẹ...",
+        "description_help": "Sọ ohun ti o ṣẹlẹ, igba ti o ṣẹlẹ, ati ibi ti o ṣẹlẹ. Lo awọn ọrọ rọrun.",
+        "categorize_optional": "Ran wa lọwọ lati to eyi sinu ẹka (Ti o ba fẹ)",
+        "category_placeholder": "Yan ẹka ti o ba fẹ",
+        "category_help": "Eyi ṣe iranlọwọ fun wa lati so ọ pọ mọ awọn eniyan to tọ, ṣugbọn o le fo eyi silẹ.",
+        "submit_report": "Fi Ijabọ Silẹ",
+        "submitting": "Nfi Ijabọ Silẹ..."
       }
     }
   },

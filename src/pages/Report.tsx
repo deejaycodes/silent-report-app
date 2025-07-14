@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
@@ -17,6 +18,7 @@ export default function Report() {
   const location = useLocation()
   const navigate = useNavigate()
   const { toast } = useToast()
+  const { t } = useTranslation()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [includeContact, setIncludeContact] = useState(false)
   const [description, setDescription] = useState("")
@@ -58,7 +60,7 @@ export default function Report() {
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-xl font-bold">Submit Report</h1>
+          <h1 className="text-xl font-bold">{t('report.title')}</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -67,25 +69,25 @@ export default function Report() {
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="h-4 w-4 text-primary" />
-                <span className="font-medium text-sm">Anonymous & Secure</span>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Your report is completely anonymous unless you choose to provide contact information below.
-              </p>
+                  <span className="font-medium text-sm">{t('report.anonymous_secure')}</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {t('report.anonymous_notice')}
+                </p>
             </CardContent>
           </Card>
 
           {/* Description - Now First */}
           <div className="space-y-2">
             <Label htmlFor="description">
-              Tell us what happened *
+              {t('report.tell_what_happened')}
               <span className="text-xs text-muted-foreground ml-2">
                 ({description.length}/1000)
               </span>
             </Label>
             <Textarea
               id="description"
-              placeholder="Tell us what happened in your own words. You can write as much or as little as you want..."
+              placeholder={t('report.description_placeholder')}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={1000}
@@ -94,7 +96,7 @@ export default function Report() {
               required
             />
             <p className="text-xs text-muted-foreground">
-              Share what happened, when it happened, and where it happened. Use simple words and write however feels natural to you.
+              {t('report.description_help')}
             </p>
           </div>
 
