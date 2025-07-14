@@ -9,6 +9,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Report from "./pages/Report";
+import ReportConfirmation from "./pages/ReportConfirmation";
 import Chat from "./pages/Chat";
 import Resources from "./pages/Resources";
 import History from "./pages/History";
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/report/confirmation" element={<ReportConfirmation />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/history" element={<History />} />

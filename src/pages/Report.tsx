@@ -44,7 +44,7 @@ export default function Report() {
     })
 
     setIsSubmitting(false)
-    navigate("/dashboard")
+    navigate("/report/confirmation")
   }
 
   return (
