@@ -13,6 +13,8 @@ import ReportConfirmation from "./pages/ReportConfirmation";
 import Chat from "./pages/Chat";
 import Resources from "./pages/Resources";
 import History from "./pages/History";
+import SafetyCenter from "./pages/SafetyCenter";
+import EvidenceVault from "./pages/EvidenceVault";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/chat" element={<Chat />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/history" element={<History />} />
+            <Route path="/safety" element={<SafetyCenter />} />
+            <Route path="/evidence" element={<EvidenceVault />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
