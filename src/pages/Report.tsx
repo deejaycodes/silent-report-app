@@ -75,27 +75,10 @@ export default function Report() {
             </CardContent>
           </Card>
 
-          {/* Incident Type */}
-          <div className="space-y-2">
-            <Label htmlFor="incident-type">Type of Incident *</Label>
-            <Select value={selectedType} onValueChange={setSelectedType} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select incident type" />
-              </SelectTrigger>
-              <SelectContent>
-                {incidentTypes.map((type) => (
-                  <SelectItem key={type.id} value={type.id}>
-                    {type.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Description */}
+          {/* Description - Now First */}
           <div className="space-y-2">
             <Label htmlFor="description">
-              Description *
+              Tell us what happened *
               <span className="text-xs text-muted-foreground ml-2">
                 ({description.length}/1000)
               </span>
@@ -205,6 +188,26 @@ export default function Report() {
             )}
           </Card>
 
+          {/* Incident Type - Now Optional at Bottom */}
+          <div className="space-y-2">
+            <Label htmlFor="incident-type">Help us categorize this (Optional)</Label>
+            <Select value={selectedType} onValueChange={setSelectedType}>
+              <SelectTrigger>
+                <SelectValue placeholder="Choose category if you want" />
+              </SelectTrigger>
+              <SelectContent>
+                {incidentTypes.map((type) => (
+                  <SelectItem key={type.id} value={type.id}>
+                    {type.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted-foreground">
+              This helps us connect you with the right people, but you can skip this if you want.
+            </p>
+          </div>
+
           {/* Submit */}
           <div className="space-y-4">
             <Button
@@ -212,7 +215,7 @@ export default function Report() {
               variant="trust"
               size="lg"
               className="w-full"
-              disabled={isSubmitting || !selectedType || !description.trim()}
+              disabled={isSubmitting || !description.trim()}
             >
               {isSubmitting ? (
                 "Submitting Report..."
