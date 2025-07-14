@@ -589,113 +589,214 @@ export default function AdminDashboard() {
 
         {/* Incident Details Modal */}
         <Dialog open={!!selectedIncident} onOpenChange={() => setSelectedIncident(null)}>
-          <DialogContent className="max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Incident Details
-              </DialogTitle>
-              <DialogDescription>
-                {selectedIncident?.id} - {selectedIncident?.category}
-              </DialogDescription>
-            </DialogHeader>
-            
+          <DialogContent className="max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
             {selectedIncident && (
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <Badge variant={getSeverityColor(selectedIncident.severity)}>
-                    {selectedIncident.severity} severity
-                  </Badge>
-                  <Badge variant={getStatusColor(selectedIncident.status)}>
-                    {selectedIncident.status}
-                  </Badge>
+              <div className="space-y-6">
+                <DialogHeader>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-2">
+                      <DialogTitle className="flex items-center gap-2 text-xl">
+                        <FileText className="h-5 w-5" />
+                        Incident #{selectedIncident.id}
+                      </DialogTitle>
+                      <DialogDescription className="text-base">
+                        Complete incident details and case information
+                      </DialogDescription>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Badge variant={getSeverityColor(selectedIncident.severity)} className="text-xs">
+                        {selectedIncident.severity.toUpperCase()} PRIORITY
+                      </Badge>
+                      <Badge variant={getStatusColor(selectedIncident.status)} className="text-xs">
+                        {selectedIncident.status.replace('-', ' ').toUpperCase()}
+                      </Badge>
+                    </div>
+                  </div>
+                </DialogHeader>
+
+                {/* Title & Description */}
+                <div className="space-y-3 p-4 bg-muted/50 rounded-lg">
+                  <h3 className="font-semibold text-lg">{selectedIncident.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{selectedIncident.description}</p>
                 </div>
 
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-muted-foreground">{selectedIncident.description}</p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <p className="text-muted-foreground">
-                        {new Date(selectedIncident.reportedAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">{selectedIncident.reportedBy}</p>
-                    </div>
-                  </div>
-
-                  {selectedIncident.location && (
-                    <div>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        {selectedIncident.location}
-                      </p>
-                    </div>
-                  )}
-
-                  {selectedIncident.contactInfo && (
-                    <div>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1">
-                        <Phone className="h-3 w-3" />
-                        {selectedIncident.contactInfo}
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="border-t pt-3">
-                    <div className="space-y-2 text-sm">
-                      {selectedIncident.details.age && (
-                        <div>
-                          <span className="text-muted-foreground">{selectedIncident.details.age}</span>
-                        </div>
-                      )}
-                      {selectedIncident.details.gender && (
-                        <div>
-                          <span className="text-muted-foreground">{selectedIncident.details.gender}</span>
-                        </div>
-                      )}
-                      {selectedIncident.details.relationship && (
-                        <div>
-                          <span className="text-muted-foreground">{selectedIncident.details.relationship}</span>
-                        </div>
-                      )}
-                      {selectedIncident.details.evidenceAttached && (
-                        <div>
-                          <Badge variant="outline" className="text-xs">Evidence Attached</Badge>
-                        </div>
-                      )}
+                {/* Case Information Grid */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Basic Information */}
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-base flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Case Information
+                    </h4>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Category</span>
+                        <span className="font-semibold">{selectedIncident.category}</span>
+                      </div>
+                      
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Case ID</span>
+                        <span className="font-mono bg-muted px-2 py-1 rounded text-xs">{selectedIncident.id}</span>
+                      </div>
+                      
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Reported By</span>
+                        <span>{selectedIncident.reportedBy}</span>
+                      </div>
+                      
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Assigned To</span>
+                        <span>{selectedIncident.assignedTo}</span>
+                      </div>
                     </div>
                   </div>
 
-                  {selectedIncident.details.additionalInfo && (
-                    <div>
-                      <p className="text-sm text-muted-foreground">{selectedIncident.details.additionalInfo}</p>
+                  {/* Contact & Location */}
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-base flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      Contact & Location
+                    </h4>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Date & Time</span>
+                        <span>{new Date(selectedIncident.reportedAt).toLocaleDateString('en-US', { 
+                          weekday: 'long', 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        })}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(selectedIncident.reportedAt).toLocaleTimeString()}
+                        </span>
+                      </div>
+                      
+                      {selectedIncident.location && (
+                        <div className="flex flex-col gap-1">
+                          <span className="font-medium text-muted-foreground">Location</span>
+                          <span>{selectedIncident.location}</span>
+                        </div>
+                      )}
+                      
+                      {selectedIncident.contactInfo && (
+                        <div className="flex flex-col gap-1">
+                          <span className="font-medium text-muted-foreground">Contact Information</span>
+                          <span>{selectedIncident.contactInfo}</span>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                {selectedIncident.status !== "completed" && selectedIncident.status !== "rejected" && (
-                  <div className="flex gap-2 pt-4 border-t">
-                    <Select onValueChange={(value) => {
-                      updateIncidentStatus(selectedIncident.id, value as IncidentStatus)
-                      setSelectedIncident(null)
-                    }}>
-                      <SelectTrigger className="flex-1">
-                        <SelectValue placeholder="Update Status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {selectedIncident.status === "pending" && (
-                          <SelectItem value="in-progress">Start Working</SelectItem>
+                <Separator />
+
+                {/* Victim/Subject Details */}
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-base flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Subject Details
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    {selectedIncident.details.age && (
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Age</span>
+                        <span>{selectedIncident.details.age} years old</span>
+                      </div>
+                    )}
+                    {selectedIncident.details.gender && (
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Gender</span>
+                        <span>{selectedIncident.details.gender}</span>
+                      </div>
+                    )}
+                    {selectedIncident.details.relationship && (
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-muted-foreground">Relationship to Perpetrator</span>
+                        <span>{selectedIncident.details.relationship}</span>
+                      </div>
+                    )}
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-muted-foreground">Evidence</span>
+                      <div>
+                        {selectedIncident.details.evidenceAttached ? (
+                          <Badge variant="default" className="text-xs bg-green-100 text-green-800 hover:bg-green-100">
+                            <CheckCircle className="h-3 w-3 mr-1" />
+                            Attached
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-xs">
+                            <XCircle className="h-3 w-3 mr-1" />
+                            None
+                          </Badge>
                         )}
-                        <SelectItem value="completed">Mark Complete</SelectItem>
-                        <SelectItem value="rejected">Reject Incident</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional Information */}
+                {selectedIncident.details.additionalInfo && (
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-base">Additional Information</h4>
+                    <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary">
+                      <p className="text-sm leading-relaxed">{selectedIncident.details.additionalInfo}</p>
+                    </div>
                   </div>
                 )}
+
+                {/* Action Buttons */}
+                <div className="flex flex-col gap-3 pt-4 border-t">
+                  {selectedIncident.status !== "completed" && selectedIncident.status !== "rejected" ? (
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-base">Case Actions</h4>
+                      <div className="grid gap-2">
+                        {selectedIncident.status === "pending" && (
+                          <Button 
+                            variant="trust" 
+                            className="w-full"
+                            onClick={() => {
+                              updateIncidentStatus(selectedIncident.id, "in-progress")
+                              setSelectedIncident(null)
+                            }}
+                          >
+                            <TrendingUp className="h-4 w-4 mr-2" />
+                            Start Working on Case
+                          </Button>
+                        )}
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button 
+                            variant="outline" 
+                            className="w-full"
+                            onClick={() => {
+                              updateIncidentStatus(selectedIncident.id, "completed")
+                              setSelectedIncident(null)
+                            }}
+                          >
+                            <CheckCircle className="h-4 w-4 mr-2" />
+                            Mark Complete
+                          </Button>
+                          <Button 
+                            variant="destructive" 
+                            className="w-full"
+                            onClick={() => {
+                              updateIncidentStatus(selectedIncident.id, "rejected")
+                              setSelectedIncident(null)
+                            }}
+                          >
+                            <XCircle className="h-4 w-4 mr-2" />
+                            Reject Case
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-4">
+                      <Badge variant={getStatusColor(selectedIncident.status)} className="text-sm px-4 py-2">
+                        Case {selectedIncident.status === "completed" ? "Completed" : "Rejected"}
+                      </Badge>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </DialogContent>
