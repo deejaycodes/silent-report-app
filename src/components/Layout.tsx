@@ -13,12 +13,14 @@ export function Layout({ children, className, showThemeToggle = true }: LayoutPr
   return (
     <div className={cn("min-h-screen bg-gradient-calm", className)}>
       {showThemeToggle && (
-        <div className="absolute top-4 right-4 z-50 flex gap-2">
+        <div className="absolute top-4 right-4 z-40 flex gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
       )}
-      {children}
+      <main className="min-h-screen">
+        {children}
+      </main>
     </div>
   )
 }

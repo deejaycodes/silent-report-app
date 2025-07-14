@@ -80,24 +80,25 @@ export function EnhancedSOSButton({ className, showCountdown = true, onSOSActiva
   return (
     <>
       <motion.div
-        animate={isActivating ? { scale: [1, 1.1, 1] } : {}}
-        transition={{ repeat: isActivating ? Infinity : 0, duration: 1 }}
+        animate={isActivating ? { scale: [1, 1.05, 1] } : {}}
+        transition={{ repeat: isActivating ? Infinity : 0, duration: 1.5 }}
+        className="w-full"
       >
         <Button
           variant="destructive"
-          size="lg"
-          className={`${className} relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-xl py-8 px-12 rounded-2xl shadow-sos transition-all duration-300 ${isActivating ? 'animate-pulse-safe' : ''}`}
+          size="sos"
+          className={`${className} relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-sos transition-all duration-300 ${isActivating ? 'animate-pulse-safe' : ''}`}
           onClick={handleSOSPress}
           disabled={countdown > 0}
         >
-          <div className="flex items-center gap-4">
-            <AlertTriangle className="h-8 w-8" />
+          <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
+            <AlertTriangle className="h-8 w-8 sm:h-10 sm:w-10" />
             <div className="text-center">
-              <div className="text-2xl font-bold">
+              <div className="text-2xl sm:text-3xl font-bold">
                 {countdown > 0 ? `${countdown}` : 'SOS'}
               </div>
               {countdown > 0 && (
-                <div className="text-sm opacity-90">Activating...</div>
+                <div className="text-xs sm:text-sm opacity-90">Activating...</div>
               )}
             </div>
           </div>
@@ -106,7 +107,7 @@ export function EnhancedSOSButton({ className, showCountdown = true, onSOSActiva
             <div className="absolute bottom-0 left-0 right-0">
               <Progress 
                 value={(6 - countdown) * 20} 
-                className="h-2 bg-red-800"
+                className="h-2 bg-red-800 rounded-none"
               />
             </div>
           )}
