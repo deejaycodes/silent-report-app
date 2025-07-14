@@ -638,16 +638,6 @@ export default function AdminDashboard() {
                         <span className="font-medium text-muted-foreground">Case ID</span>
                         <span className="font-mono bg-muted px-2 py-1 rounded text-xs">{selectedIncident.id}</span>
                       </div>
-                      
-                      <div className="flex flex-col gap-1">
-                        <span className="font-medium text-muted-foreground">Reported By</span>
-                        <span>{selectedIncident.reportedBy}</span>
-                      </div>
-                      
-                      <div className="flex flex-col gap-1">
-                        <span className="font-medium text-muted-foreground">Assigned To</span>
-                        <span>{selectedIncident.assignedTo}</span>
-                      </div>
                     </div>
                   </div>
 
