@@ -4,6 +4,7 @@ import { Layout } from "@/components/Layout"
 import { SOSButton } from "@/components/SOSButton"
 import { Shield, Phone, Heart, MapPin, MessageCircle, FileText, Building2 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const features = [
   {
@@ -30,6 +31,7 @@ const features = [
 
 export default function Landing() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <Layout>
@@ -42,7 +44,7 @@ export default function Landing() {
             </div>
             
             <h1 className="text-3xl font-bold text-foreground mb-3 leading-tight">
-              Safe Haven
+              {t('app.name')}
             </h1>
             
             <p className="text-base text-muted-foreground mb-6 max-w-xs mx-auto leading-relaxed">
