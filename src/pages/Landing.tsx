@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Layout } from "@/components/Layout"
 import { SOSButton } from "@/components/SOSButton"
+import { LanguageSelectionModal } from "@/components/LanguageSelectionModal"
 import { Shield, Phone, Heart, MapPin, MessageCircle, FileText, Building2 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
@@ -32,9 +34,22 @@ const features = [
 export default function Landing() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [showLanguageModal, setShowLanguageModal] = useState(false)
+
+  useEffect(() => {
+    // Check if language has been selected before
+    const languageSelected = localStorage.getItem('language-selected')
+    if (!languageSelected) {
+      setShowLanguageModal(true)
+    }
+  }, [])
 
   return (
-    <Layout>
+    <>
+      {showLanguageModal && (
+        <LanguageSelectionModal onLanguageSelect={() => setShowLanguageModal(false)} />
+      )}
+      <Layout>
       <div className="flex flex-col min-h-screen">
         {/* Hero Section */}
         <div className="flex-1 flex flex-col justify-center px-4 py-8 text-center max-w-screen-sm mx-auto">
@@ -126,6 +141,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
