@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "Ibi Aabo",
+    "tagline": "Sọ ohun ti o ṣẹlẹ"
+  },
+  "landing": {
+    "hero_title": "Ibi Aabo",
+    "hero_description": "Eto to ni aabo fun sísọ awọn iṣẹlẹ laimi fi orukọ han",
+    "report_anonymously": "Sọ Laimi Orukọ",
+    "ngo_section": "Fun Awọn Ajo Egbe",
+    "ngo_description": "Ṣakoso awọn iṣẹlẹ, ran awọn olufaragba lọwọ",
+    "login": "Wọle",
+    "register": "Forukọsilẹ Ajo",
+    "features": {
+      "anonymous_reporting": "Sisọ Laimi Orukọ",
+      "anonymous_description": "Sọ awọn iṣẹlẹ ni aabo ati laimi orukọ",
+      "realtime_support": "Atilẹyin Lẹsẹkẹsẹ",
+      "support_description": "Ba awọn alamọjuto sọrọ lẹsẹkẹsẹ",
+      "find_resources": "Wa Awọn Ohun Elo",
+      "resources_description": "Wa awọn iṣẹ atilẹyin ni adugbo",
+      "safe_space": "Aaye Aabo",
+      "space_description": "Ikọkọ ati aabo rẹ jẹ pataki julọ"
+    },
+    "trust_indicators": {
+      "secure": "Aabo",
+      "anonymous": "Laimi Orukọ",
+      "support": "Atilẹyin 24/7"
+    }
+  },
+  "dashboard": {
+    "choose_what_happened": "Yan ohun ti o ṣẹlẹ:",
+    "need_help_now": "O nilo Iranlọwọ Nisisiyi?",
+    "get_help_now": "Gba Iranlọwọ Nisisiyi",
+    "you_are_not_alone": "O ko dawa",
+    "help_available": "Iranlọwọ wa ni gbogbo igba. Aabo rẹ ṣe pataki.",
+    "incident_types": {
+      "violence_at_home": "Iwa ipa ni ile",
+      "harm_to_child": "Ipalara si ọmọde",
+      "unwanted_touching": "Ifọwọkan ti a ko fẹ tabi ipaniyan",
+      "other_safety": "Iṣoro aabo miiran"
+    },
+    "report_this": "Sọ Eyi"
+  },
+  "report": {
+    "title": "Fi Ijabọ Silẹ",
+    "anonymous_secure": "Laimi Orukọ ati Aabo",
+    "anonymous_notice": "Ijabọ rẹ jẹ laimi orukọ patapata ayafi ti o ba yan lati fun ni alaye olubasọrọ.",
+    "tell_what_happened": "Sọ fun wa ohun ti o ṣẹlẹ *",
+    "description_placeholder": "Sọ fun wa ohun ti o ṣẹlẹ ni ọrọ tirẹ. O le kọ pupọ tabi diẹ bi o ti fẹ...",
+    "description_help": "Sọ ohun ti o ṣẹlẹ, igba ti o ṣẹlẹ, ati ibi ti o ṣẹlẹ. Lo awọn ọrọ rọrun.",
+    "evidence_optional": "Ẹri (Ti o ba fẹ)",
+    "upload_files": "Gbe awọn aworan, fidio, tabi iwe soke",
+    "file_types": "O to 10MB fun faili kọọkan. Ti a gba laaye: JPG, PNG, PDF, MP4",
+    "choose_files": "Yan Awọn Faili",
+    "categorize_optional": "Ran wa lọwọ lati to eyi sinu ẹka (Ti o ba fẹ)",
+    "category_placeholder": "Yan ẹka ti o ba fẹ",
+    "category_help": "Eyi ṣe iranlọwọ fun wa lati so ọ pọ mọ awọn eniyan to tọ, ṣugbọn o le fo eyi silẹ.",
+    "contact_info": "Fi alaye olubasọrọ silẹ fun atẹle",
+    "contact_optional": "Ti o ba fẹ: Fun ni awọn alaye olubasọrọ rẹ ti o ba fẹ ki a tẹle ijabọ rẹ",
+    "email": "Imeeli",
+    "phone": "Nọmba Foonu",
+    "preferred_contact": "Ọna Olubasọrọ Ti O Fẹran",
+    "contact_methods": {
+      "email": "Imeeli",
+      "phone": "Ipe Foonu",
+      "sms": "Ifiranṣẹ Kikọ",
+      "whatsapp": "WhatsApp"
+    },
+    "best_time": "Akoko Ti O Dara Julọ Lati Pe",
+    "contact_times": {
+      "morning": "Owurọ (8AM - 12PM)",
+      "afternoon": "Ọsan (12PM - 6PM)",
+      "evening": "Alẹ (6PM - 10PM)",
+      "anytime": "Nigbakugba"
+    },
+    "submit_report": "Fi Ijabọ Silẹ",
+    "submitting": "Nfi Ijabọ Silẹ...",
+    "accuracy_notice": "Nipa fifi ijabọ yi silẹ, o jẹwọ pe alaye ti o fun jẹ otitọ si bi o ti mọ."
+  },
+  "confirmation": {
+    "thank_you": "A Dupẹ Lọwọ Rẹ",
+    "report_sent": "A ti fi ijabọ rẹ ranṣẹ ni aabo",
+    "review_notice": "A o wo ijabọ rẹ laarin wakati 24. O ni igboya lati sọrọ.",
+    "what_next": "Kini o fẹ ṣe tókàn?",
+    "report_something_else": "Sọ nkan miiran",
+    "report_another_description": "Sọ fun wa nipa iṣoro miiran",
+    "talk_to_someone": "Ba ẹnikan sọrọ",
+    "talk_description": "Ba oluranlọwọ sọrọ ni bayi",
+    "find_help_nearby": "Wa iranlọwọ ni adugbo",
+    "help_description": "Wo awọn ibi ti o le ran ọ lọwọ",
+    "go_to_main": "Lọ si oju-iwe akọkọ",
+    "main_description": "Pada si oju-iwe ile",
+    "reassurance": "O ko dawa",
+    "safety_message": "Iranlọwọ wa ni gbogbo igba. Aabo rẹ ṣe pataki."
+  },
+  "navigation": {
+    "home": "Ile",
+    "report": "Ijabọ",
+    "chat": "Iforọranṣọ",
+    "resources": "Awọn Ohun Elo",
+    "history": "Itan"
+  },
+  "common": {
+    "back": "Pada",
+    "next": "Tókàn",
+    "cancel": "Fagilee",
+    "save": "Tọju",
+    "close": "Pade",
+    "open": "Ṣii",
+    "remove": "Yọ Kuro",
+    "loading": "N gbejade..."
+  }
+}

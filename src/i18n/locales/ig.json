@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "Ebe Nchekwa",
+    "tagline": "Kọwa ihe mere"
+  },
+  "landing": {
+    "hero_title": "Ebe Nchekwa",
+    "hero_description": "Usoro nchekwa maka ikposa ihe mere na-amaghi onye na inweta nkwado",
+    "report_anonymously": "Kpọsa Na-amaghi Onye",
+    "ngo_section": "Maka Nzukọ Onyinye",
+    "ngo_description": "Jikwaa ihe mere, nyere ndị merụrụ ahụ aka",
+    "login": "Banye",
+    "register": "Debanye Nzukọ",
+    "features": {
+      "anonymous_reporting": "Mkpọsa Na-amaghi Onye",
+      "anonymous_description": "Kpọsa ihe mere n'udo na-amaghi onye",
+      "realtime_support": "Nkwado Ozugbo",
+      "support_description": "Kparịta ụka na ndị ọkachamara ozugbo",
+      "find_resources": "Chọta Ihe Nkwado",
+      "resources_description": "Chọta ọrụ nkwado dị nso",
+      "safe_space": "Ebe Nchekwa",
+      "space_description": "Nzuzo gị na nchekwa gị bụ ihe dị mkpa"
+    },
+    "trust_indicators": {
+      "secure": "Nchekwa",
+      "anonymous": "Na-amaghi Onye",
+      "support": "Nkwado 24/7"
+    }
+  },
+  "dashboard": {
+    "choose_what_happened": "Họrọ ihe mere:",
+    "need_help_now": "Ị Chọrọ Enyemaka Ugbu a?",
+    "get_help_now": "Nweta Enyemaka Ugbu a",
+    "you_are_not_alone": "Ị nọghị naanị gị",
+    "help_available": "Enyemaka dị mgbe niile. Nchekwa gị dị mkpa.",
+    "incident_types": {
+      "violence_at_home": "Ime ihe ike n'ụlọ",
+      "harm_to_child": "Imerụ nwata ahụ",
+      "unwanted_touching": "Imetụ aka na-achọghị ma ọ bụ mmekpa ahụ",
+      "other_safety": "Nsogbu nchekwa ọzọ"
+    },
+    "report_this": "Kpọsa Nke a"
+  },
+  "report": {
+    "title": "Tinye Mkpọsa",
+    "anonymous_secure": "Na-amaghi Onye na Nchekwa",
+    "anonymous_notice": "Mkpọsa gị bụ nke na-amaghi onye kpamkpam ma ọ bụghị na ị họọrọ inye ozi nkwurịta okwu.",
+    "tell_what_happened": "Gwa anyị ihe mere *",
+    "description_placeholder": "Gwa anyị ihe mere n'okwu gị. Ị nwere ike ide ọtụtụ ma ọ bụ ntakịrị dịka ị chọrọ...",
+    "description_help": "Kọwa ihe mere, mgbe o mere, na ebe o mere. Jiri okwu dị mfe.",
+    "evidence_optional": "Ihe Akaebe (Nhọrọ)",
+    "upload_files": "Tinye foto, vidiyo, ma ọ bụ akwụkwọ",
+    "file_types": "Ruo 10MB maka faịlụ ọ bụla. Ndị a nabatara: JPG, PNG, PDF, MP4",
+    "choose_files": "Họrọ Faịlụ",
+    "categorize_optional": "Nyere anyị aka hazie nke a (Nhọrọ)",
+    "category_placeholder": "Họrọ ụdị ma ọ bụrụ na ị chọrọ",
+    "category_help": "Nke a na-enyere anyị aka ijikọ gị na ndị kwesịrị ekwesị, mana ị nwere ike iłefere nke a.",
+    "contact_info": "Tinye ozi nkwurịta okwu maka nhụsianya",
+    "contact_optional": "Nhọrọ: Nye ozi nkwurịta okwu gị ma ọ bụrụ na ị chọrọ ka anyị sochie mkpọsa gị",
+    "email": "Imeelụ",
+    "phone": "Nọmba Ekwentị",
+    "preferred_contact": "Ụzọ Nkwurịta Okwu Ị Masịrị",
+    "contact_methods": {
+      "email": "Imeelụ",
+      "phone": "Oku Ekwentị",
+      "sms": "Ozi Ederede",
+      "whatsapp": "WhatsApp"
+    },
+    "best_time": "Oge Kacha Mma Ikpọtụrụ",
+    "contact_times": {
+      "morning": "Ụtụtụ (8AM - 12PM)",
+      "afternoon": "Ehihie (12PM - 6PM)",
+      "evening": "Mgbede (6PM - 10PM)",
+      "anytime": "Mgbe Ọ Bụla"
+    },
+    "submit_report": "Tinye Mkpọsa",
+    "submitting": "Na-etinye Mkpọsa...",
+    "accuracy_notice": "Site n'itinye mkpọsa a, ị na-ekwupụta na ozi enyere bụ eziokwu dịka ị maara."
+  },
+  "confirmation": {
+    "thank_you": "Daalụ",
+    "report_sent": "E zigara mkpọsa gị n'udo",
+    "review_notice": "Anyị ga-elele mkpọsa gị n'ime awa 24. Ị nwere obi ike ikwu okwu.",
+    "what_next": "Kedu ihe ị chọrọ ime ọzọ?",
+    "report_something_else": "Kpọsa ihe ọzọ",
+    "report_another_description": "Gwa anyị maka nsogbu ọzọ",
+    "talk_to_someone": "Kparịta ụka na mmadụ",
+    "talk_description": "Kparịta ụka na onye inyeaka ugbu a",
+    "find_help_nearby": "Chọta enyemaka dị nso",
+    "help_description": "Lee ebe ndị nwere ike inyere gị aka",
+    "go_to_main": "Gaa na ibe isi",
+    "main_description": "Laghachi na ibe ụlọ",
+    "reassurance": "Ị nọghị naanị gị",
+    "safety_message": "Enyemaka dị mgbe niile. Nchekwa gị dị mkpa."
+  },
+  "navigation": {
+    "home": "Ụlọ",
+    "report": "Mkpọsa",
+    "chat": "Nkata",
+    "resources": "Ihe Nkwado",
+    "history": "Akụkọ Ihe Mere Eme"
+  },
+  "common": {
+    "back": "Laghachi Azụ",
+    "next": "Osote",
+    "cancel": "Kagbuo",
+    "save": "Chekwaa",
+    "close": "Mechie",
+    "open": "Meghee",
+    "remove": "Wepụ",
+    "loading": "Na-ebu..."
+  }
+}

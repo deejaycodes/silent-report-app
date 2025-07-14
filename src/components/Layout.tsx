@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/ThemeToggle"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 
 interface LayoutProps {
   children: ReactNode
@@ -12,7 +13,8 @@ export function Layout({ children, className, showThemeToggle = true }: LayoutPr
   return (
     <div className={cn("min-h-screen bg-gradient-calm", className)}>
       {showThemeToggle && (
-        <div className="absolute top-4 right-4 z-50">
+        <div className="absolute top-4 right-4 z-50 flex gap-2">
+          <LanguageSwitcher />
           <ThemeToggle />
         </div>
       )}

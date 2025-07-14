@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Home, Baby, Hand, UserX, HelpCircle } from "lucide-react"
+import { Home, Baby, Hand, HelpCircle } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 interface IncidentType {
   id: string
@@ -14,23 +15,23 @@ interface IncidentType {
 const incidentTypes: IncidentType[] = [
   {
     id: "violence-at-home",
-    title: "Violence at home",
-    simpleTitle: "Home Violence",
+    title: "dashboard.incident_types.violence_at_home",
+    simpleTitle: "Violence at Home",
     icon: <Home className="h-12 w-12" />,
     color: "text-red-600",
     bgColor: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
   },
   {
     id: "harm-to-child",
-    title: "Harm to a child",
-    simpleTitle: "Child Hurt",
+    title: "dashboard.incident_types.harm_to_child",
+    simpleTitle: "Child Harm",
     icon: <Baby className="h-12 w-12" />,
     color: "text-orange-600",
     bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
   },
   {
     id: "unwanted-touching",
-    title: "Unwanted touching or harassment",
+    title: "dashboard.incident_types.unwanted_touching",
     simpleTitle: "Unwanted Touch",
     icon: <Hand className="h-12 w-12" />,
     color: "text-purple-600",
@@ -38,7 +39,7 @@ const incidentTypes: IncidentType[] = [
   },
   {
     id: "other-safety",
-    title: "Other safety concern",
+    title: "dashboard.incident_types.other_safety",
     simpleTitle: "Other Problem",
     icon: <HelpCircle className="h-12 w-12" />,
     color: "text-blue-600",
@@ -51,6 +52,8 @@ interface IncidentCardProps {
 }
 
 export function IncidentCard({ onSelect }: IncidentCardProps) {
+  const { t } = useTranslation()
+  
   return (
     <div className="grid grid-cols-1 gap-6 px-3">
       {incidentTypes.map((incident) => (
@@ -64,14 +67,14 @@ export function IncidentCard({ onSelect }: IncidentCardProps) {
               {incident.icon}
             </div>
             <h3 className="text-2xl font-bold mb-2 leading-tight">
-              {incident.title}
+              {t(incident.title)}
             </h3>
             <Button 
               variant="default" 
               size="lg"
               className="w-full mt-4 text-lg py-6"
             >
-              Report This
+              {t('dashboard.report_this')}
             </Button>
           </CardContent>
         </Card>

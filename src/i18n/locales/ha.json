@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "Gidan Aminci",
+    "tagline": "Bayyana abin da ya faru"
+  },
+  "landing": {
+    "hero_title": "Gidan Aminci",
+    "hero_description": "Tsarin amintaccen bayar da rahoto ba tare da bayyana sunan ba da samun tallafi",
+    "report_anonymously": "Bayar da Rahoto Ba Tare da Sunan",
+    "ngo_section": "Ga Kungiyoyin Agaji",
+    "ngo_description": "Sarrafa al'amura, taimaka wa wadanda suka sha wahala",
+    "login": "Shiga",
+    "register": "Yi Rajistar Kungiya",
+    "features": {
+      "anonymous_reporting": "Bayar da Rahoto Ba Tare da Sunan",
+      "anonymous_description": "Bayar da rahoto cikin aminci ba tare da bayyana sunan",
+      "realtime_support": "Tallafi Nan Take",
+      "support_description": "Yi hira da kwararru nan take",
+      "find_resources": "Nemo Tallafin",
+      "resources_description": "Gano ayyukan tallafi kusa da ku",
+      "safe_space": "Wuri Mai Aminci",
+      "space_description": "Sirrinku da amincin ku shine muhimminmu"
+    },
+    "trust_indicators": {
+      "secure": "Aminci",
+      "anonymous": "Ba Tare da Sunan",
+      "support": "Tallafi 24/7"
+    }
+  },
+  "dashboard": {
+    "choose_what_happened": "Zaɓi abin da ya faru:",
+    "need_help_now": "Kuna Bukatar Taimako Yanzu?",
+    "get_help_now": "Samun Taimako Yanzu",
+    "you_are_not_alone": "Ba ku kadai ba",
+    "help_available": "Ana samun taimako koyaushe. Amincin ku yana da muhimmanci.",
+    "incident_types": {
+      "violence_at_home": "Tashin hankali a gida",
+      "harm_to_child": "Cutar da yaro",
+      "unwanted_touching": "Taɓawa da ba a so ko zalunci",
+      "other_safety": "Wani matsalar aminci"
+    },
+    "report_this": "Bayar da Rahoton Wannan"
+  },
+  "report": {
+    "title": "Gabatar da Rahoto",
+    "anonymous_secure": "Ba Tare da Sunan kuma Amintacce",
+    "anonymous_notice": "Rahoton ku gaba daya ba shi da sunan sai dai in kun zabi ku bayar da bayanin tuntuɓar ku.",
+    "tell_what_happened": "Gayar mana abin da ya faru *",
+    "description_placeholder": "Gayar mana abin da ya faru da kalmomin ku. Za ku iya rubutu yawa ko kadan yadda kuke so...",
+    "description_help": "Gayar mana abin da ya faru, lokacin da ya faru, da inda ya faru. Yi amfani da sauƙin kalmomi.",
+    "evidence_optional": "Shaida (Zaɓi)",
+    "upload_files": "Ɗora hotuna, bidiyo, ko takardu",
+    "file_types": "Har zuwa 10MB ga kowane fayil. Ana karɓa: JPG, PNG, PDF, MP4",
+    "choose_files": "Zaɓi Fayiloli",
+    "categorize_optional": "Taimaka mana mu kasance wannan (Zaɓi)",
+    "category_placeholder": "Zaɓi nau'i in kuna so",
+    "category_help": "Wannan yana taimaka mana mu haɗa ku da mutanen da suka dace, amma za ku iya tsallake wannan.",
+    "contact_info": "Haɗa bayanin tuntuɓar don bi da baya",
+    "contact_optional": "Zaɓi: Bayar da bayanin tuntuɓar ku in kuna son mu bi da rahoton ku",
+    "email": "Imel",
+    "phone": "Lambar Waya",
+    "preferred_contact": "Hanyar Tuntuɓar da Kuke So",
+    "contact_methods": {
+      "email": "Imel",
+      "phone": "Kiran Waya",
+      "sms": "Saƙon Rubutu",
+      "whatsapp": "WhatsApp"
+    },
+    "best_time": "Mafi Kyawun Lokaci Don Tuntuɓa",
+    "contact_times": {
+      "morning": "Safiya (8AM - 12PM)",
+      "afternoon": "Rana (12PM - 6PM)",
+      "evening": "Yamma (6PM - 10PM)",
+      "anytime": "Koyaushe"
+    },
+    "submit_report": "Gabatar da Rahoto",
+    "submitting": "Ana Gabatar da Rahoto...",
+    "accuracy_notice": "Ta wurin gabatar da wannan rahoto, kun yarda cewa bayanan da aka bayar sahihi ne gwargwadon ilimin ku."
+  },
+  "confirmation": {
+    "thank_you": "Mun Gode Muku",
+    "report_sent": "An aika rahoton ku cikin aminci",
+    "review_notice": "Za mu duba rahoton ku cikin sa'o'i 24. Kun yi jaruntaka ta wurin yin magana.",
+    "what_next": "Me kuke son ku yi na gaba?",
+    "report_something_else": "Bayar da rahoto akan wani abu",
+    "report_another_description": "Gayar mana game da wata matsala",
+    "talk_to_someone": "Yi hira da wani",
+    "talk_description": "Yi hira da mai taimako yanzu",
+    "find_help_nearby": "Nemo taimako kusa",
+    "help_description": "Duba wuraren da za su iya taimaka muku",
+    "go_to_main": "Koma shafin farko",
+    "main_description": "Koma zuwa shafin gida",
+    "reassurance": "Ba ku kadai ba",
+    "safety_message": "Ana samun taimako koyaushe. Amincin ku yana da muhimmanci."
+  },
+  "navigation": {
+    "home": "Gida",
+    "report": "Rahoto",
+    "chat": "Hira",
+    "resources": "Tallafi",
+    "history": "Tarihi"
+  },
+  "common": {
+    "back": "Koma Baya",
+    "next": "Na Gaba",
+    "cancel": "Soke",
+    "save": "Ajiye",
+    "close": "Rufe",
+    "open": "Buɗe",
+    "remove": "Cire",
+    "loading": "Ana Ɗorawa..."
+  }
+}

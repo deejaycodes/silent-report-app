@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "Safe Haven",
+    "tagline": "Report what happened"
+  },
+  "landing": {
+    "hero_title": "Safe Haven",
+    "hero_description": "A secure platform for anonymous reporting and getting the support you need",
+    "report_anonymously": "Report Anonymously",
+    "ngo_section": "For NGO Organizations",
+    "ngo_description": "Manage incidents, support victims, coordinate responses",
+    "login": "Login",
+    "register": "Register NGO",
+    "features": {
+      "anonymous_reporting": "Anonymous Reporting",
+      "anonymous_description": "Report incidents safely and anonymously",
+      "realtime_support": "Real-time Support", 
+      "support_description": "Chat with trained professionals instantly",
+      "find_resources": "Find Resources",
+      "resources_description": "Locate nearby support services",
+      "safe_space": "Safe Space",
+      "space_description": "Your privacy and safety are our priority"
+    },
+    "trust_indicators": {
+      "secure": "Secure",
+      "anonymous": "Anonymous", 
+      "support": "24/7 Support"
+    }
+  },
+  "dashboard": {
+    "choose_what_happened": "Choose what happened:",
+    "need_help_now": "Need Help Right Now?",
+    "get_help_now": "Get Help Now",
+    "you_are_not_alone": "You are not alone",
+    "help_available": "Help is available 24/7. Your safety matters.",
+    "incident_types": {
+      "violence_at_home": "Violence at home",
+      "harm_to_child": "Harm to a child", 
+      "unwanted_touching": "Unwanted touching or harassment",
+      "other_safety": "Other safety concern"
+    },
+    "report_this": "Report This"
+  },
+  "report": {
+    "title": "Submit Report",
+    "anonymous_secure": "Anonymous & Secure",
+    "anonymous_notice": "Your report is completely anonymous unless you choose to provide contact information below.",
+    "tell_what_happened": "Tell us what happened *",
+    "description_placeholder": "Tell us what happened in your own words. You can write as much or as little as you want...",
+    "description_help": "Share what happened, when it happened, and where it happened. Use simple words and write however feels natural to you.",
+    "evidence_optional": "Evidence (Optional)",
+    "upload_files": "Upload photos, videos, or documents",
+    "file_types": "Max 10MB per file. Supported: JPG, PNG, PDF, MP4",
+    "choose_files": "Choose Files",
+    "categorize_optional": "Help us categorize this (Optional)",
+    "category_placeholder": "Choose category if you want",
+    "category_help": "This helps us connect you with the right people, but you can skip this if you want.",
+    "contact_info": "Include contact information for follow-up",
+    "contact_optional": "Optional: Provide your contact details if you want us to follow up on your report",
+    "email": "Email",
+    "phone": "Phone Number",
+    "preferred_contact": "Preferred Contact Method",
+    "contact_methods": {
+      "email": "Email",
+      "phone": "Phone Call",
+      "sms": "Text Message", 
+      "whatsapp": "WhatsApp"
+    },
+    "best_time": "Best Time to Contact",
+    "contact_times": {
+      "morning": "Morning (8AM - 12PM)",
+      "afternoon": "Afternoon (12PM - 6PM)",
+      "evening": "Evening (6PM - 10PM)",
+      "anytime": "Anytime"
+    },
+    "submit_report": "Submit Report",
+    "submitting": "Submitting Report...",
+    "accuracy_notice": "By submitting this report, you acknowledge that the information provided is accurate to the best of your knowledge."
+  },
+  "confirmation": {
+    "thank_you": "Thank You",
+    "report_sent": "Your report has been sent safely",
+    "review_notice": "We will look at your report within 24 hours. You are brave for speaking up.",
+    "what_next": "What do you want to do next?",
+    "report_something_else": "Report something else",
+    "report_another_description": "Tell us about another problem",
+    "talk_to_someone": "Talk to someone",
+    "talk_description": "Chat with a helper right now",
+    "find_help_nearby": "Find help nearby",
+    "help_description": "See places that can help you",
+    "go_to_main": "Go to main page",
+    "main_description": "Return to the home page",
+    "reassurance": "You are not alone",
+    "safety_message": "Help is available anytime. Your safety is important."
+  },
+  "navigation": {
+    "home": "Home",
+    "report": "Report", 
+    "chat": "Chat",
+    "resources": "Resources",
+    "history": "History"
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "open": "Open",
+    "remove": "Remove",
+    "loading": "Loading..."
+  }
+}
