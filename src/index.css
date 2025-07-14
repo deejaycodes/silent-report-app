@@ -144,76 +144,17 @@
     overflow: hidden;
   }
   
-  /* Touch-friendly sizing - minimum 44px for accessibility */
-  .touch-target {
-    min-height: 44px;
-    min-width: 44px;
-    touch-action: manipulation;
-  }
-  
+  /* Touch-friendly sizing */
   .touch-manipulation {
     touch-action: manipulation;
   }
   
-  /* Mobile gesture support */
-  .swipe-area {
-    touch-action: pan-x pan-y;
-  }
-  
   /* Safe area handling for mobile */
   .safe-top {
-    padding-top: max(env(safe-area-inset-top), 16px);
+    padding-top: env(safe-area-inset-top);
   }
   
   .safe-bottom {
-    padding-bottom: max(env(safe-area-inset-bottom), 16px);
-  }
-  
-  .safe-left {
-    padding-left: max(env(safe-area-inset-left), 16px);
-  }
-  
-  .safe-right {
-    padding-right: max(env(safe-area-inset-right), 16px);
-  }
-  
-  /* Mobile-optimized spacing */
-  .mobile-container {
-    @apply px-4 py-6 max-w-sm mx-auto;
-  }
-  
-  .mobile-section {
-    @apply space-y-6;
-  }
-  
-  .mobile-grid {
-    @apply grid grid-cols-1 gap-4;
-  }
-  
-  /* Touch-friendly forms */
-  .mobile-input {
-    @apply h-12 text-lg;
-  }
-  
-  .mobile-button {
-    @apply h-12 px-6 text-base font-medium rounded-xl;
-  }
-  
-  .mobile-card {
-    @apply p-6 rounded-2xl shadow-soft;
-  }
-  
-  /* Improved touch targets */
-  .nav-item {
-    @apply flex flex-col items-center justify-center gap-1 p-3 min-h-[60px] min-w-[60px] rounded-xl transition-all duration-200 touch-target;
-  }
-  
-  /* Mobile-first animations */
-  .mobile-scale {
-    @apply transition-transform duration-150 active:scale-95;
-  }
-  
-  .mobile-highlight {
-    @apply transition-colors duration-200 active:bg-muted/50;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

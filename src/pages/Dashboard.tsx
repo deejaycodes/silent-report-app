@@ -18,34 +18,33 @@ export default function Dashboard() {
   }
 
   return (
-    <Layout className="safe-bottom">
-      <div className="mobile-container mobile-section">
-        {/* Mobile Header */}
-        <div className="text-center space-y-4 safe-top">
-          <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{t('app.name')}</h1>
-          <p className="text-base sm:text-lg text-muted-foreground">{t('app.tagline')}</p>
+    <Layout className="pb-20">
+      <div className="px-4 py-6 space-y-8 max-w-lg mx-auto">
+        {/* Simplified Header */}
+        <div className="text-center space-y-3">
+          <h1 className="text-3xl font-bold">{t('app.name')}</h1>
+          <p className="text-lg text-muted-foreground">{t('app.tagline')}</p>
         </div>
 
         {/* Main Reporting Section */}
         <div className="space-y-6">
-          <h2 className="text-lg sm:text-xl font-semibold text-center leading-tight">
-            {t('dashboard.choose_what_happened')}
-          </h2>
+          <h2 className="text-xl font-semibold text-center">{t('dashboard.choose_what_happened')}</h2>
           <IncidentCard onSelect={handleIncidentSelect} />
         </div>
 
-        {/* Emergency Help Button - Mobile Optimized */}
-        <Card className="mobile-card border-2 border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800">
-          <CardContent className="text-center space-y-4">
-            <div>
-              <Phone className="h-12 w-12 sm:h-16 sm:w-16 text-red-600 mx-auto" />
+        {/* Emergency Help Button */}
+        <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800">
+          <CardContent className="p-6 text-center">
+            <div className="mb-4">
+              <Phone className="h-16 w-16 text-red-600 mx-auto" />
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-red-800 dark:text-red-200 leading-tight">
+            <h3 className="text-xl font-bold mb-3 text-red-800 dark:text-red-200">
               {t('dashboard.need_help_now')}
             </h3>
             <Button 
               variant="destructive" 
-              className="mobile-button w-full mobile-scale"
+              size="lg"
+              className="w-full text-lg py-6"
               onClick={() => navigate("/chat")}
             >
               {t('dashboard.get_help_now')}
@@ -53,14 +52,12 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Support Message - Mobile Optimized */}
-        <Card className="mobile-card border-0 shadow-soft bg-gradient-calm">
-          <CardContent className="text-center space-y-3">
-            <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto" />
-            <p className="text-base sm:text-lg font-medium leading-tight">
-              {t('dashboard.you_are_not_alone')}
-            </p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+        {/* Support Message */}
+        <Card className="border-0 shadow-soft bg-gradient-calm">
+          <CardContent className="p-6 text-center">
+            <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
+            <p className="text-lg font-medium mb-2">{t('dashboard.you_are_not_alone')}</p>
+            <p className="text-sm text-muted-foreground">
               {t('dashboard.help_available')}
             </p>
           </CardContent>

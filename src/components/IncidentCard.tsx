@@ -55,23 +55,24 @@ export function IncidentCard({ onSelect }: IncidentCardProps) {
   const { t } = useTranslation()
   
   return (
-    <div className="mobile-grid">
+    <div className="grid grid-cols-1 gap-6 px-3">
       {incidentTypes.map((incident) => (
         <Card 
           key={incident.id} 
-          className={`mobile-card cursor-pointer touch-target mobile-scale mobile-highlight border-2 ${incident.bgColor}`}
+          className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-95 border-2 ${incident.bgColor}`}
           onClick={() => onSelect(incident)}
         >
-          <CardContent className="text-center space-y-4">
-            <div className={`mx-auto ${incident.color}`}>
+          <CardContent className="p-8 text-center">
+            <div className={`mx-auto mb-4 ${incident.color}`}>
               {incident.icon}
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold leading-tight">
+            <h3 className="text-2xl font-bold mb-2 leading-tight">
               {t(incident.title)}
             </h3>
             <Button 
               variant="default" 
-              className="mobile-button w-full mobile-scale"
+              size="lg"
+              className="w-full mt-4 text-lg py-6"
             >
               {t('dashboard.report_this')}
             </Button>
