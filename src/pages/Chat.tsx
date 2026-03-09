@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Send, User, Bot, PhoneOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import apiService from "@/lib/api"
 
 interface Message {
   id: string
@@ -37,7 +38,7 @@ export default function Chat() {
     scrollToBottom()
   }, [messages])
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!inputValue.trim()) return
 
     const newMessage: Message = {
@@ -48,20 +49,33 @@ export default function Chat() {
     }
 
     setMessages(prev => [...prev, newMessage])
+    const userInput = inputValue
     setInputValue("")
     setIsTyping(true)
 
-    // Simulate support response
-    setTimeout(() => {
+    try {
+      // Call real AI chatbot API
+      const response = await apiService.askChatbot(userInput);
+      
       const supportMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: getAutomaticResponse(inputValue),
+        content: response.response,
         sender: "support",
         timestamp: new Date()
       }
       setMessages(prev => [...prev, supportMessage])
+    } catch (error) {
+      // Fallback to automatic response if API fails
+      const supportMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I'm having trouble connecting right now. If you're in immediate danger, please call emergency services at 199 or 112.",
+        sender: "support",
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, supportMessage])
+    } finally {
       setIsTyping(false)
-    }, 2000)
+    }
   }
 
   const getAutomaticResponse = (userMessage: string): string => {

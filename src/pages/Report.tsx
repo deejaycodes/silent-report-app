@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Upload, Send, Shield } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import type { IncidentType } from "@/components/IncidentCard"
+import apiService from "@/lib/api"
 
 export default function Report() {
   const location = useLocation()
@@ -37,16 +38,29 @@ export default function Report() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+      // Call real backend API
+      const response = await apiService.createReport({
+        incident_type: selectedType,
+        description: description,
+        location: includeContact ? 'User provided location' : undefined,
+      });
 
-    toast({
-      title: "Report submitted successfully",
-      description: "Your report has been received. You will be contacted within 24 hours if you provided contact information.",
-    })
+      toast({
+        title: "Report submitted successfully",
+        description: `Your report has been received with ID: ${response.id}. AI analysis: ${response.ai_analysis?.urgency || 'pending'}`,
+      })
 
-    setIsSubmitting(false)
-    navigate("/report/confirmation")
+      navigate("/report/confirmation", { state: { reportId: response.id } })
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: "Unable to submit report. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
