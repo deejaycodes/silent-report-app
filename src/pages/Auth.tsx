@@ -3,66 +3,91 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Layout } from "@/components/Layout"
 import { ArrowLeft, Shield, Building2 } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useToast } from "@/hooks/use-toast"
+import apiService from "@/lib/api"
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function Auth() {
   const navigate = useNavigate()
   const { toast } = useToast()
   const [searchParams] = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
-  const mode = searchParams.get('mode') || 'login' // Default to login if no mode specified
-
-  const handleUserSignup = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    toast({
-      title: "Account created successfully!",
-      description: "Welcome to Safe Haven. You can now report incidents and access support.",
-    })
-    
-    setIsLoading(false)
-    navigate("/dashboard")
-  }
+  const mode = searchParams.get('mode') || 'login'
 
   const handleAdminSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    toast({
-      title: "Admin account created successfully!",
-      description: "Welcome to Safe Haven Admin Dashboard.",
-    })
-    
-    setIsLoading(false)
-    navigate("/admin")
+    const form = e.target as HTMLFormElement
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/ngo/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ngo_name: (form.elements.namedItem('ngo-name') as HTMLInputElement).value,
+          primary_contact: {
+            name: (form.elements.namedItem('admin-name') as HTMLInputElement).value,
+            email: (form.elements.namedItem('admin-email') as HTMLInputElement).value,
+            phone: (form.elements.namedItem('admin-phone') as HTMLInputElement).value,
+          },
+          password: (form.elements.namedItem('admin-password') as HTMLInputElement).value,
+          role: 'ngo',
+        }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.message || 'Registration failed')
+      }
+
+      toast({
+        title: "NGO registered successfully!",
+        description: "Please check your email for a verification code.",
+      })
+      navigate("/auth?mode=login")
+    } catch (error: any) {
+      toast({ title: "Registration failed", description: error.message, variant: "destructive" })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    toast({
-      title: "Welcome back!",
-      description: "You have successfully logged in to your admin dashboard.",
-    })
-    
-    setIsLoading(false)
-    navigate("/admin")
+    const form = e.target as HTMLFormElement
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email, password }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.message || 'Invalid credentials')
+      }
+
+      const data = await res.json()
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data))
+      apiService.setToken(data.token)
+
+      toast({ title: "Welcome back!", description: "You have successfully logged in." })
+      navigate("/admin")
+    } catch (error: any) {
+      toast({ title: "Login failed", description: error.message, variant: "destructive" })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -123,6 +148,7 @@ export default function Auth() {
                     <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
+                      name="password"
                       type="password"
                       placeholder="Enter your password"
                       required
@@ -173,16 +199,8 @@ export default function Auth() {
                     <Label htmlFor="ngo-name">NGO/Organization Name</Label>
                     <Input
                       id="ngo-name"
+                      name="ngo-name"
                       placeholder="Hope Foundation"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="registration-number">Registration Number</Label>
-                    <Input
-                      id="registration-number"
-                      placeholder="NGO registration or license number"
                       required
                     />
                   </div>
@@ -191,6 +209,7 @@ export default function Auth() {
                     <Label htmlFor="admin-name">Primary Contact Name</Label>
                     <Input
                       id="admin-name"
+                      name="admin-name"
                       placeholder="John Doe"
                       required
                     />
@@ -200,6 +219,7 @@ export default function Auth() {
                     <Label htmlFor="admin-email">Organization Email</Label>
                     <Input
                       id="admin-email"
+                      name="admin-email"
                       type="email"
                       placeholder="admin@hopefoundation.org"
                       required
@@ -210,6 +230,7 @@ export default function Auth() {
                     <Label htmlFor="admin-phone">Contact Phone</Label>
                     <Input
                       id="admin-phone"
+                      name="admin-phone"
                       type="tel"
                       placeholder="+234 xxx xxx xxxx"
                       required
@@ -220,6 +241,7 @@ export default function Auth() {
                     <Label htmlFor="admin-password">Password</Label>
                     <Input
                       id="admin-password"
+                      name="admin-password"
                       type="password"
                       placeholder="Create a secure password"
                       required

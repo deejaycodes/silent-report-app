@@ -4,9 +4,25 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 // API Service
 class ApiService {
   private baseUrl: string;
+  private token: string | null = null;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
+  }
+
+  setToken(token: string | null) {
+    this.token = token;
+  }
+
+  private getHeaders(extra: HeadersInit = {}): HeadersInit {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...extra as Record<string, string>,
+    };
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+    return headers;
   }
 
   private async request<T>(
@@ -14,27 +30,19 @@ class ApiService {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    
+
     const config: RequestInit = {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers: this.getHeaders(options.headers as Record<string, string>),
     };
 
-    try {
-      const response = await fetch(url, config);
-      
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`);
-      }
+    const response = await fetch(url, config);
 
-      return await response.json();
-    } catch (error) {
-      console.error('API Request failed:', error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.statusText}`);
     }
+
+    return await response.json();
   }
 
   // Report endpoints
@@ -56,8 +64,14 @@ class ApiService {
       });
     }
 
-    const response = await fetch(`${this.baseUrl}/reports/create`, {
+    const headers: Record<string, string> = {};
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+
+    const response = await fetch(`${this.baseUrl}/reports`, {
       method: 'POST',
+      headers,
       body: formData,
     });
 
@@ -69,15 +83,11 @@ class ApiService {
   }
 
   async getReportStatus(reportId: string) {
-    return this.request(`/reports/${reportId}`, {
-      method: 'GET',
-    });
+    return this.request(`/reports/${reportId}`, { method: 'GET' });
   }
 
   async getAllReports() {
-    return this.request('/reports', {
-      method: 'GET',
-    });
+    return this.request('/reports', { method: 'GET' });
   }
 
   // AI Chatbot endpoints
@@ -89,20 +99,11 @@ class ApiService {
   }
 
   // NGO endpoints
-  async getNearbyNGOs(params: {
-    lat: number;
-    lng: number;
-    radius?: number;
-  }) {
+  async getNearbyNGOs(params: { lat: number; lng: number; radius?: number }) {
     const queryParams = new URLSearchParams({
-      lat: params.lat.toString(),
-      lng: params.lng.toString(),
-      radius: (params.radius || 10).toString(),
+      query: `${params.lat},${params.lng}`,
     });
-
-    return this.request(`/ngo/nearby?${queryParams}`, {
-      method: 'GET',
-    });
+    return this.request(`/ngo/search?${queryParams}`, { method: 'GET' });
   }
 
   // SOS Alert
@@ -111,9 +112,13 @@ class ApiService {
     longitude: number;
     message?: string;
   }) {
-    return this.request('/sos/alert', {
+    return this.request('/reports', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        incident_type: 'SOS Emergency',
+        description: data.message || `SOS Alert at ${data.latitude},${data.longitude}`,
+        location: `${data.latitude},${data.longitude}`,
+      }),
     });
   }
 }
