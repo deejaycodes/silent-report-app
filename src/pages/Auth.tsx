@@ -8,6 +8,7 @@ import { Layout } from "@/components/Layout"
 import { ArrowLeft, Shield, Building2 } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useToast } from "@/hooks/use-toast"
+import { useTranslation } from "react-i18next"
 import apiService from "@/lib/api"
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
@@ -18,6 +19,7 @@ export default function Auth() {
   const [searchParams] = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
   const mode = searchParams.get('mode') || 'login'
+  const { t } = useTranslation()
 
   const handleAdminSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,12 +48,12 @@ export default function Auth() {
       }
 
       toast({
-        title: "NGO registered successfully!",
-        description: "Please check your email for a verification code.",
+        title: t('auth.registration_success'),
+        description: t('auth.check_email'),
       })
       navigate("/auth?mode=login")
     } catch (error: any) {
-      toast({ title: "Registration failed", description: error.message, variant: "destructive" })
+      toast({ title: t('auth.registration_failed'), description: error.message, variant: "destructive" })
     } finally {
       setIsLoading(false)
     }
@@ -81,10 +83,10 @@ export default function Auth() {
       localStorage.setItem('user', JSON.stringify(data))
       apiService.setToken(data.token)
 
-      toast({ title: "Welcome back!", description: "You have successfully logged in." })
+      toast({ title: t('auth.welcome_message'), description: t('auth.login_success') })
       navigate("/admin")
     } catch (error: any) {
-      toast({ title: "Login failed", description: error.message, variant: "destructive" })
+      toast({ title: t('auth.login_failed'), description: error.message, variant: "destructive" })
     } finally {
       setIsLoading(false)
     }
@@ -100,7 +102,7 @@ export default function Auth() {
           className="absolute top-4 left-4"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back
+          {t('common.back')}
         </Button>
 
         <div className="max-w-md mx-auto w-full">
@@ -113,12 +115,12 @@ export default function Auth() {
               )}
             </div>
             <h1 className="text-2xl font-bold">
-              {mode === 'register' ? 'Register Your NGO' : 'Welcome Back'}
+              {mode === 'register' ? t('auth.register_ngo') : t('auth.welcome_back')}
             </h1>
             <p className="text-muted-foreground">
               {mode === 'register' 
-                ? 'Join our network of trusted organizations' 
-                : 'Sign in to access your admin dashboard'
+                ? t('auth.join_network')
+                : t('auth.sign_in_dashboard')
               }
             </p>
           </div>
@@ -126,31 +128,31 @@ export default function Auth() {
           {mode === 'login' ? (
             <Card className="border-0 shadow-comfort">
               <CardHeader>
-                <CardTitle>NGO Admin Login</CardTitle>
+                <CardTitle>{t('auth.ngo_admin_login')}</CardTitle>
                 <CardDescription>
-                  Sign in to your organization dashboard
+                  {t('auth.sign_in_org')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Organization Email</Label>
+                    <Label htmlFor="email">{t('auth.org_email')}</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="admin@organization.org"
+                      placeholder={t('auth.org_email_placeholder')}
                       required
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{t('auth.password')}</Label>
                     <Input
                       id="password"
                       name="password"
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder={t('auth.password_placeholder')}
                       required
                     />
                   </div>
@@ -161,7 +163,7 @@ export default function Auth() {
                     className="w-full"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Signing in..." : "Sign In to Dashboard"}
+                    {isLoading ? t('auth.signing_in') : t('auth.sign_in_button')}
                   </Button>
 
                   <div className="text-center">
@@ -171,7 +173,7 @@ export default function Auth() {
                       className="text-sm"
                       onClick={() => navigate("/auth?mode=register")}
                     >
-                      Don't have an account? Register your NGO
+                      {t('auth.no_account')}
                     </Button>
                   </div>
 
@@ -180,7 +182,7 @@ export default function Auth() {
                     variant="link"
                     className="w-full text-sm text-muted-foreground"
                   >
-                    Forgot your password?
+                    {t('auth.forgot_password')}
                   </Button>
                 </form>
               </CardContent>
@@ -188,62 +190,62 @@ export default function Auth() {
           ) : (
             <Card className="border-0 shadow-comfort">
               <CardHeader>
-                <CardTitle>NGO Registration</CardTitle>
+                <CardTitle>{t('auth.ngo_registration')}</CardTitle>
                 <CardDescription>
-                  Register your organization to start managing incident reports
+                  {t('auth.register_description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleAdminSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="ngo-name">NGO/Organization Name</Label>
+                    <Label htmlFor="ngo-name">{t('auth.ngo_name')}</Label>
                     <Input
                       id="ngo-name"
                       name="ngo-name"
-                      placeholder="Hope Foundation"
+                      placeholder={t('auth.ngo_name_placeholder')}
                       required
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="admin-name">Primary Contact Name</Label>
+                    <Label htmlFor="admin-name">{t('auth.primary_contact')}</Label>
                     <Input
                       id="admin-name"
                       name="admin-name"
-                      placeholder="John Doe"
+                      placeholder={t('auth.contact_name_placeholder')}
                       required
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="admin-email">Organization Email</Label>
+                    <Label htmlFor="admin-email">{t('auth.org_email')}</Label>
                     <Input
                       id="admin-email"
                       name="admin-email"
                       type="email"
-                      placeholder="admin@hopefoundation.org"
+                      placeholder={t('auth.org_email_placeholder')}
                       required
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="admin-phone">Contact Phone</Label>
+                    <Label htmlFor="admin-phone">{t('auth.contact_phone')}</Label>
                     <Input
                       id="admin-phone"
                       name="admin-phone"
                       type="tel"
-                      placeholder="+234 xxx xxx xxxx"
+                      placeholder={t('auth.phone_placeholder')}
                       required
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="admin-password">Password</Label>
+                    <Label htmlFor="admin-password">{t('auth.password')}</Label>
                     <Input
                       id="admin-password"
                       name="admin-password"
                       type="password"
-                      placeholder="Create a secure password"
+                      placeholder={t('auth.create_password')}
                       required
                     />
                   </div>
@@ -251,7 +253,7 @@ export default function Auth() {
                   <div className="flex items-center space-x-2">
                     <Checkbox id="terms" required />
                     <Label htmlFor="terms" className="text-sm">
-                      I agree to the terms of service and privacy policy
+                      {t('auth.terms_agree')}
                     </Label>
                   </div>
 
@@ -261,7 +263,7 @@ export default function Auth() {
                     className="w-full"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Registering..." : "Register NGO"}
+                    {isLoading ? t('auth.registering') : t('auth.register_button')}
                   </Button>
 
                   <div className="text-center">
@@ -271,7 +273,7 @@ export default function Auth() {
                       className="text-sm"
                       onClick={() => navigate("/auth?mode=login")}
                     >
-                      Already have an account? Sign in
+                      {t('auth.have_account')}
                     </Button>
                   </div>
                 </form>
