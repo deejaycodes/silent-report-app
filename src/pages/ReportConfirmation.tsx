@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, FileText, MessageCircle, MapPin, Home, Heart } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 export default function ReportConfirmation() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <Layout className="pb-20">
@@ -19,20 +21,20 @@ export default function ReportConfirmation() {
           
           <div className="space-y-3">
             <h1 className="text-3xl font-bold text-foreground">
-              Thank You
+              {t('confirmation.thank_you')}
             </h1>
             <p className="text-xl text-muted-foreground">
-              Your report has been sent safely
+              {t('confirmation.report_sent')}
             </p>
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
-              We will look at your report within 24 hours. You are brave for speaking up.
+              {t('confirmation.review_notice')}
             </p>
           </div>
         </div>
 
         {/* What to do next */}
         <div className="space-y-6">
-          <h2 className="text-xl font-semibold text-center">What do you want to do next?</h2>
+          <h2 className="text-xl font-semibold text-center">{t('confirmation.what_next')}</h2>
           
           <div className="space-y-4">
             {/* Submit Another Report */}
@@ -42,8 +44,8 @@ export default function ReportConfirmation() {
                   <FileText className="h-8 w-8 text-blue-600 dark:text-blue-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">Report something else</h3>
-                  <p className="text-sm text-muted-foreground">Tell us about another problem</p>
+                  <h3 className="text-lg font-semibold">{t('confirmation.report_something_else')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('confirmation.report_another_description')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -55,8 +57,8 @@ export default function ReportConfirmation() {
                   <MessageCircle className="h-8 w-8 text-green-600 dark:text-green-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">Talk to someone</h3>
-                  <p className="text-sm text-muted-foreground">Chat with a helper right now</p>
+                  <h3 className="text-lg font-semibold">{t('confirmation.talk_to_someone')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('confirmation.talk_description')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -68,8 +70,8 @@ export default function ReportConfirmation() {
                   <MapPin className="h-8 w-8 text-purple-600 dark:text-purple-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">Find help nearby</h3>
-                  <p className="text-sm text-muted-foreground">See places that can help you</p>
+                  <h3 className="text-lg font-semibold">{t('confirmation.find_help_nearby')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('confirmation.help_description')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -81,8 +83,8 @@ export default function ReportConfirmation() {
                   <Home className="h-8 w-8 text-gray-600 dark:text-gray-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">Go to main page</h3>
-                  <p className="text-sm text-muted-foreground">Return to the home page</p>
+                  <h3 className="text-lg font-semibold">{t('confirmation.go_to_main')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('confirmation.main_description')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -93,9 +95,9 @@ export default function ReportConfirmation() {
         <Card className="border-0 shadow-soft bg-gradient-calm">
           <CardContent className="p-6 text-center">
             <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
-            <p className="text-lg font-medium mb-2">You are not alone</p>
+            <p className="text-lg font-medium mb-2">{t('confirmation.reassurance')}</p>
             <p className="text-sm text-muted-foreground">
-              Help is available anytime. Your safety is important.
+              {t('confirmation.safety_message')}
             </p>
           </CardContent>
         </Card>
