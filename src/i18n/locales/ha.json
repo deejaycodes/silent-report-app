@@ -48,9 +48,12 @@
     "tell_what_happened": "Gayar mana abin da ya faru *",
     "description_placeholder": "Gayar mana abin da ya faru da kalmomin ku. Za ku iya rubutu yawa ko kadan yadda kuke so...",
     "description_help": "Gayar mana abin da ya faru, lokacin da ya faru, da inda ya faru. Yi amfani da sauƙin kalmomi.",
+    "location_state": "Wuri (Jiha) *",
+    "select_state": "Zaɓi jihar ku",
     "evidence_optional": "Shaida (Zaɓi)",
     "upload_files": "Ɗora hotuna, bidiyo, ko takardu",
-    "file_types": "Har zuwa 10MB ga kowane fayil. Ana karɓa: JPG, PNG, PDF, MP4",
+    "file_types": "Har zuwa 2 fayiloli. Ana karɓa: JPG, PNG, PDF, MP4",
+    "files_selected": "fayil(oli) da aka zaɓa",
     "choose_files": "Zaɓi Fayiloli",
     "categorize_optional": "Taimaka mana mu kasance wannan (Zaɓi)",
     "category_placeholder": "Zaɓi nau'i in kuna so",
@@ -58,8 +61,11 @@
     "contact_info": "Haɗa bayanin tuntuɓar don bi da baya",
     "contact_optional": "Zaɓi: Bayar da bayanin tuntuɓar ku in kuna son mu bi da rahoton ku",
     "email": "Imel",
+    "email_placeholder": "imel.ku@misali.com",
     "phone": "Lambar Waya",
+    "phone_placeholder": "+234 xxx xxx xxxx",
     "preferred_contact": "Hanyar Tuntuɓar da Kuke So",
+    "contact_method_placeholder": "Ta yaya kuke son a tuntuɓe ku?",
     "contact_methods": {
       "email": "Imel",
       "phone": "Kiran Waya",
@@ -67,6 +73,7 @@
       "whatsapp": "WhatsApp"
     },
     "best_time": "Mafi Kyawun Lokaci Don Tuntuɓa",
+    "best_time_placeholder": "Yaushe ya dace a tuntuɓe ku?",
     "contact_times": {
       "morning": "Safiya (8AM - 12PM)",
       "afternoon": "Rana (12PM - 6PM)",
@@ -75,7 +82,12 @@
     },
     "submit_report": "Gabatar da Rahoto",
     "submitting": "Ana Gabatar da Rahoto...",
-    "accuracy_notice": "Ta wurin gabatar da wannan rahoto, kun yarda cewa bayanan da aka bayar sahihi ne gwargwadon ilimin ku."
+    "accuracy_notice": "Ta wurin gabatar da wannan rahoto, kun yarda cewa bayanan da aka bayar sahihi ne gwargwadon ilimin ku.",
+    "location_required": "Ana buƙatar wuri",
+    "select_state_error": "Da fatan za a zaɓi jiha.",
+    "submission_success": "An gabatar da rahoto cikin nasara",
+    "submission_failed": "Gabatarwa ta kasa",
+    "submission_error": "Ba za a iya gabatar da rahoto ba. Da fatan za a sake gwadawa."
   },
   "confirmation": {
     "thank_you": "Mun Gode Muku",

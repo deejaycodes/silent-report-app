@@ -48,9 +48,12 @@
     "tell_what_happened": "Sọ fun wa ohun ti o ṣẹlẹ *",
     "description_placeholder": "Sọ fun wa ohun ti o ṣẹlẹ ni ọrọ tirẹ. O le kọ pupọ tabi diẹ bi o ti fẹ...",
     "description_help": "Sọ ohun ti o ṣẹlẹ, igba ti o ṣẹlẹ, ati ibi ti o ṣẹlẹ. Lo awọn ọrọ rọrun.",
+    "location_state": "Ipo (Ipinlẹ) *",
+    "select_state": "Yan ipinlẹ rẹ",
     "evidence_optional": "Ẹri (Ti o ba fẹ)",
     "upload_files": "Gbe awọn aworan, fidio, tabi iwe soke",
-    "file_types": "O to 10MB fun faili kọọkan. Ti a gba laaye: JPG, PNG, PDF, MP4",
+    "file_types": "O to 2 faili. Ti a gba laaye: JPG, PNG, PDF, MP4",
+    "files_selected": "faili ti a yan",
     "choose_files": "Yan Awọn Faili",
     "categorize_optional": "Ran wa lọwọ lati to eyi sinu ẹka (Ti o ba fẹ)",
     "category_placeholder": "Yan ẹka ti o ba fẹ",
@@ -58,8 +61,11 @@
     "contact_info": "Fi alaye olubasọrọ silẹ fun atẹle",
     "contact_optional": "Ti o ba fẹ: Fun ni awọn alaye olubasọrọ rẹ ti o ba fẹ ki a tẹle ijabọ rẹ",
     "email": "Imeeli",
+    "email_placeholder": "imeeli.re@apẹẹrẹ.com",
     "phone": "Nọmba Foonu",
+    "phone_placeholder": "+234 xxx xxx xxxx",
     "preferred_contact": "Ọna Olubasọrọ Ti O Fẹran",
+    "contact_method_placeholder": "Bawo ni o ṣe fẹ ki a pe ọ?",
     "contact_methods": {
       "email": "Imeeli",
       "phone": "Ipe Foonu",
@@ -67,6 +73,7 @@
       "whatsapp": "WhatsApp"
     },
     "best_time": "Akoko Ti O Dara Julọ Lati Pe",
+    "best_time_placeholder": "Igba wo ni o tọ lati pe ọ?",
     "contact_times": {
       "morning": "Owurọ (8AM - 12PM)",
       "afternoon": "Ọsan (12PM - 6PM)",
@@ -75,7 +82,12 @@
     },
     "submit_report": "Fi Ijabọ Silẹ",
     "submitting": "Nfi Ijabọ Silẹ...",
-    "accuracy_notice": "Nipa fifi ijabọ yi silẹ, o jẹwọ pe alaye ti o fun jẹ otitọ si bi o ti mọ."
+    "accuracy_notice": "Nipa fifi ijabọ yi silẹ, o jẹwọ pe alaye ti o fun jẹ otitọ si bi o ti mọ.",
+    "location_required": "Ipo nilo",
+    "select_state_error": "Jọwọ yan ipinlẹ kan.",
+    "submission_success": "A ti fi ijabọ silẹ ni aṣeyọri",
+    "submission_failed": "Fifi silẹ kuna",
+    "submission_error": "Ko le fi ijabọ silẹ. Jọwọ gbiyanju lẹẹkansi."
   },
   "confirmation": {
     "thank_you": "A Dupẹ Lọwọ Rẹ",

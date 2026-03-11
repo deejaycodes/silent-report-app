@@ -52,7 +52,11 @@ export default function Report() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!selectedState) {
-      toast({ title: "Location required", description: "Please select a state.", variant: "destructive" })
+      toast({ 
+        title: t('report.location_required'), 
+        description: t('report.select_state_error'), 
+        variant: "destructive" 
+      })
       return
     }
     setIsSubmitting(true)
@@ -66,12 +70,16 @@ export default function Report() {
       })
 
       toast({
-        title: "Report submitted successfully",
+        title: t('report.submission_success'),
         description: `Your report has been received. AI analysis: ${response.ai_analysis?.urgency || 'pending'}`,
       })
       navigate("/report/confirmation", { state: { reportId: response._id || response.id } })
     } catch (error) {
-      toast({ title: "Submission failed", description: "Unable to submit report. Please try again.", variant: "destructive" })
+      toast({ 
+        title: t('report.submission_failed'), 
+        description: t('report.submission_error'), 
+        variant: "destructive" 
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -120,10 +128,10 @@ export default function Report() {
 
           {/* Location (Nigerian State) */}
           <div className="space-y-2">
-            <Label>Location (State) *</Label>
+            <Label>{t('report.location_state')}</Label>
             <Select value={selectedState} onValueChange={setSelectedState}>
               <SelectTrigger>
-                <SelectValue placeholder="Select your state" />
+                <SelectValue placeholder={t('report.select_state')} />
               </SelectTrigger>
               <SelectContent>
                 {NIGERIAN_STATES.map((state) => (
@@ -135,7 +143,7 @@ export default function Report() {
 
           {/* File Upload */}
           <div className="space-y-2">
-            <Label>Evidence (Optional)</Label>
+            <Label>{t('report.evidence_optional')}</Label>
             <input
               ref={fileInputRef}
               type="file"
@@ -149,15 +157,15 @@ export default function Report() {
               <CardContent className="p-6 text-center">
                 <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
                 {selectedFiles.length > 0 ? (
-                  <p className="text-sm font-medium">{selectedFiles.length} file(s) selected</p>
+                  <p className="text-sm font-medium">{selectedFiles.length} {t('report.files_selected')}</p>
                 ) : (
                   <>
-                    <p className="text-sm text-muted-foreground mb-1">Upload photos, videos, or documents</p>
-                    <p className="text-xs text-muted-foreground">Max 2 files. Supported: JPG, PNG, PDF, MP4</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t('report.upload_files')}</p>
+                    <p className="text-xs text-muted-foreground">{t('report.file_types')}</p>
                   </>
                 )}
                 <Button variant="outline" size="sm" className="mt-3" type="button">
-                  Choose Files
+                  {t('report.choose_files')}
                 </Button>
               </CardContent>
             </Card>
@@ -173,50 +181,50 @@ export default function Report() {
                   onCheckedChange={(checked) => setIncludeContact(checked === true)}
                 />
                 <Label htmlFor="include-contact" className="font-medium">
-                  Include contact information for follow-up
+                  {t('report.contact_info')}
                 </Label>
               </div>
               <CardDescription className="text-sm">
-                Optional: Provide your contact details if you want us to follow up on your report
+                {t('report.contact_optional')}
               </CardDescription>
             </CardHeader>
             {includeContact && (
               <CardContent className="pt-0 space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="contact-email">Email</Label>
+                  <Label htmlFor="contact-email">{t('report.email')}</Label>
                   <Input
                     id="contact-email"
                     type="email"
-                    placeholder="your.email@example.com"
+                    placeholder={t('report.email_placeholder')}
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="contact-phone">Phone Number</Label>
-                  <Input id="contact-phone" type="tel" placeholder="+234 xxx xxx xxxx" />
+                  <Label htmlFor="contact-phone">{t('report.phone')}</Label>
+                  <Input id="contact-phone" type="tel" placeholder={t('report.phone_placeholder')} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="preferred-contact">Preferred Contact Method</Label>
+                  <Label htmlFor="preferred-contact">{t('report.preferred_contact')}</Label>
                   <Select>
-                    <SelectTrigger><SelectValue placeholder="How would you like to be contacted?" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder={t('report.contact_method_placeholder')} /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="email">Email</SelectItem>
-                      <SelectItem value="phone">Phone Call</SelectItem>
-                      <SelectItem value="sms">Text Message</SelectItem>
-                      <SelectItem value="whatsapp">WhatsApp</SelectItem>
+                      <SelectItem value="email">{t('report.contact_methods.email')}</SelectItem>
+                      <SelectItem value="phone">{t('report.contact_methods.phone')}</SelectItem>
+                      <SelectItem value="sms">{t('report.contact_methods.sms')}</SelectItem>
+                      <SelectItem value="whatsapp">{t('report.contact_methods.whatsapp')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="best-time">Best Time to Contact</Label>
+                  <Label htmlFor="best-time">{t('report.best_time')}</Label>
                   <Select>
-                    <SelectTrigger><SelectValue placeholder="When is it safe to contact you?" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder={t('report.best_time_placeholder')} /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="morning">Morning (8AM - 12PM)</SelectItem>
-                      <SelectItem value="afternoon">Afternoon (12PM - 6PM)</SelectItem>
-                      <SelectItem value="evening">Evening (6PM - 10PM)</SelectItem>
-                      <SelectItem value="anytime">Anytime</SelectItem>
+                      <SelectItem value="morning">{t('report.contact_times.morning')}</SelectItem>
+                      <SelectItem value="afternoon">{t('report.contact_times.afternoon')}</SelectItem>
+                      <SelectItem value="evening">{t('report.contact_times.evening')}</SelectItem>
+                      <SelectItem value="anytime">{t('report.contact_times.anytime')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -226,9 +234,9 @@ export default function Report() {
 
           {/* Incident Type */}
           <div className="space-y-2">
-            <Label htmlFor="incident-type">Help us categorize this (Optional)</Label>
+            <Label htmlFor="incident-type">{t('report.categorize_optional')}</Label>
             <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger><SelectValue placeholder="Choose category if you want" /></SelectTrigger>
+              <SelectTrigger><SelectValue placeholder={t('report.category_placeholder')} /></SelectTrigger>
               <SelectContent>
                 {incidentTypes.map((type) => (
                   <SelectItem key={type.id} value={type.id}>{type.title}</SelectItem>
@@ -236,7 +244,7 @@ export default function Report() {
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              This helps us connect you with the right people, but you can skip this if you want.
+              {t('report.category_help')}
             </p>
           </div>
 
@@ -249,12 +257,12 @@ export default function Report() {
               className="w-full"
               disabled={isSubmitting || !description.trim() || !selectedState}
             >
-              {isSubmitting ? "Submitting Report..." : (
-                <><Send className="h-4 w-4 mr-2" />Submit Report</>
+              {isSubmitting ? t('report.submitting') : (
+                <><Send className="h-4 w-4 mr-2" />{t('report.submit_report')}</>
               )}
             </Button>
             <p className="text-xs text-center text-muted-foreground px-4">
-              By submitting this report, you acknowledge that the information provided is accurate to the best of your knowledge.
+              {t('report.accuracy_notice')}
             </p>
           </div>
         </form>

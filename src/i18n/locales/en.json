@@ -48,9 +48,12 @@
     "tell_what_happened": "Tell us what happened *",
     "description_placeholder": "Tell us what happened in your own words. You can write as much or as little as you want...",
     "description_help": "Share what happened, when it happened, and where it happened. Use simple words and write however feels natural to you.",
+    "location_state": "Location (State) *",
+    "select_state": "Select your state",
     "evidence_optional": "Evidence (Optional)",
     "upload_files": "Upload photos, videos, or documents",
-    "file_types": "Max 10MB per file. Supported: JPG, PNG, PDF, MP4",
+    "file_types": "Max 2 files. Supported: JPG, PNG, PDF, MP4",
+    "files_selected": "file(s) selected",
     "choose_files": "Choose Files",
     "categorize_optional": "Help us categorize this (Optional)",
     "category_placeholder": "Choose category if you want",
@@ -58,8 +61,11 @@
     "contact_info": "Include contact information for follow-up",
     "contact_optional": "Optional: Provide your contact details if you want us to follow up on your report",
     "email": "Email",
+    "email_placeholder": "your.email@example.com",
     "phone": "Phone Number",
+    "phone_placeholder": "+234 xxx xxx xxxx",
     "preferred_contact": "Preferred Contact Method",
+    "contact_method_placeholder": "How would you like to be contacted?",
     "contact_methods": {
       "email": "Email",
       "phone": "Phone Call",
@@ -67,6 +73,7 @@
       "whatsapp": "WhatsApp"
     },
     "best_time": "Best Time to Contact",
+    "best_time_placeholder": "When is it safe to contact you?",
     "contact_times": {
       "morning": "Morning (8AM - 12PM)",
       "afternoon": "Afternoon (12PM - 6PM)",
@@ -75,7 +82,12 @@
     },
     "submit_report": "Submit Report",
     "submitting": "Submitting Report...",
-    "accuracy_notice": "By submitting this report, you acknowledge that the information provided is accurate to the best of your knowledge."
+    "accuracy_notice": "By submitting this report, you acknowledge that the information provided is accurate to the best of your knowledge.",
+    "location_required": "Location required",
+    "select_state_error": "Please select a state.",
+    "submission_success": "Report submitted successfully",
+    "submission_failed": "Submission failed",
+    "submission_error": "Unable to submit report. Please try again."
   },
   "confirmation": {
     "thank_you": "Thank You",

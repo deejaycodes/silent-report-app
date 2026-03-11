@@ -48,9 +48,12 @@
     "tell_what_happened": "Gwa anyị ihe mere *",
     "description_placeholder": "Gwa anyị ihe mere n'okwu gị. Ị nwere ike ide ọtụtụ ma ọ bụ ntakịrị dịka ị chọrọ...",
     "description_help": "Kọwa ihe mere, mgbe o mere, na ebe o mere. Jiri okwu dị mfe.",
+    "location_state": "Ebe (Steeti) *",
+    "select_state": "Họrọ steeti gị",
     "evidence_optional": "Ihe Akaebe (Nhọrọ)",
     "upload_files": "Tinye foto, vidiyo, ma ọ bụ akwụkwọ",
-    "file_types": "Ruo 10MB maka faịlụ ọ bụla. Ndị a nabatara: JPG, PNG, PDF, MP4",
+    "file_types": "Ruo 2 faịlụ. Ndị a nabatara: JPG, PNG, PDF, MP4",
+    "files_selected": "faịlụ ahọpụtara",
     "choose_files": "Họrọ Faịlụ",
     "categorize_optional": "Nyere anyị aka hazie nke a (Nhọrọ)",
     "category_placeholder": "Họrọ ụdị ma ọ bụrụ na ị chọrọ",
@@ -58,8 +61,11 @@
     "contact_info": "Tinye ozi nkwurịta okwu maka nhụsianya",
     "contact_optional": "Nhọrọ: Nye ozi nkwurịta okwu gị ma ọ bụrụ na ị chọrọ ka anyị sochie mkpọsa gị",
     "email": "Imeelụ",
+    "email_placeholder": "imeelụ.gị@ọmụmaatụ.com",
     "phone": "Nọmba Ekwentị",
+    "phone_placeholder": "+234 xxx xxx xxxx",
     "preferred_contact": "Ụzọ Nkwurịta Okwu Ị Masịrị",
+    "contact_method_placeholder": "Kedu ka ị ga-esi chọọ ka a kpọtụrụ gị?",
     "contact_methods": {
       "email": "Imeelụ",
       "phone": "Oku Ekwentị",
@@ -67,6 +73,7 @@
       "whatsapp": "WhatsApp"
     },
     "best_time": "Oge Kacha Mma Ikpọtụrụ",
+    "best_time_placeholder": "Kedu mgbe ọ dị mma ikpọtụrụ gị?",
     "contact_times": {
       "morning": "Ụtụtụ (8AM - 12PM)",
       "afternoon": "Ehihie (12PM - 6PM)",
@@ -75,7 +82,12 @@
     },
     "submit_report": "Tinye Mkpọsa",
     "submitting": "Na-etinye Mkpọsa...",
-    "accuracy_notice": "Site n'itinye mkpọsa a, ị na-ekwupụta na ozi enyere bụ eziokwu dịka ị maara."
+    "accuracy_notice": "Site n'itinye mkpọsa a, ị na-ekwupụta na ozi enyere bụ eziokwu dịka ị maara.",
+    "location_required": "Achọrọ ebe",
+    "select_state_error": "Biko họrọ steeti.",
+    "submission_success": "E tinyere mkpọsa nke ọma",
+    "submission_failed": "Ntinye dara ada",
+    "submission_error": "Enweghị ike itinye mkpọsa. Biko nwaa ọzọ."
   },
   "confirmation": {
     "thank_you": "Daalụ",
