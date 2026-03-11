@@ -109,33 +109,34 @@ export default function Landing() {
               </div>
             </div>
 
-          {/* Trust Indicators */}
-          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-muted-foreground flex-wrap">
-            <div className="flex items-center gap-1">
-              <Shield className="h-3 w-3" />
-              <span>Encrypted</span>
+            {/* Trust Indicators */}
+            <div className="mt-4 flex items-center justify-center gap-4 text-xs text-muted-foreground flex-wrap">
+              <div className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                <span>Encrypted</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Heart className="h-3 w-3" />
+                <span>Confidential</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Phone className="h-3 w-3" />
+                <span>24/7 Support</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              <Heart className="h-3 w-3" />
-              <span>Confidential</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Phone className="h-3 w-3" />
-              <span>24/7 Support</span>
-            </div>
-          </div>
 
-          {/* NGO Portal Link */}
-          <div className="mt-6 pb-4">
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => navigate("/ngo-portal")}
-              className="text-xs text-muted-foreground hover:text-foreground"
-            >
-              <Building2 className="h-3 w-3 mr-1" />
-              NGO Portal
-            </Button>
+            {/* NGO Portal Link */}
+            <div className="mt-6 pb-4">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/ngo-portal")}
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
+                <Building2 className="h-3 w-3 mr-1" />
+                NGO Portal
+              </Button>
+            </div>
           </div>
         </div>
       </div>
