@@ -66,12 +66,12 @@ export default function Landing() {
               {t('landing.hero_description')}
             </p>
 
-            <div className="flex flex-col gap-3 max-w-xs mx-auto mb-8">
+            <div className="flex flex-col gap-3 max-w-xs mx-auto mb-6">
               <Button 
                 variant="default" 
                 size="lg"
                 onClick={() => navigate("/dashboard")}
-                className="w-full"
+                className="w-full h-14 text-lg"
               >
                 {t('landing.report_anonymously')}
               </Button>
@@ -86,34 +86,38 @@ export default function Landing() {
                 Find Help Nearby
               </Button>
             </div>
-          </div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
-            {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-soft bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-3 text-center">
-                  <div className="mb-2 p-2 bg-primary-soft rounded-lg w-fit mx-auto">
-                    {feature.icon}
-                  </div>
-                  <h3 className="font-semibold text-xs mb-1">{feature.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+            {/* Simplified Features - Single Row */}
+            <div className="flex items-center justify-center gap-6 max-w-xs mx-auto text-xs text-muted-foreground mb-4">
+              <div className="flex flex-col items-center gap-1">
+                <div className="p-2 bg-primary-soft rounded-lg">
+                  <Shield className="h-4 w-4 text-primary" />
+                </div>
+                <span>Anonymous</span>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="p-2 bg-primary-soft rounded-lg">
+                  <MessageCircle className="h-4 w-4 text-primary" />
+                </div>
+                <span>24/7 Chat</span>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="p-2 bg-primary-soft rounded-lg">
+                  <Heart className="h-4 w-4 text-primary" />
+                </div>
+                <span>Safe Space</span>
+              </div>
+            </div>
 
           {/* Trust Indicators */}
-          <div className="mt-8 flex items-center justify-center gap-4 text-xs text-muted-foreground flex-wrap">
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-muted-foreground flex-wrap">
             <div className="flex items-center gap-1">
               <Shield className="h-3 w-3" />
-              <span>Secure</span>
+              <span>Encrypted</span>
             </div>
             <div className="flex items-center gap-1">
               <Heart className="h-3 w-3" />
-              <span>Anonymous</span>
+              <span>Confidential</span>
             </div>
             <div className="flex items-center gap-1">
               <Phone className="h-3 w-3" />
