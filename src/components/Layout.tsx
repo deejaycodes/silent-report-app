@@ -11,9 +11,9 @@ interface LayoutProps {
 
 export function Layout({ children, className, showThemeToggle = true }: LayoutProps) {
   return (
-    <div className={cn("min-h-screen bg-gradient-calm", className)}>
+    <div className={cn("min-h-screen bg-gradient-calm safe-top safe-bottom", className)}>
       {showThemeToggle && (
-        <div className="absolute top-4 right-4 z-50 flex gap-2">
+        <div className="absolute top-4 right-4 z-50 flex gap-2" style={{ marginTop: 'env(safe-area-inset-top)' }}>
           <LanguageSwitcher />
           <ThemeToggle />
         </div>

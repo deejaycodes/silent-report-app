@@ -149,12 +149,26 @@
     touch-action: manipulation;
   }
   
-  /* Safe area handling for mobile */
-  .safe-top {
+  /* Safe area handling for iOS notch/Dynamic Island */
+  body {
     padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
   }
   
   .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Ensure fixed elements respect safe areas */
+  .fixed-top {
+    top: env(safe-area-inset-top);
+  }
+  
+  .fixed-bottom {
+    bottom: env(safe-area-inset-bottom);
   }
 }
