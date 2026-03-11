@@ -76,34 +76,15 @@ export default function Landing() {
                 {t('landing.report_anonymously')}
               </Button>
               
-              {/* NGO Organization Section */}
-              <div className="border rounded-lg p-4 bg-card/50 backdrop-blur-sm mt-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <Building2 className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-sm">For NGO Organizations</h3>
-                </div>
-                <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                  Manage incidents, support victims, coordinate responses
-                </p>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="flex-1"
-                    onClick={() => navigate("/auth?mode=login")}
-                  >
-                    Login
-                  </Button>
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="flex-1"
-                    onClick={() => navigate("/auth?mode=register")}
-                  >
-                    Register NGO
-                  </Button>
-                </div>
-              </div>
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => navigate("/resources")}
+                className="w-full"
+              >
+                <MapPin className="h-4 w-4 mr-2" />
+                Find Help Nearby
+              </Button>
             </div>
           </div>
 
@@ -138,6 +119,19 @@ export default function Landing() {
               <Phone className="h-3 w-3" />
               <span>24/7 Support</span>
             </div>
+          </div>
+
+          {/* NGO Portal Link */}
+          <div className="mt-6 pb-4">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/ngo-portal")}
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
+              <Building2 className="h-3 w-3 mr-1" />
+              NGO Portal
+            </Button>
           </div>
         </div>
       </div>
