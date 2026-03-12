@@ -5,7 +5,7 @@
   },
   "landing": {
     "hero_title": "Safe Haven",
-    "hero_description": "Report FGM and abuse anonymously. Get help immediately. Your voice matters.",
+    "hero_description": "Report FGM and abuse anonymously. Get help immediately. Every voice matters.",
     "report_anonymously": "Report Anonymously",
     "ngo_section": "For NGO Organizations",
     "ngo_description": "Manage incidents, support victims, coordinate responses",
@@ -28,8 +28,8 @@
     }
   },
   "dashboard": {
-    "choose_what_happened": "What do you need help with?",
-    "anonymity_reminder": "(You can report without giving your name)",
+    "choose_what_happened": "What do you want to report?",
+    "anonymity_reminder": "(You can report for yourself or someone else)",
     "need_help_now": "Are You in Danger Right Now?",
     "get_help_now": "Connect Me to Help Now",
     "emergency_description": "If someone is hurting you or you need immediate help, we can connect you to a trained counselor right now.",
@@ -54,14 +54,14 @@
     "report_this": "Report This"
   },
   "report": {
-    "title": "Tell Your Story Safely",
+    "title": "Report Safely",
     "anonymous_secure": "🔒 Completely Anonymous",
     "anonymous_notice": "We don't track your phone. You don't have to give your name. Share only what feels safe.",
     "tell_what_happened": "What happened?",
-    "description_placeholder": "Write as much or as little as you want. There's no right or wrong way to tell your story.",
-    "description_help": "Helpful to share: What happened • When • Who (if you know) • If you're still in danger",
+    "description_placeholder": "Describe what happened. You can report for yourself or someone else.",
+    "description_help": "Helpful to share: What happened • When • Who was affected • Who did it (if known) • If they're still in danger",
     "location_state": "Location (State)",
-    "select_state": "Select your state",
+    "select_state": "Select state where it happened",
     "evidence_optional": "Evidence (Optional)",
     "upload_files": "Upload photos, videos, or documents if you have them",
     "file_types": "Max 2 files. Supported: JPG, PNG, PDF, MP4",
@@ -70,8 +70,8 @@
     "categorize_optional": "Help us understand what happened (Optional)",
     "category_placeholder": "Choose category if you want",
     "category_help": "This helps us connect you with the right people, but you can skip this.",
-    "contact_info": "Want someone to contact you?",
-    "contact_optional": "⚠️ Only give contact info if it's SAFE. If someone checks your phone, it might not be safe.",
+    "contact_info": "Contact information (Optional)",
+    "contact_optional": "⚠️ Only provide contact info if it's SAFE. If the abuser might check this phone, don't share contact details.",
     "email": "Email",
     "email_placeholder": "your.email@example.com",
     "phone": "Phone Number",
@@ -85,12 +85,12 @@
       "whatsapp": "WhatsApp",
       "app_only": "I'll check back on this app (no contact needed)"
     },
-    "best_time": "When is it SAFE to contact you?",
-    "best_time_placeholder": "When is it safe to contact you?",
+    "best_time": "When is it SAFE to contact?",
+    "best_time_placeholder": "When is it safe to contact?",
     "contact_times": {
-      "morning": "Morning (8AM-12PM) - when I'm alone",
-      "afternoon": "Afternoon (12PM-6PM) - when I'm at work/school",
-      "evening": "Evening (6PM-10PM) - when family is asleep",
+      "morning": "Morning (8AM-12PM)",
+      "afternoon": "Afternoon (12PM-6PM)",
+      "evening": "Evening (6PM-10PM)",
       "reach_out": "Only contact if I reach out first"
     },
     "submit_report": "Send My Report Safely",
