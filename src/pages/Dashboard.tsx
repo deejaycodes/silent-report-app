@@ -18,8 +18,8 @@ export default function Dashboard() {
   }
 
   return (
-    <Layout className="pb-20">
-      <div className="px-4 py-6 space-y-8 max-w-lg mx-auto">
+    <Layout className="pb-24">
+      <div className="px-4 py-6 space-y-8 max-w-lg mx-auto pb-8">
         {/* Simplified Header */}
         <div className="text-center space-y-3">
           <h1 className="text-3xl font-bold">{t('app.name')}</h1>
@@ -59,7 +59,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Support Message */}
-        <Card className="border-0 shadow-soft bg-gradient-calm">
+        <Card className="border-0 shadow-soft bg-gradient-calm mb-8">
           <CardContent className="p-6 text-center">
             <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
             <p className="text-lg font-medium mb-2">{t('dashboard.you_are_not_alone')}</p>
