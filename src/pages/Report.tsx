@@ -71,7 +71,7 @@ export default function Report() {
 
       toast({
         title: t('report.submission_success'),
-        description: `Your report has been received. AI analysis: ${response.ai_analysis?.urgency || 'pending'}`,
+        description: t('report.submission_success_message'),
       })
       navigate("/report/confirmation", { state: { reportId: response._id || response.id } })
     } catch (error) {

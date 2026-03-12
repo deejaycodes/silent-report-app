@@ -99,6 +99,7 @@
     "location_required": "Location required",
     "select_state_error": "Please select a state.",
     "submission_success": "Report received safely",
+    "submission_success_message": "Your report has been sent. We will review it within 24 hours.",
     "submission_failed": "Submission failed",
     "submission_error": "Unable to submit report. Please try again."
   },
