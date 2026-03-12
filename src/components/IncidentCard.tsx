@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Home, Baby, Hand, HelpCircle, Scissors, Heart, Briefcase } from "lucide-react"
+import { Baby, Hand, HelpCircle, Scissors, Briefcase } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 interface IncidentType {
@@ -24,24 +24,6 @@ const incidentTypes: IncidentType[] = [
     bgColor: "bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800"
   },
   {
-    id: "violence-at-home",
-    title: "dashboard.incident_types.violence_at_home",
-    description: "dashboard.incident_types.violence_description",
-    simpleTitle: "Violence at Home",
-    icon: <Home className="h-12 w-12" />,
-    color: "text-red-600",
-    bgColor: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
-  },
-  {
-    id: "harm-to-child",
-    title: "dashboard.incident_types.harm_to_child",
-    description: "dashboard.incident_types.child_description",
-    simpleTitle: "Child Harm",
-    icon: <Baby className="h-12 w-12" />,
-    color: "text-orange-600",
-    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
-  },
-  {
     id: "child-labour",
     title: "dashboard.incident_types.child_labour",
     description: "dashboard.incident_types.labour_description",
@@ -51,6 +33,15 @@ const incidentTypes: IncidentType[] = [
     bgColor: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800"
   },
   {
+    id: "harm-to-child",
+    title: "dashboard.incident_types.harm_to_child",
+    description: "dashboard.incident_types.child_description",
+    simpleTitle: "Child Abuse",
+    icon: <Baby className="h-12 w-12" />,
+    color: "text-orange-600",
+    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
+  },
+  {
     id: "unwanted-touching",
     title: "dashboard.incident_types.unwanted_touching",
     description: "dashboard.incident_types.touching_description",
@@ -58,15 +49,6 @@ const incidentTypes: IncidentType[] = [
     icon: <Hand className="h-12 w-12" />,
     color: "text-purple-600",
     bgColor: "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800"
-  },
-  {
-    id: "forced-marriage",
-    title: "dashboard.incident_types.forced_marriage",
-    description: "dashboard.incident_types.marriage_description",
-    simpleTitle: "Forced Marriage",
-    icon: <Heart className="h-12 w-12" />,
-    color: "text-rose-600",
-    bgColor: "bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800"
   },
   {
     id: "other-safety",
