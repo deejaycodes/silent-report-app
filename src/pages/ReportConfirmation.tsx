@@ -67,7 +67,7 @@ export default function ReportConfirmation() {
           
           <div className="space-y-4">
             {/* Submit Another Report */}
-            <Card className="border-2 border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/dashboard")}>
+            <Card className="border-2 border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/report-start")}>
               <CardContent className="p-6 flex items-center space-x-4">
                 <div className="p-3 bg-blue-100 dark:bg-blue-800 rounded-full">
                   <FileText className="h-8 w-8 text-blue-600 dark:text-blue-300" />

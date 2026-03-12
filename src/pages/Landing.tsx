@@ -70,7 +70,7 @@ export default function Landing() {
               <Button 
                 variant="default" 
                 size="lg"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/report-start")}
                 className="w-full h-14 text-lg"
               >
                 {t('landing.report_anonymously')}

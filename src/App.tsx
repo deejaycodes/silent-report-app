@@ -29,7 +29,7 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/ngo-portal" element={<NGOPortal />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/report-start" element={<Dashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/report" element={<Report />} />
             <Route path="/report/confirmation" element={<ReportConfirmation />} />

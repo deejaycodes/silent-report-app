@@ -3,7 +3,7 @@ import { Home, FileText, MessageCircle, MapPin, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { to: "/dashboard", icon: Home, label: "Home" },
+  { to: "/report-start", icon: Home, label: "Home" },
   { to: "/report", icon: FileText, label: "Report" },
   { to: "/chat", icon: MessageCircle, label: "Chat" },
   { to: "/resources", icon: MapPin, label: "Resources" },
