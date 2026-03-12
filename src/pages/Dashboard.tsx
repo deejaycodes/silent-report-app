@@ -28,7 +28,10 @@ export default function Dashboard() {
 
         {/* Main Reporting Section */}
         <div className="space-y-6">
-          <h2 className="text-xl font-semibold text-center">{t('dashboard.choose_what_happened')}</h2>
+          <div className="text-center space-y-2">
+            <h2 className="text-xl font-semibold">{t('dashboard.choose_what_happened')}</h2>
+            <p className="text-sm text-muted-foreground">{t('dashboard.anonymity_reminder')}</p>
+          </div>
           <IncidentCard onSelect={handleIncidentSelect} />
         </div>
 
@@ -38,9 +41,12 @@ export default function Dashboard() {
             <div className="mb-4">
               <Phone className="h-16 w-16 text-red-600 mx-auto" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-red-800 dark:text-red-200">
+            <h3 className="text-xl font-bold mb-2 text-red-800 dark:text-red-200">
               {t('dashboard.need_help_now')}
             </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              {t('dashboard.emergency_description')}
+            </p>
             <Button 
               variant="destructive" 
               size="lg"

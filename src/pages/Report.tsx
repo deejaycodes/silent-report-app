@@ -213,6 +213,7 @@ export default function Report() {
                       <SelectItem value="phone">{t('report.contact_methods.phone')}</SelectItem>
                       <SelectItem value="sms">{t('report.contact_methods.sms')}</SelectItem>
                       <SelectItem value="whatsapp">{t('report.contact_methods.whatsapp')}</SelectItem>
+                      <SelectItem value="app_only">{t('report.contact_methods.app_only')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -224,7 +225,7 @@ export default function Report() {
                       <SelectItem value="morning">{t('report.contact_times.morning')}</SelectItem>
                       <SelectItem value="afternoon">{t('report.contact_times.afternoon')}</SelectItem>
                       <SelectItem value="evening">{t('report.contact_times.evening')}</SelectItem>
-                      <SelectItem value="anytime">{t('report.contact_times.anytime')}</SelectItem>
+                      <SelectItem value="reach_out">{t('report.contact_times.reach_out')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

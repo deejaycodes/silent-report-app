@@ -2,13 +2,15 @@ import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, FileText, MessageCircle, MapPin, Home, Heart } from "lucide-react"
+import { CheckCircle, FileText, MessageCircle, MapPin, Home, Heart, Shield, AlertCircle } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useState } from "react"
 
 export default function ReportConfirmation() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [showSafetyCheck, setShowSafetyCheck] = useState(true)
 
   return (
     <Layout className="pb-20">
@@ -23,14 +25,41 @@ export default function ReportConfirmation() {
             <h1 className="text-3xl font-bold text-foreground">
               {t('confirmation.thank_you')}
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg text-muted-foreground">
               {t('confirmation.report_sent')}
             </p>
-            <p className="text-lg text-muted-foreground max-w-md mx-auto">
+            <p className="text-base text-muted-foreground max-w-md mx-auto">
               {t('confirmation.review_notice')}
             </p>
           </div>
         </div>
+
+        {/* Safety Check */}
+        {showSafetyCheck && (
+          <Card className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-800">
+            <CardContent className="p-6 text-center space-y-4">
+              <AlertCircle className="h-12 w-12 text-amber-600 mx-auto" />
+              <h3 className="text-xl font-semibold">{t('confirmation.safety_check')}</h3>
+              <div className="flex gap-3 justify-center">
+                <Button 
+                  variant="destructive" 
+                  onClick={() => {
+                    setShowSafetyCheck(false)
+                    navigate("/chat")
+                  }}
+                >
+                  {t('confirmation.need_help_now')}
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => setShowSafetyCheck(false)}
+                >
+                  {t('confirmation.safe_for_now')}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* What to do next */}
         <div className="space-y-6">
@@ -72,6 +101,19 @@ export default function ReportConfirmation() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold">{t('confirmation.find_help_nearby')}</h3>
                   <p className="text-sm text-muted-foreground">{t('confirmation.help_description')}</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Learn Rights */}
+            <Card className="border-2 border-indigo-200 bg-indigo-50 dark:bg-indigo-900/20 dark:border-indigo-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/resources")}>
+              <CardContent className="p-6 flex items-center space-x-4">
+                <div className="p-3 bg-indigo-100 dark:bg-indigo-800 rounded-full">
+                  <Shield className="h-8 w-8 text-indigo-600 dark:text-indigo-300" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold">{t('confirmation.learn_rights')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('confirmation.rights_description')}</p>
                 </div>
               </CardContent>
             </Card>

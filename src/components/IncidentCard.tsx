@@ -1,11 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Home, Baby, Hand, HelpCircle } from "lucide-react"
+import { Home, Baby, Hand, HelpCircle, Scissors, Heart } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 interface IncidentType {
   id: string
   title: string
+  description: string
   simpleTitle: string
   icon: React.ReactNode
   color: string
@@ -14,8 +15,18 @@ interface IncidentType {
 
 const incidentTypes: IncidentType[] = [
   {
+    id: "fgm",
+    title: "dashboard.incident_types.fgm",
+    description: "dashboard.incident_types.fgm_description",
+    simpleTitle: "FGM/C",
+    icon: <Scissors className="h-12 w-12" />,
+    color: "text-pink-600",
+    bgColor: "bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800"
+  },
+  {
     id: "violence-at-home",
     title: "dashboard.incident_types.violence_at_home",
+    description: "dashboard.incident_types.violence_description",
     simpleTitle: "Violence at Home",
     icon: <Home className="h-12 w-12" />,
     color: "text-red-600",
@@ -24,6 +35,7 @@ const incidentTypes: IncidentType[] = [
   {
     id: "harm-to-child",
     title: "dashboard.incident_types.harm_to_child",
+    description: "dashboard.incident_types.child_description",
     simpleTitle: "Child Harm",
     icon: <Baby className="h-12 w-12" />,
     color: "text-orange-600",
@@ -32,15 +44,26 @@ const incidentTypes: IncidentType[] = [
   {
     id: "unwanted-touching",
     title: "dashboard.incident_types.unwanted_touching",
-    simpleTitle: "Unwanted Touch",
+    description: "dashboard.incident_types.touching_description",
+    simpleTitle: "Sexual Abuse",
     icon: <Hand className="h-12 w-12" />,
     color: "text-purple-600",
     bgColor: "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800"
   },
   {
+    id: "forced-marriage",
+    title: "dashboard.incident_types.forced_marriage",
+    description: "dashboard.incident_types.marriage_description",
+    simpleTitle: "Forced Marriage",
+    icon: <Heart className="h-12 w-12" />,
+    color: "text-rose-600",
+    bgColor: "bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800"
+  },
+  {
     id: "other-safety",
     title: "dashboard.incident_types.other_safety",
-    simpleTitle: "Other Problem",
+    description: "dashboard.incident_types.other_description",
+    simpleTitle: "Other Harm",
     icon: <HelpCircle className="h-12 w-12" />,
     color: "text-blue-600",
     bgColor: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
@@ -69,6 +92,9 @@ export function IncidentCard({ onSelect }: IncidentCardProps) {
             <h3 className="text-2xl font-bold mb-2 leading-tight">
               {t(incident.title)}
             </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              {t(incident.description)}
+            </p>
             <Button 
               variant="default" 
               size="lg"
