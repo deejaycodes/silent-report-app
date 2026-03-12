@@ -51,6 +51,43 @@ export default function Report() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate description
+    const wordCount = description.trim().split(/\s+/).filter(w => w.length > 0).length
+    const lowerText = description.toLowerCase().trim()
+    
+    // Check minimum length
+    if (wordCount < 10) {
+      toast({ 
+        title: "Please provide more details", 
+        description: "Help us understand what happened by writing at least 10 words.",
+        variant: "destructive" 
+      })
+      return
+    }
+    
+    // Check for test/spam phrases
+    const spamPhrases = ['test', 'hello world', 'asdf', 'qwerty', 'fuck you', 'fuck u']
+    if (spamPhrases.some(phrase => lowerText === phrase || lowerText.includes(phrase + ' '))) {
+      toast({ 
+        title: "Please describe the actual incident", 
+        description: "We need real information to help.",
+        variant: "destructive" 
+      })
+      return
+    }
+    
+    // Check for gibberish (repeated characters)
+    const hasGibberish = /(.)\1{5,}/.test(description) // 6+ repeated chars
+    if (hasGibberish) {
+      toast({ 
+        title: "Please write clearly", 
+        description: "Help us understand by using real words.",
+        variant: "destructive" 
+      })
+      return
+    }
+    
     if (!selectedState) {
       toast({ 
         title: t('report.location_required'), 
@@ -59,6 +96,7 @@ export default function Report() {
       })
       return
     }
+    
     setIsSubmitting(true)
 
     try {
