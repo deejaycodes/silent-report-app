@@ -124,19 +124,25 @@ export default function Landing() {
                 <span>24/7 Support</span>
               </div>
             </div>
+          </div>
 
-            {/* NGO Portal Link */}
-            <div className="mt-6 pb-4">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => navigate("/ngo-portal")}
-                className="text-xs text-muted-foreground hover:text-foreground"
-              >
-                <Building2 className="h-3 w-3 mr-1" />
-                NGO Portal
-              </Button>
+          {/* NGO Section - Separated */}
+          <div className="mt-12 p-6 bg-muted/50 rounded-lg border border-border">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Building2 className="h-5 w-5 text-primary" />
+              <h3 className="font-semibold text-foreground">For NGO Workers</h3>
             </div>
+            <p className="text-sm text-muted-foreground mb-4 text-center">
+              Access the web portal for case management and victim support
+            </p>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate("/ngo-portal")}
+              className="w-full"
+            >
+              Learn More →
+            </Button>
           </div>
         </div>
       </div>

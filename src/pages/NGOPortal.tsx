@@ -28,8 +28,6 @@ const ngoFeatures = [
 ]
 
 export default function NGOPortal() {
-  const navigate = useNavigate()
-
   return (
     <Layout showThemeToggle={false}>
       <div className="flex flex-col min-h-screen">
@@ -38,7 +36,7 @@ export default function NGOPortal() {
           <Button 
             variant="ghost" 
             size="sm"
-            onClick={() => navigate("/")}
+            onClick={() => window.location.href = "/"}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
@@ -53,33 +51,38 @@ export default function NGOPortal() {
             </div>
             
             <h1 className="text-3xl font-bold text-foreground mb-3 leading-tight">
-              NGO Portal
+              For NGO Workers
             </h1>
             
             <p className="text-base text-muted-foreground mb-8 max-w-xs mx-auto leading-relaxed">
-              Manage incident reports, support victims, and coordinate responses with AI-powered tools
+              Manage cases, support victims, and coordinate responses with our web-based portal
             </p>
 
-            {/* Auth Buttons */}
+            {/* Clear Message */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+              <p className="text-sm text-blue-900 dark:text-blue-100 font-medium mb-2">
+                📱 This mobile app is for victims only
+              </p>
+              <p className="text-xs text-blue-700 dark:text-blue-300">
+                NGO workers should use our web portal for case management
+              </p>
+            </div>
+
+            {/* Web Portal Button */}
             <div className="flex flex-col gap-3 max-w-xs mx-auto mb-8">
               <Button 
                 variant="default" 
                 size="lg"
-                onClick={() => navigate("/auth?mode=login")}
+                onClick={() => window.open('https://portal.safevoice.app', '_blank')}
                 className="w-full"
               >
                 <Shield className="h-4 w-4 mr-2" />
-                Login to Dashboard
+                Access Web Portal
               </Button>
               
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => navigate("/auth?mode=register")}
-                className="w-full"
-              >
-                Register Your NGO
-              </Button>
+              <p className="text-xs text-muted-foreground">
+                Desktop-optimized for case management
+              </p>
             </div>
 
             {/* Features Grid */}
