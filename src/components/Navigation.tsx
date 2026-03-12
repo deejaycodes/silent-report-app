@@ -1,14 +1,13 @@
-import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import { Home, FileText, MessageCircle, MapPin, Clock, Shield } from "lucide-react"
+import { Home, FileText, MessageCircle, MapPin, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { to: "/", icon: Home, label: "Home" },
+  { to: "/dashboard", icon: Home, label: "Home" },
   { to: "/report", icon: FileText, label: "Report" },
   { to: "/chat", icon: MessageCircle, label: "Chat" },
   { to: "/resources", icon: MapPin, label: "Resources" },
-  { to: "/history", icon: Clock, label: "History" },
+  { to: "/safety", icon: Shield, label: "Safety" },
 ]
 
 export function Navigation() {

@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Phone, Clock, Search, Filter, Navigation as NavigationIcon } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { MapPin, Phone, Clock, Search, Filter, Navigation as NavigationIcon, Shield, Scale, Heart, FileText } from "lucide-react"
 
 interface Resource {
   id: string
@@ -82,9 +83,29 @@ export default function Resources() {
       <div className="px-4 py-6 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold mb-2">Find Resources</h1>
-          <p className="text-muted-foreground">Locate nearby support services and organizations</p>
+          <h1 className="text-2xl font-bold mb-2">Resources & Support</h1>
+          <p className="text-muted-foreground">Find help, learn your rights, and plan for safety</p>
         </div>
+
+        {/* Tabs */}
+        <Tabs defaultValue="find" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="find">
+              <MapPin className="h-4 w-4 mr-1" />
+              Find Help
+            </TabsTrigger>
+            <TabsTrigger value="rights">
+              <Scale className="h-4 w-4 mr-1" />
+              Your Rights
+            </TabsTrigger>
+            <TabsTrigger value="safety">
+              <Shield className="h-4 w-4 mr-1" />
+              Safety Plan
+            </TabsTrigger>
+          </TabsList>
+
+          {/* FIND HELP TAB */}
+          <TabsContent value="find" className="space-y-6 mt-6">
 
         {/* Search and Filters */}
         <Card className="border-0 shadow-soft">
@@ -218,6 +239,179 @@ export default function Resources() {
             </Card>
           ))}
         </div>
+
+        {/* Emergency Notice */}
+        <Card className="border-0 shadow-comfort bg-destructive/10">
+          <CardContent className="p-4 text-center">
+            <h3 className="font-semibold text-destructive mb-2">Emergency Situation?</h3>
+            <p className="text-sm text-muted-foreground mb-3">
+              If you're in immediate danger, contact emergency services right away
+            </p>
+            <div className="flex gap-2">
+              <Button variant="destructive" size="sm" className="flex-1">
+                Call 199 (Police)
+              </Button>
+              <Button variant="destructive" size="sm" className="flex-1">
+                Call 112 (Emergency)
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </TabsContent>
+
+      {/* YOUR RIGHTS TAB */}
+      <TabsContent value="rights" className="space-y-4 mt-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Know Your Rights in Nigeria</CardTitle>
+            <CardDescription>Understanding the law can help protect you</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            
+            <div>
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                FGM is Illegal
+              </h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• The Violence Against Persons Prohibition (VAPP) Act 2015 criminalizes FGM</p>
+                <p>• Anyone who performs FGM can face up to 4 years in prison or a fine</p>
+                <p>• It's illegal even if the person consents or if it's for "cultural reasons"</p>
+                <p>• You have the right to refuse FGM for yourself or your daughter</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                Domestic Violence is a Crime
+              </h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Physical, emotional, sexual, and economic abuse are all illegal</p>
+                <p>• You can get a protection order to keep your abuser away</p>
+                <p>• Police must respond to domestic violence calls</p>
+                <p>• You don't need to be married for it to be domestic violence</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <Heart className="h-5 w-5 text-primary" />
+                Your Rights as a Survivor
+              </h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• You have the right to free medical care after assault</p>
+                <p>• You have the right to free legal aid</p>
+                <p>• You can report without giving your name</p>
+                <p>• You can change your mind about pressing charges</p>
+                <p>• You have the right to a safe shelter</p>
+              </div>
+            </div>
+
+            <div className="bg-muted p-4 rounded-lg">
+              <p className="text-sm font-medium mb-2">Need Legal Help?</p>
+              <p className="text-sm text-muted-foreground mb-3">
+                Free legal aid is available through FIDA, Legal Aid Council, and other organizations
+              </p>
+              <Button variant="outline" size="sm" className="w-full">
+                Find Legal Aid Near You
+              </Button>
+            </div>
+
+          </CardContent>
+        </Card>
+      </TabsContent>
+
+      {/* SAFETY PLAN TAB */}
+      <TabsContent value="safety" className="space-y-4 mt-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Create Your Safety Plan</CardTitle>
+            <CardDescription>
+              ⚠️ Don't save this on your device if your abuser can access it
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            
+            <div>
+              <h3 className="font-semibold mb-3">1. Safe Places to Go</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                Think of 3 places you can go if you need to leave quickly:
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• A friend or family member's house</li>
+                <li>• A shelter or safe house</li>
+                <li>• A public place (police station, hospital, church/mosque)</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">2. Important Documents</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                Keep copies of these in a safe place (with a trusted friend):
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• Your ID card or passport</li>
+                <li>• Children's birth certificates</li>
+                <li>• Bank account information</li>
+                <li>• Marriage certificate (if applicable)</li>
+                <li>• Medical records</li>
+                <li>• Photos of injuries (if any)</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">3. Emergency Bag</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                Pack a bag and hide it or leave it with someone you trust:
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• Change of clothes for you and children</li>
+                <li>• Money or ATM card</li>
+                <li>• Phone charger</li>
+                <li>• Medications</li>
+                <li>• Keys (house, car)</li>
+                <li>• Important phone numbers written down</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">4. Trusted Contacts</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                Tell 2-3 people you trust about your situation:
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• Someone who can help you leave quickly</li>
+                <li>• Someone who can keep your documents</li>
+                <li>• Someone who can check on you regularly</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">5. If Violence Starts</h3>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• Try to move to a room with an exit</li>
+                <li>• Avoid rooms with weapons (kitchen, bathroom)</li>
+                <li>• Protect your head and face</li>
+                <li>• Call for help when it's safe</li>
+                <li>• Leave as soon as you can</li>
+              </ul>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg">
+              <p className="text-sm font-medium text-amber-800 mb-2">
+                ⚠️ Remember: Your safety comes first
+              </p>
+              <p className="text-sm text-amber-700">
+                The most dangerous time is when you're trying to leave. Plan carefully and get help from professionals.
+              </p>
+            </div>
+
+          </CardContent>
+        </Card>
+      </TabsContent>
+
+    </Tabs>
 
         {/* Emergency Notice */}
         <Card className="border-0 shadow-comfort bg-destructive/10">
