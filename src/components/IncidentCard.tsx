@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Home, Baby, Hand, HelpCircle, Scissors, Heart } from "lucide-react"
+import { Home, Baby, Hand, HelpCircle, Scissors, Heart, Briefcase } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 interface IncidentType {
@@ -40,6 +40,15 @@ const incidentTypes: IncidentType[] = [
     icon: <Baby className="h-12 w-12" />,
     color: "text-orange-600",
     bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
+  },
+  {
+    id: "child-labour",
+    title: "dashboard.incident_types.child_labour",
+    description: "dashboard.incident_types.labour_description",
+    simpleTitle: "Child Labour",
+    icon: <Briefcase className="h-12 w-12" />,
+    color: "text-amber-600",
+    bgColor: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800"
   },
   {
     id: "unwanted-touching",

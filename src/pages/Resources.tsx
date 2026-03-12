@@ -308,6 +308,35 @@ export default function Resources() {
               </div>
             </div>
 
+            <div>
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                Child Labour & Protection
+              </h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Child labour is illegal in Nigeria (Labour Act, Child Rights Act)</p>
+                <p>• Children under 12 cannot work at all</p>
+                <p>• Children 12-18 cannot do hazardous work (mining, factories, night work)</p>
+                <p>• Children must attend school - education is a right</p>
+                <p>• Worst forms: trafficking, forced labour, sexual exploitation, armed conflict</p>
+                <p>• Report to Ministry of Labour, NAPTIP, or local child protection services</p>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+              <p className="text-sm font-medium text-blue-800 mb-2">
+                🌍 ILO Convention 182 (Nigeria ratified 2002)
+              </p>
+              <p className="text-sm text-blue-700 mb-3">
+                Nigeria committed to eliminating worst forms of child labour including trafficking, forced labour, and hazardous work.
+              </p>
+              <div className="space-y-1 text-xs text-blue-600">
+                <p>• National Action Plan on Child Labour (2021-2025)</p>
+                <p>• Free education through Universal Basic Education (UBE)</p>
+                <p>• Child helpline: 6700 (toll-free)</p>
+              </div>
+            </div>
+
             <div className="bg-muted p-4 rounded-lg">
               <p className="text-sm font-medium mb-2">Need Legal Help?</p>
               <p className="text-sm text-muted-foreground mb-3">
