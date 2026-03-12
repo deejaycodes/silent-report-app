@@ -33,15 +33,6 @@ const incidentTypes: IncidentType[] = [
     bgColor: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800"
   },
   {
-    id: "harm-to-child",
-    title: "dashboard.incident_types.harm_to_child",
-    description: "dashboard.incident_types.child_description",
-    simpleTitle: "Child Abuse",
-    icon: <Baby className="h-12 w-12" />,
-    color: "text-orange-600",
-    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
-  },
-  {
     id: "unwanted-touching",
     title: "dashboard.incident_types.unwanted_touching",
     description: "dashboard.incident_types.touching_description",
@@ -49,6 +40,15 @@ const incidentTypes: IncidentType[] = [
     icon: <Hand className="h-12 w-12" />,
     color: "text-purple-600",
     bgColor: "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800"
+  },
+  {
+    id: "harm-to-child",
+    title: "dashboard.incident_types.harm_to_child",
+    description: "dashboard.incident_types.child_description",
+    simpleTitle: "Child Abuse",
+    icon: <Baby className="h-12 w-12" />,
+    color: "text-orange-600",
+    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
   },
   {
     id: "other-safety",
