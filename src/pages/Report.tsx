@@ -86,8 +86,8 @@ export default function Report() {
   }
 
   return (
-    <Layout className="pb-20">
-      <div className="px-4 py-6">
+    <Layout className="pb-24">
+      <div className="px-4 py-6 pb-8">
         <div className="flex items-center gap-3 mb-6">
           <Button variant="ghost" size="icon-sm" onClick={() => navigate(-1)}>
             <ArrowLeft className="h-4 w-4" />
@@ -250,7 +250,7 @@ export default function Report() {
           </div>
 
           {/* Submit */}
-          <div className="space-y-4">
+          <div className="space-y-4 pb-8">
             <Button
               type="submit"
               variant="trust"
