@@ -40,15 +40,15 @@ export default function ReportConfirmation() {
           <h1 className="text-2xl font-bold">{t('confirmation.thank_you')}</h1>
           <p className="text-muted-foreground">{t('confirmation.report_sent')}</p>
           {reportId && (
-            <div className="inline-block px-4 py-2.5 bg-muted rounded-lg">
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Tracking ID</p>
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-mono font-bold select-all">{reportId}</p>
-                <button onClick={copyId} className="p-1 rounded hover:bg-accent">
-                  {copied ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" />}
+            <div className="inline-block px-5 py-4 bg-muted rounded-2xl">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Your Tracking ID</p>
+              <div className="flex items-center justify-center gap-3">
+                <p className="text-2xl font-mono font-bold tracking-widest select-all">{reportId}</p>
+                <button onClick={copyId} className="p-1.5 rounded-lg hover:bg-accent">
+                  {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
                 </button>
               </div>
-              <p className="text-[11px] text-muted-foreground mt-1">Save this — check back in 24-48 hours for updates from a case worker</p>
+              <p className="text-sm text-muted-foreground mt-2">Write this down — use it to check for updates</p>
             </div>
           )}
           <p className="text-sm text-muted-foreground">{t('confirmation.review_notice')}</p>

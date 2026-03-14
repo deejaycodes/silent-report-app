@@ -79,8 +79,8 @@ export default function Report() {
         contact_info: contactEmail || undefined,
         files: selectedFiles.length > 0 ? selectedFiles : undefined,
       })
-      toast({ title: t('report.submission_success'), description: t('report.submission_success_message') })
-      navigate("/report/confirmation", { state: { reportId: response._id || response.id } })
+      toast({ title: "Report sent", duration: 2000 })
+      navigate("/report/confirmation", { state: { reportId: response.tracking_code || response._id || response.id } })
     } catch (error: any) {
       toast({ title: t('report.submission_failed'), description: error?.message || t('report.submission_error'), variant: "destructive" })
     } finally {
