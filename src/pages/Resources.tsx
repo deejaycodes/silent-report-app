@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MapPin, Phone, Clock, Scale, Shield, Heart, FileText, Loader2, ExternalLink, ArrowLeft } from "lucide-react"
+import { MapPin, Phone, Clock, Scale, Shield, Heart, FileText, Loader2, ExternalLink, ArrowLeft, Navigation2 } from "lucide-react"
 import { NIGERIAN_STATES } from "@/lib/nigerian-locations"
 import { useNavigate } from "react-router-dom"
 
@@ -56,7 +56,6 @@ export default function Resources() {
     )
   }
 
-  // Rough lat/lng centers per state for client-side distance sorting
   const STATE_COORDS: Record<string, [number, number]> = {
     'Abia': [5.45, 7.52], 'Adamawa': [9.33, 12.5], 'Akwa Ibom': [5.01, 7.85], 'Anambra': [6.21, 6.94],
     'Bauchi': [10.31, 9.84], 'Bayelsa': [4.77, 6.07], 'Benue': [7.34, 8.77], 'Borno': [11.85, 13.15],
@@ -81,7 +80,6 @@ export default function Resources() {
     return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)))
   }
 
-  // Sort NGOs by distance if coords available
   const sortedNgos = userCoords
     ? [...ngos].sort((a, b) => (distanceTo(a.state) ?? 999) - (distanceTo(b.state) ?? 999))
     : ngos
@@ -103,84 +101,94 @@ export default function Resources() {
 
   return (
     <Layout className="pb-24">
-      <div className="px-4 py-6 max-w-lg mx-auto space-y-4">
+      <div className="px-4 py-6 max-w-lg mx-auto space-y-5">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate("/")} className="p-2 -ml-2 rounded-lg hover:bg-accent transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </button>
           <div>
             <h1 className="text-2xl font-bold">Resources & Support</h1>
-            <p className="text-sm text-muted-foreground">Find help, learn your rights, plan for safety</p>
+            <p className="text-base text-muted-foreground">Find help, learn your rights, plan for safety</p>
           </div>
         </div>
 
         <Tabs defaultValue="find" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="find" className="text-xs"><MapPin className="h-3.5 w-3.5 mr-1" />Find Help</TabsTrigger>
-            <TabsTrigger value="rights" className="text-xs"><Scale className="h-3.5 w-3.5 mr-1" />Rights</TabsTrigger>
-            <TabsTrigger value="safety" className="text-xs"><Shield className="h-3.5 w-3.5 mr-1" />Safety Plan</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 h-11">
+            <TabsTrigger value="find" className="text-sm"><MapPin className="h-4 w-4 mr-1.5" />Find Help</TabsTrigger>
+            <TabsTrigger value="rights" className="text-sm"><Scale className="h-4 w-4 mr-1.5" />Rights</TabsTrigger>
+            <TabsTrigger value="safety" className="text-sm"><Shield className="h-4 w-4 mr-1.5" />Safety Plan</TabsTrigger>
           </TabsList>
 
           {/* FIND HELP */}
-          <TabsContent value="find" className="space-y-4 mt-4">
-            <div>
-              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Select your state to find nearby support</label>
+          <TabsContent value="find" className="space-y-5 mt-4">
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-foreground block">Select your state to find nearby support</label>
               <Select value={selectedState} onValueChange={setSelectedState}>
-                <SelectTrigger><SelectValue placeholder="Choose a state..." /></SelectTrigger>
+                <SelectTrigger className="h-12 text-base"><SelectValue placeholder="Choose a state..." /></SelectTrigger>
                 <SelectContent>
-                  {NIGERIAN_STATES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+                  {NIGERIAN_STATES.map(s => <SelectItem key={s} value={s} className="text-base">{s}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-                <Shield className="h-3 w-3" /> Your selection stays on your device — never tracked
+              <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                <Shield className="h-3.5 w-3.5" /> Your selection stays on your device — never tracked
               </p>
-              {!userCoords && (
-                <Button variant="ghost" size="sm" className="mt-2 text-xs w-full" onClick={requestLocation} disabled={geoLoading}>
-                  {geoLoading ? <><Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />Locating...</> : <><MapPin className="h-3.5 w-3.5 mr-1" />Use my location to sort by distance</>}
+
+              {/* Location button — prominent */}
+              {!userCoords ? (
+                <Button
+                  variant="outline"
+                  className="w-full h-12 text-sm font-medium border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary"
+                  onClick={requestLocation}
+                  disabled={geoLoading}
+                >
+                  {geoLoading
+                    ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Finding your location...</>
+                    : <><Navigation2 className="h-4 w-4 mr-2" />Use my location to sort by distance</>
+                  }
                 </Button>
-              )}
-              {userCoords && (
-                <p className="text-[10px] text-emerald-600 mt-1.5 flex items-center gap-1">
-                  <MapPin className="h-3 w-3" /> Sorting by distance — location stays on your device only
-                </p>
+              ) : (
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
+                  <MapPin className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <p className="text-sm text-emerald-700 dark:text-emerald-300">Sorting by distance — your location stays on this device only</p>
+                </div>
               )}
             </div>
 
             {loading && (
-              <div className="flex items-center justify-center py-8">
+              <div className="flex items-center justify-center py-10">
                 <Loader2 className="h-5 w-5 animate-spin text-primary" />
-                <span className="ml-2 text-sm text-muted-foreground">Finding support near you...</span>
+                <span className="ml-2 text-base text-muted-foreground">Finding support near you...</span>
               </div>
             )}
 
             {!loading && selectedState && ngos.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Organizations in {selectedState}</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Organizations in {selectedState}</h3>
                 {sortedNgos.map(ngo => (
                   <div key={ngo.id} className="border border-border rounded-xl p-4 space-y-3">
                     <div>
-                      <p className="text-sm font-semibold">{ngo.name}</p>
-                      <div className="flex items-center gap-2 mt-0.5">
-                        {ngo.city && <span className="text-xs text-muted-foreground">{ngo.city}, {ngo.state}</span>}
+                      <p className="text-base font-semibold">{ngo.name}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        {ngo.city && <span className="text-sm text-muted-foreground">{ngo.city}, {ngo.state}</span>}
                         {userCoords && distanceTo(ngo.state) != null && (
-                          <Badge variant="outline" className="text-[10px]">~{distanceTo(ngo.state)} km</Badge>
+                          <Badge variant="outline" className="text-xs">~{distanceTo(ngo.state)} km</Badge>
                         )}
                       </div>
                     </div>
                     {ngo.services.length > 0 && (
-                      <div className="flex flex-wrap gap-1">
-                        {ngo.services.map(s => <Badge key={s} variant="secondary" className="text-[10px]">{s}</Badge>)}
+                      <div className="flex flex-wrap gap-1.5">
+                        {ngo.services.map(s => <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>)}
                       </div>
                     )}
-                    {ngo.address && <p className="text-xs text-muted-foreground flex items-center gap-1.5"><MapPin className="h-3 w-3" />{ngo.address}</p>}
+                    {ngo.address && <p className="text-sm text-muted-foreground flex items-center gap-2"><MapPin className="h-4 w-4 flex-shrink-0" />{ngo.address}</p>}
                     <div className="flex gap-2">
                       {ngo.phone && (
                         <a href={`tel:${ngo.phone.replace(/\s/g, '')}`} className="flex-1">
-                          <Button variant="default" size="sm" className="w-full"><Phone className="h-3.5 w-3.5 mr-1" />Call</Button>
+                          <Button variant="default" className="w-full h-10"><Phone className="h-4 w-4 mr-1.5" />Call</Button>
                         </a>
                       )}
-                      <Button variant="outline" size="sm" className="flex-1" onClick={() => openDirections(ngo.address || '', ngo.state)}>
-                        <ExternalLink className="h-3.5 w-3.5 mr-1" />Directions
+                      <Button variant="outline" className="flex-1 h-10" onClick={() => openDirections(ngo.address || '', ngo.state)}>
+                        <ExternalLink className="h-4 w-4 mr-1.5" />Directions
                       </Button>
                     </div>
                   </div>
@@ -189,35 +197,35 @@ export default function Resources() {
             )}
 
             {!loading && selectedState && ngos.length === 0 && (
-              <div className="text-center py-6">
-                <p className="text-sm text-muted-foreground">No registered organizations found in {selectedState} yet.</p>
-                <p className="text-xs text-muted-foreground mt-1">Try the national helplines below.</p>
+              <div className="text-center py-8">
+                <p className="text-base text-muted-foreground">No registered organizations found in {selectedState} yet.</p>
+                <p className="text-sm text-muted-foreground mt-1">Try the national helplines below.</p>
               </div>
             )}
 
             {/* National — always visible */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">National Helplines</h3>
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">National Helplines</h3>
               {NATIONAL_RESOURCES.map(r => (
-                <div key={r.name} className="border border-border rounded-xl p-4 space-y-2">
-                  <p className="text-sm font-semibold">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.desc}</p>
-                  <div className="flex flex-wrap gap-1">
-                    {r.services.map(s => <Badge key={s} variant="outline" className="text-[10px]">{s}</Badge>)}
+                <div key={r.name} className="border border-border rounded-xl p-4 space-y-2.5">
+                  <p className="text-base font-semibold">{r.name}</p>
+                  <p className="text-sm text-muted-foreground">{r.desc}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {r.services.map(s => <Badge key={s} variant="outline" className="text-xs">{s}</Badge>)}
                   </div>
-                  <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3 w-3" />{r.hours}</span>
+                  <span className="flex items-center gap-1.5 text-sm text-muted-foreground"><Clock className="h-4 w-4" />{r.hours}</span>
                   <a href={`tel:${r.phone.replace(/[\s-]/g, '')}`}>
-                    <Button variant="default" size="sm" className="w-full mt-1"><Phone className="h-3.5 w-3.5 mr-1" />{r.phone}</Button>
+                    <Button variant="default" className="w-full h-10 mt-1"><Phone className="h-4 w-4 mr-1.5" />{r.phone}</Button>
                   </a>
                 </div>
               ))}
             </div>
 
             <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
-              <p className="text-sm font-semibold text-red-800 dark:text-red-200 mb-2">Emergency?</p>
+              <p className="text-base font-semibold text-red-800 dark:text-red-200 mb-3">Emergency?</p>
               <div className="flex gap-2">
-                <a href="tel:199" className="flex-1"><Button variant="destructive" size="sm" className="w-full">Call 199</Button></a>
-                <a href="tel:112" className="flex-1"><Button variant="destructive" size="sm" className="w-full">Call 112</Button></a>
+                <a href="tel:199" className="flex-1"><Button variant="destructive" className="w-full h-10">Call 199</Button></a>
+                <a href="tel:112" className="flex-1"><Button variant="destructive" className="w-full h-10">Call 112</Button></a>
               </div>
             </div>
           </TabsContent>
@@ -225,41 +233,41 @@ export default function Resources() {
           {/* RIGHTS */}
           <TabsContent value="rights" className="space-y-4 mt-4">
             {rightsData.map(section => (
-              <div key={section.title} className="border border-border rounded-xl p-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2 mb-2">
-                  <section.icon className="h-4 w-4 text-primary" />{section.title}
+              <div key={section.title} className="border border-border rounded-xl p-5">
+                <h3 className="text-base font-semibold flex items-center gap-2 mb-3">
+                  <section.icon className="h-5 w-5 text-primary" />{section.title}
                 </h3>
-                <ul className="space-y-1">
+                <ul className="space-y-2">
                   {section.items.map(item => (
-                    <li key={item} className="text-xs text-muted-foreground flex gap-2"><span className="text-primary mt-0.5">•</span>{item}</li>
+                    <li key={item} className="text-sm text-muted-foreground flex gap-2 leading-relaxed"><span className="text-primary mt-0.5">•</span>{item}</li>
                   ))}
                 </ul>
               </div>
             ))}
-            <div className="p-3 bg-muted rounded-xl">
-              <p className="text-xs font-medium mb-1">Need Legal Help?</p>
-              <p className="text-[11px] text-muted-foreground">Free legal aid through FIDA, Legal Aid Council, and other organizations.</p>
+            <div className="p-4 bg-muted rounded-xl">
+              <p className="text-sm font-medium mb-1">Need Legal Help?</p>
+              <p className="text-sm text-muted-foreground">Free legal aid through FIDA, Legal Aid Council, and other organizations.</p>
             </div>
           </TabsContent>
 
           {/* SAFETY PLAN */}
           <TabsContent value="safety" className="space-y-4 mt-4">
-            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
-              <p className="text-xs text-amber-800 dark:text-amber-200">⚠️ Don't save this on a device your abuser can access</p>
+            <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+              <p className="text-sm text-amber-800 dark:text-amber-200">⚠️ Don't save this on a device your abuser can access</p>
             </div>
             {safetyPlan.map(section => (
-              <div key={section.title} className="border border-border rounded-xl p-4">
-                <h3 className="text-sm font-semibold mb-2">{section.title}</h3>
-                <ul className="space-y-1">
+              <div key={section.title} className="border border-border rounded-xl p-5">
+                <h3 className="text-base font-semibold mb-3">{section.title}</h3>
+                <ul className="space-y-2">
                   {section.items.map(item => (
-                    <li key={item} className="text-xs text-muted-foreground flex gap-2"><span className="text-primary mt-0.5">•</span>{item}</li>
+                    <li key={item} className="text-sm text-muted-foreground flex gap-2 leading-relaxed"><span className="text-primary mt-0.5">•</span>{item}</li>
                   ))}
                 </ul>
               </div>
             ))}
-            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
-              <p className="text-xs font-medium text-amber-800 dark:text-amber-200">Your safety comes first</p>
-              <p className="text-[11px] text-amber-700 dark:text-amber-300">The most dangerous time is when leaving. Plan carefully and get professional help.</p>
+            <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+              <p className="text-sm font-medium text-amber-800 dark:text-amber-200">Your safety comes first</p>
+              <p className="text-sm text-amber-700 dark:text-amber-300">The most dangerous time is when leaving. Plan carefully and get professional help.</p>
             </div>
           </TabsContent>
         </Tabs>
