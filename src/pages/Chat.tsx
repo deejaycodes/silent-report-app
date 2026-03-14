@@ -50,7 +50,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-[100dvh] bg-background">
       {/* Header */}
       <div className="bg-card border-b border-border px-4 py-3 flex items-center gap-3">
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-accent transition-colors">
@@ -96,17 +96,17 @@ export default function Chat() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <div className="p-3 bg-card border-t border-border safe-bottom">
+      {/* Input — fixed bottom */}
+      <div className="sticky bottom-0 p-3 bg-card border-t border-border" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
         <div className="flex gap-2">
           <Input value={inputValue} onChange={e => setInputValue(e.target.value)}
             onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
-            placeholder="Type a message..." className="flex-1 rounded-full" disabled={isTyping} />
-          <Button onClick={sendMessage} disabled={!inputValue.trim() || isTyping} size="icon" className="rounded-full h-10 w-10">
+            placeholder="Type a message..." className="flex-1 rounded-full h-11 text-base" disabled={isTyping} />
+          <Button onClick={sendMessage} disabled={!inputValue.trim() || isTyping} size="icon" className="rounded-full h-11 w-11">
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        <p className="text-[10px] text-muted-foreground mt-1.5 text-center">Confidential · AI responses may not always be accurate</p>
+        <p className="text-xs text-muted-foreground mt-1.5 text-center">Confidential · AI responses may not always be accurate</p>
       </div>
     </div>
   )
