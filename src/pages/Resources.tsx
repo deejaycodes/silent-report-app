@@ -43,6 +43,48 @@ export default function Resources() {
   const [selectedState, setSelectedState] = useState("")
   const [ngos, setNgos] = useState<NgoResource[]>([])
   const [loading, setLoading] = useState(false)
+  const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null)
+  const [geoLoading, setGeoLoading] = useState(false)
+
+  const requestLocation = () => {
+    if (!navigator.geolocation) return
+    setGeoLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      pos => { setUserCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude }); setGeoLoading(false) },
+      () => setGeoLoading(false),
+      { enableHighAccuracy: false, timeout: 8000 }
+    )
+  }
+
+  // Rough lat/lng centers per state for client-side distance sorting
+  const STATE_COORDS: Record<string, [number, number]> = {
+    'Abia': [5.45, 7.52], 'Adamawa': [9.33, 12.5], 'Akwa Ibom': [5.01, 7.85], 'Anambra': [6.21, 6.94],
+    'Bauchi': [10.31, 9.84], 'Bayelsa': [4.77, 6.07], 'Benue': [7.34, 8.77], 'Borno': [11.85, 13.15],
+    'Cross River': [5.87, 8.6], 'Delta': [5.53, 5.9], 'Ebonyi': [6.26, 8.09], 'Edo': [6.63, 5.93],
+    'Ekiti': [7.72, 5.31], 'Enugu': [6.44, 7.5], 'FCT': [9.06, 7.49], 'Gombe': [10.29, 11.17],
+    'Imo': [5.57, 7.06], 'Jigawa': [12.23, 9.56], 'Kaduna': [10.52, 7.43], 'Kano': [12.0, 8.52],
+    'Katsina': [13.0, 7.6], 'Kebbi': [12.45, 4.2], 'Kogi': [7.73, 6.69], 'Kwara': [8.97, 4.96],
+    'Lagos': [6.52, 3.38], 'Nasarawa': [8.54, 8.52], 'Niger': [9.93, 5.6], 'Ogun': [7.16, 3.35],
+    'Ondo': [7.25, 5.19], 'Osun': [7.56, 4.52], 'Oyo': [7.84, 3.93], 'Plateau': [9.22, 9.52],
+    'Rivers': [4.84, 6.92], 'Sokoto': [13.06, 5.24], 'Taraba': [7.87, 9.78], 'Yobe': [12.29, 11.44],
+    'Zamfara': [12.17, 6.66],
+  }
+
+  const distanceTo = (stateName: string): number | null => {
+    if (!userCoords) return null
+    const c = STATE_COORDS[stateName]
+    if (!c) return null
+    const R = 6371
+    const dLat = (c[0] - userCoords.lat) * Math.PI / 180
+    const dLng = (c[1] - userCoords.lng) * Math.PI / 180
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(userCoords.lat * Math.PI / 180) * Math.cos(c[0] * Math.PI / 180) * Math.sin(dLng / 2) ** 2
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)))
+  }
+
+  // Sort NGOs by distance if coords available
+  const sortedNgos = userCoords
+    ? [...ngos].sort((a, b) => (distanceTo(a.state) ?? 999) - (distanceTo(b.state) ?? 999))
+    : ngos
 
   useEffect(() => {
     if (!selectedState) { setNgos([]); return }
@@ -92,6 +134,16 @@ export default function Resources() {
               <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
                 <Shield className="h-3 w-3" /> Your selection stays on your device — never tracked
               </p>
+              {!userCoords && (
+                <Button variant="ghost" size="sm" className="mt-2 text-xs w-full" onClick={requestLocation} disabled={geoLoading}>
+                  {geoLoading ? <><Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />Locating...</> : <><MapPin className="h-3.5 w-3.5 mr-1" />Use my location to sort by distance</>}
+                </Button>
+              )}
+              {userCoords && (
+                <p className="text-[10px] text-emerald-600 mt-1.5 flex items-center gap-1">
+                  <MapPin className="h-3 w-3" /> Sorting by distance — location stays on your device only
+                </p>
+              )}
             </div>
 
             {loading && (
@@ -104,11 +156,16 @@ export default function Resources() {
             {!loading && selectedState && ngos.length > 0 && (
               <div className="space-y-3">
                 <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Organizations in {selectedState}</h3>
-                {ngos.map(ngo => (
+                {sortedNgos.map(ngo => (
                   <div key={ngo.id} className="border border-border rounded-xl p-4 space-y-3">
                     <div>
                       <p className="text-sm font-semibold">{ngo.name}</p>
-                      {ngo.city && <p className="text-xs text-muted-foreground">{ngo.city}, {ngo.state}</p>}
+                      <div className="flex items-center gap-2 mt-0.5">
+                        {ngo.city && <span className="text-xs text-muted-foreground">{ngo.city}, {ngo.state}</span>}
+                        {userCoords && distanceTo(ngo.state) != null && (
+                          <Badge variant="outline" className="text-[10px]">~{distanceTo(ngo.state)} km</Badge>
+                        )}
+                      </div>
                     </div>
                     {ngo.services.length > 0 && (
                       <div className="flex flex-wrap gap-1">
