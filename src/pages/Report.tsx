@@ -12,12 +12,7 @@ import { ArrowLeft, Upload, Send, Shield, Lock, X, Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import apiService from "@/lib/api"
 
-const NIGERIAN_STATES = [
-  'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
-  'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
-  'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
-  'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
-]
+import { NIGERIAN_STATES, NIGERIAN_STATES_LGAS } from "@/lib/nigerian-locations"
 
 const incidentTypes = [
   { id: "domestic_violence", title: "Violence at home" },
@@ -48,6 +43,8 @@ export default function Report() {
   const [description, setDescription] = useState("")
   const [selectedType, setSelectedType] = useState(location.state?.selectedIncidentId || "")
   const [selectedState, setSelectedState] = useState("")
+  const [selectedLGA, setSelectedLGA] = useState("")
+  const [timing, setTiming] = useState("")
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [contactEmail, setContactEmail] = useState("")
   const [contactPhone, setContactPhone] = useState("")
@@ -90,8 +87,8 @@ export default function Report() {
     try {
       const response = await apiService.createReport({
         incident_type: selectedType || 'other',
-        description,
-        location: selectedState,
+        description: `${description}${timing ? `\n\n[Timing: ${timing}]` : ''}`,
+        location: selectedLGA ? `${selectedState}, ${selectedLGA}` : selectedState,
         files: selectedFiles.length > 0 ? selectedFiles : undefined,
       })
       toast({ title: t('report.submission_success'), description: t('report.submission_success_message') })
@@ -145,20 +142,54 @@ export default function Report() {
           </section>
 
           {/* 2. Location */}
-          <section className="space-y-2">
+          <section className="space-y-3">
             <Label className="text-sm font-semibold">
-              {t('report.location_state')} <span className="text-destructive">*</span>
+              Where did this happen? <span className="text-destructive">*</span>
             </Label>
-            <Select value={selectedState} onValueChange={setSelectedState}>
-              <SelectTrigger>
-                <SelectValue placeholder={t('report.select_state')} />
-              </SelectTrigger>
-              <SelectContent>
-                {NIGERIAN_STATES.map((state) => (
-                  <SelectItem key={state} value={state}>{state}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="grid grid-cols-2 gap-3">
+              <Select value={selectedState} onValueChange={(v) => { setSelectedState(v); setSelectedLGA(""); }}>
+                <SelectTrigger>
+                  <SelectValue placeholder="State" />
+                </SelectTrigger>
+                <SelectContent>
+                  {NIGERIAN_STATES.map((state) => (
+                    <SelectItem key={state} value={state}>{state}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={selectedLGA} onValueChange={setSelectedLGA} disabled={!selectedState}>
+                <SelectTrigger>
+                  <SelectValue placeholder={selectedState ? "Select LGA" : "Select state first"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {(NIGERIAN_STATES_LGAS[selectedState] || []).map((lga) => (
+                    <SelectItem key={lga} value={lga}>{lga}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </section>
+
+          {/* 3. When */}
+          <section className="space-y-2">
+            <Label className="text-sm font-semibold">When did this happen?</Label>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { value: 'happening_now', label: 'Happening now' },
+                { value: 'today', label: 'Today' },
+                { value: 'this_week', label: 'This week' },
+                { value: 'longer_ago', label: 'Longer ago' },
+              ].map(opt => (
+                <button key={opt.value} type="button" onClick={() => setTiming(opt.value)}
+                  className={`px-3 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
+                    timing === opt.value
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-border text-muted-foreground hover:bg-accent/50'
+                  }`}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </section>
 
           {/* 3. Category (pre-filled from previous page) */}
