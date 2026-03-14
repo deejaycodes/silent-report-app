@@ -27,6 +27,16 @@ const incidentTypes = [
   { id: "other", title: "Other safety concern" }
 ]
 
+const CONTEXT_PROMPTS: Record<string, { label: string; placeholder: string }> = {
+  'fgm': { label: 'Tell us about the FGM incident', placeholder: 'Who is affected? When did it happen or is it being planned? Where did it happen?' },
+  'child-labour': { label: 'Tell us about the child labour', placeholder: 'What kind of work? How old is the child? Where is this happening?' },
+  'unwanted-touching': { label: 'Tell us about the abuse', placeholder: 'What happened? Where and when? Is the person still in danger?' },
+  'harm-to-child': { label: 'Tell us about the harm to the child', placeholder: 'What happened to the child? How old are they? Who is responsible?' },
+  'domestic_violence': { label: 'Tell us about the violence', placeholder: 'What happened? Who is the abuser? Is the person safe now?' },
+  'child_abuse': { label: 'Tell us about the harm to the child', placeholder: 'What happened to the child? How old are they? Who is responsible?' },
+  'harassment': { label: 'Tell us about the harassment', placeholder: 'What happened? Where and when? Is the person still in danger?' },
+}
+
 export default function Report() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -115,7 +125,7 @@ export default function Report() {
           <section className="space-y-2">
             <div className="flex items-baseline justify-between">
               <Label htmlFor="description" className="text-sm font-semibold">
-                {t('report.tell_what_happened')} <span className="text-destructive">*</span>
+                {CONTEXT_PROMPTS[selectedType]?.label || t('report.tell_what_happened')} <span className="text-destructive">*</span>
               </Label>
               <span className={`text-xs ${wordCount >= 10 ? 'text-success' : 'text-muted-foreground'}`}>
                 {wordCount}/10 words min
@@ -123,7 +133,7 @@ export default function Report() {
             </div>
             <Textarea
               id="description"
-              placeholder={t('report.description_placeholder')}
+              placeholder={CONTEXT_PROMPTS[selectedType]?.placeholder || t('report.description_placeholder')}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={1000}
@@ -131,7 +141,7 @@ export default function Report() {
               className="resize-none text-[15px] leading-relaxed"
               required
             />
-            <p className="text-xs text-muted-foreground">{t('report.description_help')}</p>
+            <p className="text-xs text-muted-foreground">{!selectedType ? t('report.description_help') : 'Share as much or as little as you feel comfortable with.'}</p>
           </section>
 
           {/* 2. Location */}
