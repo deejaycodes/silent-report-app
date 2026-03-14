@@ -248,12 +248,14 @@ export default function Report() {
             </div>
 
             {/* Submit */}
-            <div className="pt-2 space-y-3">
-              <Button onClick={handleSubmit} size="lg" className="w-full h-12 text-base font-semibold" disabled={isSubmitting}>
-                {isSubmitting ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Submitting...</> : <><Send className="h-4 w-4 mr-2" />{t('report.submit_report')}</>}
-              </Button>
-              <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-                <Shield className="h-3 w-3" /><span>{t('report.accuracy_notice')}</span>
+            <div className="fixed bottom-20 left-0 right-0 px-4 pb-2 bg-gradient-to-t from-background via-background to-transparent pt-6">
+              <div className="max-w-lg mx-auto space-y-2">
+                <Button onClick={handleSubmit} size="lg" className="w-full h-12 text-base font-semibold shadow-lg" disabled={isSubmitting}>
+                  {isSubmitting ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Submitting...</> : <><Send className="h-4 w-4 mr-2" />{t('report.submit_report')}</>}
+                </Button>
+                <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                  <Shield className="h-3 w-3" /><span>{t('report.accuracy_notice')}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -261,10 +263,12 @@ export default function Report() {
 
         {/* Next button (steps 0 & 1) */}
         {step < totalSteps - 1 && (
-          <div className="mt-8">
-            <Button onClick={validateAndNext} size="lg" className="w-full h-12 text-base font-semibold" disabled={!canAdvance()}>
-              Continue <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
+          <div className="fixed bottom-20 left-0 right-0 px-4 pb-2 bg-gradient-to-t from-background via-background to-transparent pt-6">
+            <div className="max-w-lg mx-auto">
+              <Button onClick={validateAndNext} size="lg" className="w-full h-12 text-base font-semibold shadow-lg" disabled={!canAdvance()}>
+                Continue <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
+            </div>
           </div>
         )}
       </div>

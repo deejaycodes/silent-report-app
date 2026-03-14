@@ -71,16 +71,14 @@ export default function TrackReport() {
         {/* Lookup */}
         {!report && (
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">Enter the tracking ID you received when you submitted your report.</p>
-            <div className="flex gap-2">
-              <Input placeholder="Paste tracking ID" value={trackingId} onChange={e => setTrackingId(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && lookup()} className="font-mono text-sm" />
-              <Button onClick={lookup} disabled={loading || !trackingId.trim()}>
-                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
-              </Button>
-            </div>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Shield className="h-3 w-3" /><span>No login required. Your identity stays anonymous.</span>
+            <p className="text-base text-foreground/60">Enter the tracking ID you received when you submitted your report.</p>
+            <Input placeholder="e.g. SV-A3K9M2" value={trackingId} onChange={e => setTrackingId(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && lookup()} className="font-mono text-base h-12" />
+            <Button onClick={lookup} disabled={loading || !trackingId.trim()} className="w-full h-12 text-base font-semibold">
+              {loading ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Looking up...</> : <><Search className="h-4 w-4 mr-2" />Find My Report</>}
+            </Button>
+            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+              <Shield className="h-3.5 w-3.5" /><span>No login required. Your identity stays anonymous.</span>
             </div>
           </div>
         )}
