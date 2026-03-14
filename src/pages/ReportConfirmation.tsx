@@ -1,158 +1,82 @@
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, FileText, MessageCircle, MapPin, Home, Heart, Shield, AlertCircle } from "lucide-react"
+import { CheckCircle, FileText, MessageCircle, MapPin, Home, ChevronRight } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
+
+const nextActions = [
+  { icon: FileText, label: 'confirmation.report_something_else', desc: 'confirmation.report_another_description', to: '/report-start', color: 'text-blue-600', bg: 'bg-blue-50' },
+  { icon: MessageCircle, label: 'confirmation.talk_to_someone', desc: 'confirmation.talk_description', to: '/chat', color: 'text-green-600', bg: 'bg-green-50' },
+  { icon: MapPin, label: 'confirmation.find_help_nearby', desc: 'confirmation.help_description', to: '/resources', color: 'text-purple-600', bg: 'bg-purple-50' },
+  { icon: Home, label: 'confirmation.go_to_main', desc: 'confirmation.main_description', to: '/', color: 'text-gray-600', bg: 'bg-gray-50' },
+]
 
 export default function ReportConfirmation() {
   const navigate = useNavigate()
   const location = useLocation()
   const { t } = useTranslation()
-  const [showSafetyCheck, setShowSafetyCheck] = useState(true)
+  const [safetyDismissed, setSafetyDismissed] = useState(false)
   const reportId = (location.state as any)?.reportId
 
   return (
-    <Layout className="pb-20">
-      <div className="px-4 py-8 max-w-lg mx-auto space-y-8">
-        {/* Success Message */}
-        <div className="text-center space-y-6">
-          <div className="mx-auto w-24 h-24 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center">
-            <CheckCircle className="h-16 w-16 text-green-600 dark:text-green-400" />
+    <Layout className="pb-24">
+      <div className="px-4 py-8 max-w-lg mx-auto space-y-6">
+        {/* Success */}
+        <div className="text-center space-y-4">
+          <div className="mx-auto w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center">
+            <CheckCircle className="h-9 w-9 text-green-600" />
           </div>
-          
-          <div className="space-y-3">
-            <h1 className="text-3xl font-bold text-foreground">
-              {t('confirmation.thank_you')}
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              {t('confirmation.report_sent')}
-            </p>
-            <p className="text-base text-muted-foreground max-w-md mx-auto">
-              {t('confirmation.review_notice')}
-            </p>
-            {reportId && (
-              <div className="mt-2 p-3 bg-muted rounded-lg inline-block">
-                <p className="text-xs text-muted-foreground mb-1">Your Tracking ID</p>
-                <p className="text-sm font-mono font-bold text-foreground select-all">{reportId}</p>
-              </div>
-            )}
-          </div>
+          <h1 className="text-2xl font-bold">{t('confirmation.thank_you')}</h1>
+          <p className="text-muted-foreground">{t('confirmation.report_sent')}</p>
+          {reportId && (
+            <div className="inline-block px-4 py-2.5 bg-muted rounded-lg">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Tracking ID</p>
+              <p className="text-sm font-mono font-bold select-all">{reportId}</p>
+            </div>
+          )}
+          <p className="text-sm text-muted-foreground">{t('confirmation.review_notice')}</p>
         </div>
 
-        {/* Safety Check */}
-        {showSafetyCheck && (
-          <Card className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-800">
-            <CardContent className="p-6 text-center space-y-4">
-              <AlertCircle className="h-12 w-12 text-amber-600 mx-auto" />
-              <h3 className="text-xl font-semibold">{t('confirmation.safety_check')}</h3>
-              <div className="flex gap-3 justify-center">
-                <Button 
-                  variant="destructive" 
-                  onClick={() => {
-                    setShowSafetyCheck(false)
-                    navigate("/chat")
-                  }}
-                >
-                  {t('confirmation.need_help_now')}
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => setShowSafetyCheck(false)}
-                >
-                  {t('confirmation.safe_for_now')}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Safety check */}
+        {!safetyDismissed && (
+          <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl text-center space-y-3">
+            <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">{t('confirmation.safety_check')}</p>
+            <div className="flex gap-2">
+              <Button variant="destructive" size="sm" className="flex-1" onClick={() => { setSafetyDismissed(true); navigate("/chat"); }}>
+                {t('confirmation.need_help_now')}
+              </Button>
+              <Button variant="outline" size="sm" className="flex-1" onClick={() => setSafetyDismissed(true)}>
+                {t('confirmation.safe_for_now')}
+              </Button>
+            </div>
+          </div>
         )}
 
-        {/* What to do next */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-semibold text-center">{t('confirmation.what_next')}</h2>
-          
-          <div className="space-y-4">
-            {/* Submit Another Report */}
-            <Card className="border-2 border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/report-start")}>
-              <CardContent className="p-6 flex items-center space-x-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-800 rounded-full">
-                  <FileText className="h-8 w-8 text-blue-600 dark:text-blue-300" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('confirmation.report_something_else')}</h3>
-                  <p className="text-sm text-muted-foreground">{t('confirmation.report_another_description')}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Talk to Someone */}
-            <Card className="border-2 border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/chat")}>
-              <CardContent className="p-6 flex items-center space-x-4">
-                <div className="p-3 bg-green-100 dark:bg-green-800 rounded-full">
-                  <MessageCircle className="h-8 w-8 text-green-600 dark:text-green-300" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('confirmation.talk_to_someone')}</h3>
-                  <p className="text-sm text-muted-foreground">{t('confirmation.talk_description')}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Find Help Nearby */}
-            <Card className="border-2 border-purple-200 bg-purple-50 dark:bg-purple-900/20 dark:border-purple-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/resources")}>
-              <CardContent className="p-6 flex items-center space-x-4">
-                <div className="p-3 bg-purple-100 dark:bg-purple-800 rounded-full">
-                  <MapPin className="h-8 w-8 text-purple-600 dark:text-purple-300" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('confirmation.find_help_nearby')}</h3>
-                  <p className="text-sm text-muted-foreground">{t('confirmation.help_description')}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Learn Rights */}
-            <Card className="border-2 border-indigo-200 bg-indigo-50 dark:bg-indigo-900/20 dark:border-indigo-800 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/resources")}>
-              <CardContent className="p-6 flex items-center space-x-4">
-                <div className="p-3 bg-indigo-100 dark:bg-indigo-800 rounded-full">
-                  <Shield className="h-8 w-8 text-indigo-600 dark:text-indigo-300" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('confirmation.learn_rights')}</h3>
-                  <p className="text-sm text-muted-foreground">{t('confirmation.rights_description')}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Go Home */}
-            <Card className="border-2 border-gray-200 bg-gray-50 dark:bg-gray-900/20 dark:border-gray-700 cursor-pointer hover:shadow-lg transition-all" onClick={() => navigate("/")}>
-              <CardContent className="p-6 flex items-center space-x-4">
-                <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-full">
-                  <Home className="h-8 w-8 text-gray-600 dark:text-gray-300" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('confirmation.go_to_main')}</h3>
-                  <p className="text-sm text-muted-foreground">{t('confirmation.main_description')}</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Next actions */}
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-center mb-3">{t('confirmation.what_next')}</p>
+          {nextActions.map(action => (
+            <button key={action.to} onClick={() => navigate(action.to)}
+              className="w-full flex items-center gap-3 p-3.5 border border-border rounded-xl hover:bg-accent/50 active:scale-[0.98] transition-all text-left">
+              <div className={`w-9 h-9 rounded-lg ${action.bg} flex items-center justify-center flex-shrink-0`}>
+                <action.icon className={`h-4.5 w-4.5 ${action.color}`} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium">{t(action.label)}</p>
+                <p className="text-xs text-muted-foreground truncate">{t(action.desc)}</p>
+              </div>
+              <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+            </button>
+          ))}
         </div>
 
-        {/* Reassurance Message */}
-        <Card className="border-0 shadow-soft bg-gradient-calm">
-          <CardContent className="p-6 text-center">
-            <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
-            <p className="text-lg font-medium mb-2">{t('confirmation.reassurance')}</p>
-            <p className="text-sm text-muted-foreground">
-              {t('confirmation.safety_message')}
-            </p>
-          </CardContent>
-        </Card>
+        {/* Reassurance */}
+        <p className="text-center text-sm text-muted-foreground px-4">
+          {t('confirmation.reassurance')}
+        </p>
       </div>
-      
       <Navigation />
     </Layout>
   )

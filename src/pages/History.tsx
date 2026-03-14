@@ -1,283 +1,103 @@
-import { useState } from "react"
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { FileText, MessageCircle, Calendar, Star, ChevronRight } from "lucide-react"
+import { FileText, ChevronRight, Loader2 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
+import apiService from "@/lib/api"
 
-interface Report {
-  id: string
-  type: string
-  status: "submitted" | "in-review" | "resolved" | "closed"
-  date: string
-  urgent: boolean
-  description: string
-  lastUpdate: string
+const STATUS_MAP: Record<string, { label: string; color: string }> = {
+  submitted: { label: 'Submitted', color: 'bg-blue-100 text-blue-700' },
+  under_review: { label: 'Under Review', color: 'bg-yellow-100 text-yellow-700' },
+  active: { label: 'Active', color: 'bg-green-100 text-green-700' },
+  on_hold: { label: 'On Hold', color: 'bg-gray-100 text-gray-700' },
+  resolved: { label: 'Resolved', color: 'bg-emerald-100 text-emerald-700' },
+  referred: { label: 'Referred', color: 'bg-purple-100 text-purple-700' },
+  closed: { label: 'Closed', color: 'bg-gray-100 text-gray-600' },
 }
 
-interface ChatSession {
-  id: string
-  counselor: string
-  date: string
-  duration: string
-  status: "completed" | "ongoing"
-  summary: string
+const URGENCY_MAP: Record<string, string> = {
+  critical: 'bg-red-100 text-red-700',
+  high: 'bg-orange-100 text-orange-700',
+  medium: 'bg-yellow-100 text-yellow-700',
+  low: 'bg-gray-100 text-gray-600',
 }
-
-const mockReports: Report[] = [
-  {
-    id: "R001",
-    type: "Domestic Violence",
-    status: "in-review",
-    date: "2024-01-15",
-    urgent: true,
-    description: "Reported incident of domestic violence requiring immediate attention",
-    lastUpdate: "Case assigned to specialist counselor"
-  },
-  {
-    id: "R002", 
-    type: "Harassment",
-    status: "resolved",
-    date: "2024-01-10",
-    urgent: false,
-    description: "Workplace harassment case resolved through mediation",
-    lastUpdate: "Case closed successfully with follow-up scheduled"
-  },
-  {
-    id: "R003",
-    type: "Child Abuse",
-    status: "submitted",
-    date: "2024-01-12",
-    urgent: true,
-    description: "Child welfare concern reported and under investigation",
-    lastUpdate: "Report received and being processed"
-  }
-]
-
-const mockChatSessions: ChatSession[] = [
-  {
-    id: "C001",
-    counselor: "Sarah Johnson",
-    date: "2024-01-15",
-    duration: "45 minutes",
-    status: "completed",
-    summary: "Discussed coping strategies and safety planning"
-  },
-  {
-    id: "C002",
-    counselor: "Michael Chen",
-    date: "2024-01-12",
-    duration: "30 minutes", 
-    status: "completed",
-    summary: "Initial consultation and resource recommendations"
-  }
-]
 
 export default function History() {
   const navigate = useNavigate()
-  const [feedbackGiven, setFeedbackGiven] = useState<string[]>([])
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "submitted": return "default"
-      case "in-review": return "default"
-      case "resolved": return "secondary" 
-      case "closed": return "secondary"
-      default: return "default"
-    }
-  }
-
-  const getStatusLabel = (status: string) => {
-    switch (status) {
-      case "submitted": return "Submitted"
-      case "in-review": return "In Review"
-      case "resolved": return "Resolved"
-      case "closed": return "Closed"
-      default: return status
-    }
-  }
-
-  const handleFeedback = (reportId: string) => {
-    setFeedbackGiven(prev => [...prev, reportId])
-    // In a real app, this would open a feedback form
-  }
+  const { data: reports, isLoading, error } = useQuery({
+    queryKey: ['my-reports'],
+    queryFn: () => apiService.getAllReports() as Promise<any[]>,
+    retry: 1,
+  })
 
   return (
-    <Layout className="pb-20">
-      <div className="px-4 py-6 space-y-6">
-        {/* Header */}
+    <Layout className="pb-24">
+      <div className="px-4 py-6 max-w-lg mx-auto space-y-4">
         <div>
-          <h1 className="text-2xl font-bold mb-2">Your History</h1>
-          <p className="text-muted-foreground">Track your reports and chat sessions</p>
+          <h1 className="text-2xl font-bold">Your Reports</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">Track the status of your submitted reports</p>
         </div>
 
-        <Tabs defaultValue="reports" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="reports">Reports</TabsTrigger>
-            <TabsTrigger value="chats">Chat Sessions</TabsTrigger>
-          </TabsList>
+        {isLoading && (
+          <div className="flex flex-col items-center py-16 text-muted-foreground">
+            <Loader2 className="h-6 w-6 animate-spin mb-2" />
+            <p className="text-sm">Loading your reports...</p>
+          </div>
+        )}
 
-          <TabsContent value="reports" className="space-y-4">
-            {mockReports.length > 0 ? (
-              <div className="space-y-3">
-                {mockReports.map((report) => (
-                  <Card key={report.id} className="border-0 shadow-soft">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <FileText className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <CardTitle className="text-base">{report.type}</CardTitle>
-                            <CardDescription className="text-xs">
-                              ID: {report.id} • {new Date(report.date).toLocaleDateString()}
-                            </CardDescription>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {report.urgent && (
-                            <Badge variant="destructive" className="text-xs">
-                              Urgent
-                            </Badge>
-                          )}
-                          <Badge variant={getStatusColor(report.status)} className="text-xs">
-                            {getStatusLabel(report.status)}
-                          </Badge>
-                        </div>
-                      </div>
-                    </CardHeader>
+        {error && (
+          <div className="text-center py-16 space-y-3">
+            <FileText className="h-10 w-10 text-muted-foreground mx-auto" />
+            <p className="text-sm text-muted-foreground">Could not load reports. Reports are anonymous — if you didn't provide contact info, your reports won't appear here.</p>
+            <Button variant="outline" size="sm" onClick={() => navigate("/report-start")}>Submit a Report</Button>
+          </div>
+        )}
 
-                    <CardContent className="space-y-3">
-                      <p className="text-sm text-muted-foreground">
-                        {report.description}
-                      </p>
+        {!isLoading && !error && reports?.length === 0 && (
+          <div className="text-center py-16 space-y-3">
+            <FileText className="h-10 w-10 text-muted-foreground mx-auto" />
+            <p className="font-medium">No Reports Yet</p>
+            <p className="text-sm text-muted-foreground">Reports you submit will appear here</p>
+            <Button size="sm" onClick={() => navigate("/report-start")}>Submit a Report</Button>
+          </div>
+        )}
 
-                      <div className="bg-muted/30 rounded-lg p-3">
-                        <p className="text-xs font-medium text-muted-foreground mb-1">
-                          Last Update:
-                        </p>
-                        <p className="text-sm">{report.lastUpdate}</p>
-                      </div>
+        {!isLoading && reports && reports.length > 0 && (
+          <div className="space-y-2">
+            {reports.map((report: any) => {
+              const status = STATUS_MAP[report.status] || { label: report.status, color: 'bg-gray-100 text-gray-600' }
+              const urgency = report.ai_analysis?.urgency
+              return (
+                <button key={report._id || report.id} onClick={() => navigate(`/report/${report._id || report.id}`)}
+                  className="w-full text-left p-4 border border-border rounded-xl hover:bg-accent/50 active:scale-[0.98] transition-all">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <p className="text-sm font-semibold line-clamp-1">
+                      {report.ai_analysis?.classification || report.incident_type || 'Report'}
+                    </p>
+                    <Badge className={`text-[10px] flex-shrink-0 ${status.color}`}>{status.label}</Badge>
+                  </div>
+                  <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{report.description}</p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      {report.location && <span>📍 {report.location}</span>}
+                      {urgency && <Badge className={`text-[10px] ${URGENCY_MAP[urgency] || ''}`}>{urgency}</Badge>}
+                    </div>
+                    <span>{new Date(report.created_at || report.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        )}
 
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="flex-1">
-                          View Details
-                          <ChevronRight className="h-3 w-3 ml-1" />
-                        </Button>
-                        
-                        {report.status === "resolved" && !feedbackGiven.includes(report.id) && (
-                          <Button 
-                            variant="trust" 
-                            size="sm" 
-                            className="flex-1"
-                            onClick={() => handleFeedback(report.id)}
-                          >
-                            <Star className="h-3 w-3 mr-1" />
-                            Give Feedback
-                          </Button>
-                        )}
-                        
-                        {feedbackGiven.includes(report.id) && (
-                          <Badge variant="secondary" className="text-xs px-3 py-1">
-                            ✓ Feedback Given
-                          </Badge>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <Card className="border-0 shadow-soft">
-                <CardContent className="p-8 text-center">
-                  <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">No Reports Yet</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Your submitted reports will appear here
-                  </p>
-                  <Button variant="trust" onClick={() => navigate("/report")}>
-                    Submit Your First Report
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-          </TabsContent>
-
-          <TabsContent value="chats" className="space-y-4">
-            {mockChatSessions.length > 0 ? (
-              <div className="space-y-3">
-                {mockChatSessions.map((session) => (
-                  <Card key={session.id} className="border-0 shadow-soft">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <MessageCircle className="h-4 w-4 text-success" />
-                          <div>
-                            <CardTitle className="text-base">
-                              Chat with {session.counselor}
-                            </CardTitle>
-                            <CardDescription className="text-xs flex items-center gap-2">
-                              <Calendar className="h-3 w-3" />
-                              {new Date(session.date).toLocaleDateString()} • {session.duration}
-                            </CardDescription>
-                          </div>
-                        </div>
-                        <Badge 
-                          variant={session.status === "completed" ? "secondary" : "default"}
-                          className="text-xs"
-                        >
-                          {session.status}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="space-y-3">
-                      <div className="bg-muted/30 rounded-lg p-3">
-                        <p className="text-xs font-medium text-muted-foreground mb-1">
-                          Session Summary:
-                        </p>
-                        <p className="text-sm">{session.summary}</p>
-                      </div>
-
-                      <Button variant="outline" size="sm" className="w-full">
-                        View Transcript
-                        <ChevronRight className="h-3 w-3 ml-1" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <Card className="border-0 shadow-soft">
-                <CardContent className="p-8 text-center">
-                  <MessageCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">No Chat Sessions Yet</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Your chat history will appear here
-                  </p>
-                  <Button variant="trust" onClick={() => navigate("/chat")}>
-                    Start Your First Chat
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-          </TabsContent>
-        </Tabs>
-
-        {/* Privacy Notice */}
-        <Card className="border-0 shadow-soft bg-primary-soft/30">
-          <CardContent className="p-4">
-            <h3 className="font-semibold text-sm mb-2">Privacy & Data Retention</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Your data is kept confidential and secure. Reports are retained for follow-up purposes. 
-              Chat transcripts are anonymized after 30 days. You can request data deletion at any time.
-            </p>
-          </CardContent>
-        </Card>
+        {/* Privacy */}
+        <p className="text-[11px] text-muted-foreground text-center px-4">
+          Your data is confidential and encrypted. Anonymous reports cannot be linked back to you.
+        </p>
       </div>
-
       <Navigation />
     </Layout>
   )
