@@ -44,8 +44,11 @@ export default function ReportConfirmation() {
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Your Tracking ID</p>
               <div className="flex items-center justify-center gap-3">
                 <p className="text-2xl font-mono font-bold tracking-widest select-all">{reportId}</p>
-                <button onClick={copyId} className="p-1.5 rounded-lg hover:bg-accent">
-                  {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
+                <button onClick={copyId} className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg hover:bg-accent text-sm transition-colors">
+                  {copied
+                    ? <><Check className="h-4 w-4 text-green-600" /><span className="text-green-600 font-medium">Copied!</span></>
+                    : <><Copy className="h-4 w-4 text-muted-foreground" /><span className="text-muted-foreground">Copy</span></>
+                  }
                 </button>
               </div>
               <p className="text-sm text-muted-foreground mt-2">Write this down — use it to check for updates</p>
