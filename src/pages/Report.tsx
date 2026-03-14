@@ -76,6 +76,7 @@ export default function Report() {
         description: `${description}${timing ? `\n\n[Timing: ${timing}]` : ''}`,
         location: selectedLGA ? `${selectedState}, ${selectedLGA}` : selectedState,
         address: address || undefined,
+        contact_info: contactEmail || undefined,
         files: selectedFiles.length > 0 ? selectedFiles : undefined,
       })
       toast({ title: t('report.submission_success'), description: t('report.submission_success_message') })

@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom"
-import { Home, FileText, MessageCircle, MapPin, Shield } from "lucide-react"
+import { Home, Search, MessageCircle, MapPin, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { to: "/report-start", icon: Home, label: "Home" },
-  { to: "/report", icon: FileText, label: "Report" },
+  { to: "/track", icon: Search, label: "Track" },
   { to: "/chat", icon: MessageCircle, label: "Chat" },
   { to: "/resources", icon: MapPin, label: "Resources" },
   { to: "/safety", icon: Shield, label: "Safety" },

@@ -51,22 +51,16 @@ class ApiService {
     description: string;
     location?: string;
     address?: string;
+    contact_info?: string;
     files?: File[];
   }) {
     const formData = new FormData();
     formData.append('incident_type', data.incident_type);
     formData.append('description', data.description);
-    if (data.location) {
-      formData.append('location', data.location);
-    }
-    if (data.address) {
-      formData.append('address', data.address);
-    }
-    if (data.files) {
-      data.files.forEach((file) => {
-        formData.append('files', file);
-      });
-    }
+    if (data.location) formData.append('location', data.location);
+    if (data.address) formData.append('address', data.address);
+    if (data.contact_info) formData.append('contact_info', data.contact_info);
+    if (data.files) data.files.forEach(file => formData.append('files', file));
 
     const headers: Record<string, string> = {};
     if (this.token) {

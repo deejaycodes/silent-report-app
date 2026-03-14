@@ -1,7 +1,7 @@
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, FileText, MessageCircle, MapPin, Home, ChevronRight, Search } from "lucide-react"
+import { CheckCircle, FileText, MessageCircle, MapPin, Home, ChevronRight, Search, Copy, Check } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
@@ -19,7 +19,15 @@ export default function ReportConfirmation() {
   const location = useLocation()
   const { t } = useTranslation()
   const [safetyDismissed, setSafetyDismissed] = useState(false)
+  const [copied, setCopied] = useState(false)
   const reportId = (location.state as any)?.reportId
+
+  const copyId = () => {
+    if (!reportId) return
+    navigator.clipboard.writeText(reportId)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <Layout className="pb-24">
@@ -34,7 +42,12 @@ export default function ReportConfirmation() {
           {reportId && (
             <div className="inline-block px-4 py-2.5 bg-muted rounded-lg">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Tracking ID</p>
-              <p className="text-sm font-mono font-bold select-all">{reportId}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-mono font-bold select-all">{reportId}</p>
+                <button onClick={copyId} className="p-1 rounded hover:bg-accent">
+                  {copied ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" />}
+                </button>
+              </div>
               <p className="text-[11px] text-muted-foreground mt-1">Save this — check back in 24-48 hours for updates from a case worker</p>
             </div>
           )}
