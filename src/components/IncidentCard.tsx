@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Baby, Hand, HelpCircle, Scissors, Briefcase } from "lucide-react"
+import { Baby, Hand, HelpCircle, Scissors, Briefcase, ChevronRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 interface IncidentType {
@@ -9,8 +8,7 @@ interface IncidentType {
   description: string
   simpleTitle: string
   icon: React.ReactNode
-  color: string
-  bgColor: string
+  emoji: string
 }
 
 const incidentTypes: IncidentType[] = [
@@ -19,45 +17,40 @@ const incidentTypes: IncidentType[] = [
     title: "dashboard.incident_types.fgm",
     description: "dashboard.incident_types.fgm_description",
     simpleTitle: "FGM/C",
-    icon: <Scissors className="h-12 w-12" />,
-    color: "text-pink-600",
-    bgColor: "bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800"
+    icon: <Scissors className="h-5 w-5" />,
+    emoji: "🩺",
   },
   {
     id: "child-labour",
     title: "dashboard.incident_types.child_labour",
     description: "dashboard.incident_types.labour_description",
     simpleTitle: "Child Labour",
-    icon: <Briefcase className="h-12 w-12" />,
-    color: "text-amber-600",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800"
+    icon: <Briefcase className="h-5 w-5" />,
+    emoji: "👷",
   },
   {
     id: "unwanted-touching",
     title: "dashboard.incident_types.unwanted_touching",
     description: "dashboard.incident_types.touching_description",
     simpleTitle: "Sexual Abuse",
-    icon: <Hand className="h-12 w-12" />,
-    color: "text-purple-600",
-    bgColor: "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800"
+    icon: <Hand className="h-5 w-5" />,
+    emoji: "🛡️",
   },
   {
     id: "harm-to-child",
     title: "dashboard.incident_types.harm_to_child",
     description: "dashboard.incident_types.child_description",
     simpleTitle: "Child Abuse",
-    icon: <Baby className="h-12 w-12" />,
-    color: "text-orange-600",
-    bgColor: "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
+    icon: <Baby className="h-5 w-5" />,
+    emoji: "🧒",
   },
   {
     id: "other-safety",
     title: "dashboard.incident_types.other_safety",
     description: "dashboard.incident_types.other_description",
     simpleTitle: "Other Harm",
-    icon: <HelpCircle className="h-12 w-12" />,
-    color: "text-blue-600",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
+    icon: <HelpCircle className="h-5 w-5" />,
+    emoji: "📋",
   }
 ]
 
@@ -69,30 +62,26 @@ export function IncidentCard({ onSelect }: IncidentCardProps) {
   const { t } = useTranslation()
   
   return (
-    <div className="grid grid-cols-1 gap-3 px-3">
+    <div className="space-y-2">
       {incidentTypes.map((incident) => (
-        <Card 
-          key={incident.id} 
-          className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-95 border-2 ${incident.bgColor}`}
+        <button
+          key={incident.id}
           onClick={() => onSelect(incident)}
+          className="w-full text-left bg-card border border-border rounded-xl p-4 flex items-center gap-4 hover:bg-accent/50 active:scale-[0.98] transition-all duration-200"
         >
-          <CardContent className="p-4 flex items-center gap-4">
-            <div className={`flex-shrink-0 ${incident.color}`}>
-              {incident.icon}
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="text-lg font-bold leading-tight">
-                {t(incident.title)}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {t(incident.description)}
-              </p>
-            </div>
-            <Button variant="default" size="sm" className="flex-shrink-0">
-              {t('dashboard.report_this')}
-            </Button>
-          </CardContent>
-        </Card>
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-lg">
+            {incident.emoji}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-[15px] font-semibold text-foreground leading-tight">
+              {t(incident.title)}
+            </h3>
+            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+              {t(incident.description)}
+            </p>
+          </div>
+          <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+        </button>
       ))}
     </div>
   )
