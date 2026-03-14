@@ -18,7 +18,7 @@ interface Message {
 const initialMessages: Message[] = [
   {
     id: "1",
-    content: "Hello! I'm Sarah, a trained counselor. I'm here to provide support and listen. How are you feeling today?",
+    content: "Hello! I'm SafeVoice AI assistant. I'm here to provide support, answer questions, and help connect you with the right resources. How can I help you today?",
     sender: "support",
     timestamp: new Date()
   }
@@ -78,24 +78,6 @@ export default function Chat() {
     }
   }
 
-  const getAutomaticResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase()
-    
-    if (message.includes("help") || message.includes("urgent")) {
-      return "I understand you need help. Your safety is our priority. If you're in immediate danger, please contact emergency services at 199 or 112. Would you like me to help you find nearby resources or would you prefer to talk about what's happening?"
-    }
-    
-    if (message.includes("scared") || message.includes("afraid")) {
-      return "I hear that you're feeling scared, and that's completely understandable. You're brave for reaching out. Can you tell me a bit more about your situation? Remember, everything we discuss here is confidential."
-    }
-    
-    if (message.includes("thank")) {
-      return "You're very welcome. Remember, you're not alone in this. Is there anything specific you'd like to talk about or any way I can better support you today?"
-    }
-    
-    return "Thank you for sharing that with me. I want you to know that your feelings are valid and you deserve support. Can you tell me more about how you're feeling or what brought you here today?"
-  }
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
@@ -114,10 +96,10 @@ export default function Chat() {
                 <Bot className="h-5 w-5 text-success" />
               </div>
               <div>
-                <h1 className="font-semibold">Live Support Chat</h1>
+                <h1 className="font-semibold">SafeVoice Assistant</h1>
                 <p className="text-xs text-muted-foreground flex items-center gap-1">
                   <div className="w-2 h-2 bg-success rounded-full"></div>
-                  Sarah is online
+                  AI-powered support
                 </p>
               </div>
             </div>

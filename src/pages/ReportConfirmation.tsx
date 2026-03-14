@@ -3,14 +3,16 @@ import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, FileText, MessageCircle, MapPin, Home, Heart, Shield, AlertCircle } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
 
 export default function ReportConfirmation() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { t } = useTranslation()
   const [showSafetyCheck, setShowSafetyCheck] = useState(true)
+  const reportId = (location.state as any)?.reportId
 
   return (
     <Layout className="pb-20">
@@ -31,6 +33,12 @@ export default function ReportConfirmation() {
             <p className="text-base text-muted-foreground max-w-md mx-auto">
               {t('confirmation.review_notice')}
             </p>
+            {reportId && (
+              <div className="mt-2 p-3 bg-muted rounded-lg inline-block">
+                <p className="text-xs text-muted-foreground mb-1">Your Tracking ID</p>
+                <p className="text-sm font-mono font-bold text-foreground select-all">{reportId}</p>
+              </div>
+            )}
           </div>
         </div>
 

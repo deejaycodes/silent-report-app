@@ -112,10 +112,10 @@ export default function Report() {
         description: t('report.submission_success_message'),
       })
       navigate("/report/confirmation", { state: { reportId: response._id || response.id } })
-    } catch (error) {
+    } catch (error: any) {
       toast({ 
         title: t('report.submission_failed'), 
-        description: t('report.submission_error'), 
+        description: error?.message || t('report.submission_error'), 
         variant: "destructive" 
       })
     } finally {

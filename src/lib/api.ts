@@ -76,7 +76,8 @@ class ApiService {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create report');
+      const body = await response.json().catch(() => null);
+      throw new Error(body?.message || 'Failed to create report');
     }
 
     return await response.json();
