@@ -113,7 +113,7 @@ export default function Report() {
       <div className="px-4 py-4 max-w-lg mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-3">
-          <button onClick={() => step > 0 ? setStep(s => s - 1) : navigate(-1)} className="p-2 -ml-2 rounded-lg hover:bg-accent transition-colors">
+          <button onClick={() => step > 0 ? setStep(s => s - 1) : navigate("/")} className="p-2 -ml-2 rounded-lg hover:bg-accent transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </button>
           <h1 className="text-xl font-bold flex-1">{t('report.title')}</h1>

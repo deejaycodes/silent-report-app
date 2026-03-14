@@ -2,7 +2,7 @@ import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { IncidentCard } from "@/components/IncidentCard"
 import { Button } from "@/components/ui/button"
-import { Phone, Shield } from "lucide-react"
+import { Phone, Shield, ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import type { IncidentType } from "@/components/IncidentCard"
@@ -20,6 +20,9 @@ export default function Dashboard() {
       <div className="px-4 py-6 space-y-6 max-w-lg mx-auto">
         {/* Header */}
         <div className="text-center space-y-1">
+          <button onClick={() => navigate("/")} className="absolute left-4 top-4 p-2 rounded-lg hover:bg-accent transition-colors z-10" style={{ marginTop: 'env(safe-area-inset-top)' }}>
+            <ArrowLeft className="h-5 w-5 text-muted-foreground" />
+          </button>
           <div className="mx-auto mb-3 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
             <Shield className="h-6 w-6 text-primary" />
           </div>
