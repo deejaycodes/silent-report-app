@@ -35,7 +35,7 @@ export default function ReportConfirmation() {
             <div className="inline-block px-4 py-2.5 bg-muted rounded-lg">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Tracking ID</p>
               <p className="text-sm font-mono font-bold select-all">{reportId}</p>
-              <p className="text-[11px] text-muted-foreground mt-1">Save this to check your report status later</p>
+              <p className="text-[11px] text-muted-foreground mt-1">Save this — check back in 24-48 hours for updates from a case worker</p>
             </div>
           )}
           <p className="text-sm text-muted-foreground">{t('confirmation.review_notice')}</p>
