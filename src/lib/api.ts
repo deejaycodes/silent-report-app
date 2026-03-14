@@ -87,6 +87,21 @@ class ApiService {
     return this.request(`/reports/${reportId}`, { method: 'GET' });
   }
 
+  async trackReport(reportId: string) {
+    return this.request<{
+      id: string; status: string; incident_type: string;
+      created_at: string; updated_at: string;
+      messages: Array<{ id: string; content: string; type: string; createdAt: string }>;
+    }>(`/track/${reportId}`, { method: 'GET' });
+  }
+
+  async sendTrackingMessage(reportId: string, content: string) {
+    return this.request(`/track/${reportId}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+    });
+  }
+
   async getAllReports() {
     return this.request('/reports', { method: 'GET' });
   }

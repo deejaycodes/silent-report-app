@@ -1,12 +1,13 @@
 import { Layout } from "@/components/Layout"
 import { Navigation } from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, FileText, MessageCircle, MapPin, Home, ChevronRight } from "lucide-react"
+import { CheckCircle, FileText, MessageCircle, MapPin, Home, ChevronRight, Search } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
 
 const nextActions = [
+  { icon: Search, label: 'Track your report', desc: 'Check status and exchange messages', to: '/track', color: 'text-primary', bg: 'bg-primary/10' },
   { icon: FileText, label: 'confirmation.report_something_else', desc: 'confirmation.report_another_description', to: '/report-start', color: 'text-blue-600', bg: 'bg-blue-50' },
   { icon: MessageCircle, label: 'confirmation.talk_to_someone', desc: 'confirmation.talk_description', to: '/chat', color: 'text-green-600', bg: 'bg-green-50' },
   { icon: MapPin, label: 'confirmation.find_help_nearby', desc: 'confirmation.help_description', to: '/resources', color: 'text-purple-600', bg: 'bg-purple-50' },
@@ -34,6 +35,7 @@ export default function ReportConfirmation() {
             <div className="inline-block px-4 py-2.5 bg-muted rounded-lg">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">Tracking ID</p>
               <p className="text-sm font-mono font-bold select-all">{reportId}</p>
+              <p className="text-[11px] text-muted-foreground mt-1">Save this to check your report status later</p>
             </div>
           )}
           <p className="text-sm text-muted-foreground">{t('confirmation.review_notice')}</p>

@@ -12,6 +12,7 @@ import Resources from "./pages/Resources";
 import SafetyCenter from "./pages/SafetyCenter";
 import Chat from "./pages/Chat";
 import History from "./pages/History";
+import TrackReport from "./pages/TrackReport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/safety" element={<SafetyCenter />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/history" element={<History />} />
+            <Route path="/track" element={<TrackReport />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
