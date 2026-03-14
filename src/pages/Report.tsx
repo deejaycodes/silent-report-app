@@ -51,6 +51,7 @@ export default function Report() {
   const [selectedLGA, setSelectedLGA] = useState("")
   const [timing, setTiming] = useState("")
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [address, setAddress] = useState("")
   const [contactEmail, setContactEmail] = useState("")
   const [contactPhone, setContactPhone] = useState("")
 
@@ -74,6 +75,7 @@ export default function Report() {
         incident_type: selectedType || 'other',
         description: `${description}${timing ? `\n\n[Timing: ${timing}]` : ''}`,
         location: selectedLGA ? `${selectedState}, ${selectedLGA}` : selectedState,
+        address: address || undefined,
         files: selectedFiles.length > 0 ? selectedFiles : undefined,
       })
       toast({ title: t('report.submission_success'), description: t('report.submission_success_message') })
@@ -186,6 +188,11 @@ export default function Report() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-sm font-semibold">Address or landmark <span className="text-muted-foreground font-normal">(optional)</span></Label>
+              <Input placeholder="e.g. behind Shoprite, opposite the mosque on Adeniyi Jones" value={address} onChange={e => setAddress(e.target.value)} className="text-sm" />
             </div>
 
             <div className="space-y-2">

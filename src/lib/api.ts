@@ -50,6 +50,7 @@ class ApiService {
     incident_type: string;
     description: string;
     location?: string;
+    address?: string;
     files?: File[];
   }) {
     const formData = new FormData();
@@ -57,6 +58,9 @@ class ApiService {
     formData.append('description', data.description);
     if (data.location) {
       formData.append('location', data.location);
+    }
+    if (data.address) {
+      formData.append('address', data.address);
     }
     if (data.files) {
       data.files.forEach((file) => {
